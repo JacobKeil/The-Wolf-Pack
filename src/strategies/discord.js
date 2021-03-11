@@ -20,7 +20,7 @@ passport.deserializeUser(async (discordId, done) => {
 passport.use(new DiscordStrategy({
     clientID: process.env.DISCORD_CLIENT_ID,
     clientSecret: process.env.DISCORD_CLIENT_SECRET,
-    callbackURL: "/auth/discord/redirect",
+    callbackURL: process.env.DISCORD_CALLBACK_URL,
     scope: ["identify", "guilds"]
 }, async (accessToken, refreshToken, profile, done) => {
     const { id, username, discriminator, avatar, guilds } = profile;
