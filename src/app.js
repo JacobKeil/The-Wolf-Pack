@@ -14,11 +14,11 @@ const PORT = process.env.PORT || 5001;
 const routes = require("./routes");
 
 app.use(express.static(path.join(__dirname, "views")));
+app.set("views", path.join(__dirname, "views"));
 app.engine("ejs", ejs.renderFile);
 app.set("view engine", "ejs");
-app.set("views", path.join(__dirname, "views"));
 
-mongoose.connect(process.env.MONGO_DB_URL, {
+mongoose.connect(`${process.env.MONGO_DB_URL}`, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useCreateIndex: true,
@@ -36,6 +36,7 @@ app.use(session({
         mongoUrl: process.env.MONGO_DB_URL
      })
 }));
+
 app.use(passport.initialize());
 app.use(passport.session());
 
