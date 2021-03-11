@@ -26,6 +26,7 @@ router.get("/", redirectHome, (req, res) => {
 });
 
 router.get("/home", redirectLogin, (req, res) => {
+    //console.log(req.user);
     //res.send(req.user);
     const un = req.user.discordTag.split("#");
     res.render("home.ejs", {
