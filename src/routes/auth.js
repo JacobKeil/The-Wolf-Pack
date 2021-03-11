@@ -19,7 +19,7 @@ router.get("/", redirectLogin, (req, res) => {
     if(req.user) {
         res.send(req.user);
     } else {
-        res.sendStatus(401);
+        res.send("Error on / redirect");
     }
 });
 
