@@ -26,7 +26,7 @@ passport.use(new DiscordStrategy({
     const { id, username, discriminator, avatar, guilds } = profile;
     //console.log(id, username, guilds);
     try {
-        const findUser = await User.findOneAndUpdate({ discordId: id }, {
+        const findUser = await User.findOneAndModify({ discordId: id }, {
             discordTag: `${username}#${discriminator}`,
             avatar,
             guilds,
