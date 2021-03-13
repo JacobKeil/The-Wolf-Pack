@@ -25,6 +25,11 @@ router.get("/", redirectHome, (req, res) => {
     res.render("index.ejs");
 });
 
+router.get("/logout", (req, res) => {
+  res.clearCookie("connect.sid");
+  res.redirect("/");
+});
+
 router.get("/user", redirectLogin, (req, res) => {
   let profilePic = "";
     if (req.user.avatar == null) {
