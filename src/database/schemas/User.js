@@ -12,6 +12,10 @@ const UserSchema = new mongoose.Schema({
     },
     avatar: {
         type: String,
+        required: false,
+    },
+    email: {
+        type: String,
         required: true,
     },
     guilds: {

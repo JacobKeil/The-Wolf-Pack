@@ -21,14 +21,15 @@ passport.use(new DiscordStrategy({
     clientID: process.env.DISCORD_CLIENT_ID,
     clientSecret: process.env.DISCORD_CLIENT_SECRET,
     callbackURL: process.env.DISCORD_CALLBACK_URL,
-    scope: ["identify", "guilds"]
+    scope: ["identify", "guilds", "email"]
 }, async (accessToken, refreshToken, profile, done) => {
-    const { id, username, discriminator, avatar, guilds } = profile;
+    const { id, username, discriminator, avatar, guilds, email } = profile;
     //console.log(id, username, guilds);
     try {
         const findUser = await User.findOneAndUpdate({ discordId: id }, {
             discordTag: `${username}#${discriminator}`,
             avatar,
+            email,
             guilds,
         }, { new: true });
         if (findUser) {
@@ -39,6 +40,7 @@ passport.use(new DiscordStrategy({
                 discordId: id,
                 discordTag: `${username}#${discriminator}`,
                 avatar,
+                email,
                 guilds,
             });
             return done(null, newUser);
