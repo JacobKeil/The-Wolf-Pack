@@ -18,7 +18,7 @@ app.set("views", path.join(__dirname, "views"));
 app.engine("ejs", ejs.renderFile);
 app.set("view engine", "ejs");
 
-mongoose.connect(`${process.env.MONGO_DB_URL}`, {
+mongoose.connect(process.env.MONGO_DB_URL, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useCreateIndex: true,
