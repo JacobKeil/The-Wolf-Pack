@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" type="text/css" href="css/main.css" />
+    <title>Comrades Cove</title>
+    <script
+      src="https://kit.fontawesome.com/f9371e1f01.js"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
+    <div class="banner-area">
+      <div class="content-area">
+        <div class="content">
+          <div class="nav">
+            <div class="inline">
+              <a href="/home"
+                ><img
+                  id="logo"
+                  src="https://i.ibb.co/DgLFTpV/Comrades-Cove.png"
+                  alt=""
+              /></a>
+              <h1 id="title">Comrades Cove</h1>
+            </div>
+            <div class="inline">
+              <a href="/user"><h1 id="username"><%= username %></h1></a>
+              <a href="/user"><%- avatar %></a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="centered-middle">
+        <a href="/donate/send" target="_blank">
+          <button class="button">Donate</button>
+        </a>
+      </div>
+    </div>
+  </body>
+</html>
