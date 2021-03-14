@@ -4,6 +4,15 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Comrades Cove DayZ, A website for information on the server and donating."
+    />
+    <meta
+      name="keywords"
+      content="Comrades Cove, DayZ, DayZ Server, Modded DayZ Server, Fun Server"
+    />
+    <meta name="author" content="Jacob Keil" />
     <link rel="stylesheet" type="text/css" href="css/main.css" />
     <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png" />
     <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png" />
@@ -30,7 +39,9 @@
               <h1 id="title">Comrades Cove</h1>
             </div>
             <div class="inline">
-              <a href="/user"><h1 id="username"><%= username %></h1></a>
+              <a href="/user"
+                ><button class="button-login logout"><%= username %></button></a
+              >
               <a href="/user"><%- avatar %></a>
             </div>
           </div>
