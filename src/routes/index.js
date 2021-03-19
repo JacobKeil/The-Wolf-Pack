@@ -5,6 +5,12 @@ const { Webhook, MessageBuilder } = require("discord-webhook-node");
 const auth = require("./auth");
 const discord = require("./discord");
 
+const stripePublicKey = process.env.STRIPE_PUBLIC_KEY;
+const stripeSecretKey = process.env.STRIPE_SECRET_KEY;
+
+const stripe = require("stripe")(stripeSecretKey);
+const fetch = require("node-fetch");
+
 router.use("/auth", auth);
 router.use("/discord", discord);
 
@@ -82,18 +88,39 @@ router.get("/donate", redirectLogin, (req, res) => {
       email: req.user.email,
       avatar: `<img id="user-logo" src="${profilePic}">`,
       guilds: req.user.guilds,
-      id: req.user.discordId
+      id: req.user.discordId,
+      stripePublicKey: process.env.STRIPE_PUBLIC_KEY,
   });
 });
 
-router.get("/donate/send", redirectLogin, (req, res) => {
+router.post("/donate/send/:price", redirectLogin, async (req, res) => {
   const whurl = process.env.DONATION_DISCORD_WH;
   const donateHook = new Webhook(whurl);
   const un = req.user.discordTag.split("#");
+  let isInt = parseInt(req.params.price);
+  let isFloat = parseFloat(req.params.price);
+  let amount = "";
+
+  const api_url = `https://discord.com/api/guilds/804540410067157002/members/${req.user.discordId}/roles/813613759209144392`
+
+  await fetch(api_url, { 
+    method: 'PUT', 
+    headers: { 
+      'Authorization': `Bot ${process.env.bot_token}`
+    }
+  }); 
+
+  if(isInt) {
+    amount = req.params.price + ".00";
+  }
+  if(isFloat) {
+    amount = req.params.price;
+  }
 
   const donateEmbed = new MessageBuilder()
-    .setTitle(`Thank you ${un[0]}`)
-    .setDescription(`Donation was sent by <@${req.user.discordId}>`)
+    .setTitle(`Thank you for donating!`)
+    .setDescription(`<@${req.user.discordId}> sent **$${amount}** and was given the role <@&813613759209144392>`)
+    .setColor("#8f4aff")
     .setTimestamp();
 
   donateHook.send(donateEmbed);
@@ -101,8 +128,25 @@ router.get("/donate/send", redirectLogin, (req, res) => {
   res.redirect("/donate/thankyou");
 });
 
-router.get("/donate/thankyou", redirectLogin, (req, res) => {
-  res.send("Thank you!")
+router.post("/donate/charge/:token/:amount", async (req, res) => {
+    stripe.charges.create({
+      amount: req.params.amount,
+      source: req.params.token,
+      currency: "usd"
+    }).then(() => {
+      console.log("Charge Successful");
+
+      res.redirect("/donation/successful");
+    })
+    .catch(() => {
+      console.log("Charge Failed");
+    });
+
+    //console.log(req.baseUrl);
 });
+
+router.get("/donation/successful", (req, res) => {
+  res.send("Thank you for donating");
+})
 
 module.exports = router;

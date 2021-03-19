@@ -4,20 +4,26 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta
-      name="description"
-      content="Comrades Cove DayZ, A website for information on the server and donating."
-    />
-    <meta
-      name="keywords"
-      content="Comrades Cove, DayZ, DayZ Server, Modded DayZ Server, Fun Server"
-    />
     <meta name="author" content="Jacob Keil" />
     <link rel="stylesheet" type="text/css" href="css/main.css" />
-    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png" />
-    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png" />
-    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png" />
-    <link rel="manifest" href="site.webmanifest" />
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="icons/apple-touch-icon.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="icons/favicon-32x32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="icons/favicon-16x16.png"
+    />
+    <link rel="manifest" href="icons/site.webmanifest" />
     <title>Comrades Cove</title>
     <script
       src="https://kit.fontawesome.com/f9371e1f01.js"
@@ -36,7 +42,12 @@
                   src="https://i.ibb.co/DgLFTpV/Comrades-Cove.png"
                   alt=""
               /></a>
-              <h1 id="title">Comrades Cove</h1>
+              <div class="nav-links">
+                <a href="#discord">Discord</a>
+                <a href="/donate">Donate</a>
+                <a href="#server">Server Info</a>
+                <a href="#about">About</a>
+              </div>
             </div>
             <div class="inline">
               <a href="/user"
@@ -46,14 +57,40 @@
             </div>
           </div>
         </div>
+        <div class="centered-middle">
+          <h1 id="title-brand">Comrades Cove</h1>
+        </div>
       </div>
-      <div class="centered-middle">
-        <a href="/donate">
-          <button class="button">Donate</button>
-        </a>
-        <a href="https://discord.gg/e3x2jXEbQB" target="_blank">
-          <button class="button">Join us on Discord</button>
-        </a>
+    </div>
+    <div class="section" id="discord">
+      <hr />
+      <h1 class="title-info">Discord Server</h1>
+      <div class="section-wrapper">
+        <iframe
+          id="discord-widget"
+          src="https://discord.com/widget?id=804540410067157002&theme=dark"
+          width="100%"
+          height="100%"
+          allowtransparency="true"
+          frameborder="0"
+          sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"
+        ></iframe>
+      </div>
+    </div>
+    <div class="section" id="server">
+      <hr />
+      <h1 class="title-info">Server Information</h1>
+      <div class="section-wrapper">
+
+      </div>
+      </div>
+    </div>
+    <div class="section" id="about">
+      <hr />
+      <h1 class="title-info">About Comrades Cove</h1>
+      <div class="section-wrapper">
+
+      </div>
       </div>
     </div>
   </body>
