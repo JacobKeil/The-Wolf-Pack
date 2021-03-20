@@ -5,8 +5,8 @@ const { Webhook, MessageBuilder } = require("discord-webhook-node");
 const auth = require("./auth");
 const discord = require("./discord");
 
-const stripePublicKey = process.env.STRIPE_PUBLIC_KEY;
-const stripeSecretKey = process.env.STRIPE_SECRET_KEY;
+const stripePublicKey = process.env.STRIPE_TEST_PUBLIC_KEY;
+const stripeSecretKey = process.env.STRIPE_TEST_SECRET_KEY;
 
 const stripe = require("stripe")(stripeSecretKey);
 const fetch = require("node-fetch");
@@ -89,7 +89,7 @@ router.get("/donate", redirectLogin, (req, res) => {
       avatar: `<img id="user-logo" src="${profilePic}">`,
       guilds: req.user.guilds,
       id: req.user.discordId,
-      stripePublicKey: process.env.STRIPE_PUBLIC_KEY,
+      stripePublicKey: stripePublicKey,
   });
 });
 
