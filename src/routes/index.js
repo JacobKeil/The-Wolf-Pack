@@ -103,12 +103,12 @@ router.post("/donate/send/:price", redirectLogin, async (req, res) => {
 
   const api_url = `https://discord.com/api/guilds/804540410067157002/members/${req.user.discordId}/roles/813613759209144392`
 
-  await fetch(api_url, { 
+  fetch(api_url, { 
     method: 'PUT', 
     headers: { 
       'Authorization': `Bot ${process.env.bot_token}`
     }
-  }); 
+  });
 
   if(isInt) {
     amount = req.params.price + ".00";
