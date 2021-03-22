@@ -47,11 +47,11 @@ hr {
   padding-left: 20px;
   font-size: 17px;
   font-weight: bold;
-  transition: all .25s ease-in-out;
+  transition: all 0.25s ease-in-out;
 }
 
 .nav-links a:hover {
-  color: #ff9292;
+  color: #111111;
 }
 
 .button {
@@ -133,7 +133,7 @@ hr {
   height: 35px;
   margin-top: 5px;
   border-radius: 25%;
-  transition: all .5s ease-in-out;
+  transition: all 0.5s ease-in-out;
 }
 
 #user-logo {
@@ -141,7 +141,7 @@ hr {
   height: 40px;
   margin-top: 5px;
   border-radius: 50%;
-  transition: all .5s ease-in-out;
+  transition: all 0.5s ease-in-out;
 }
 
 #user-logo:hover {
@@ -244,7 +244,7 @@ li {
   font-family: "Oleo Script", cursive;
   font-size: 70px;
   color: #f8f8f8;
-  animation: onLoadTitle .75s ease-in-out;
+  animation: onLoadTitle 0.75s ease-in-out;
 }
 
 .title-info {
@@ -252,6 +252,23 @@ li {
   font-size: 35px;
   color: #dddddd;
   text-align: center;
+}
+
+.title {
+  font-size: 35px;
+  padding-bottom: 20px;
+  color: #dddddd;
+  text-align: center;
+}
+
+.para {
+  font-size: 15px;
+  color: #dddddd;
+  text-align: center;
+}
+
+.purple {
+  color: rgb(136, 92, 194);
 }
 
 #discord-widget {

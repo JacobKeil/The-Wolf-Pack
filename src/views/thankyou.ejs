@@ -28,11 +28,6 @@
       src="https://kit.fontawesome.com/f9371e1f01.js"
       crossorigin="anonymous"
     ></script>
-    <script src="https://checkout.stripe.com/checkout.js" defer></script>
-    <script>
-      var stripePublicKey = `<%= stripePublicKey %>`;
-    </script>
-    <script src="js/donate.js" defer></script>
   </head>
   <body>
     <div class="nav">
@@ -58,35 +53,11 @@
 
     <div id="newEntry" class="modal">
       <div class="modal-content">
-        <div class="inline">
-          <h2 id="modal-title">Donate</h2>
-        </div>
-        <div id="main-inputs" class="stacked">
-          <input
-            id="name"
-            name="Name"
-            class="modal-input"
-            type="text"
-            placeholder="Name..."
-          />
-          <input
-            id="amount"
-            onchange="changeValues()"
-            onkeyup="changeValues()"
-            name="Amount"
-            class="modal-input"
-            type="number"
-            min="0.00"
-            step="0.01"
-            placeholder="Amount... (ex. 5, 10, 15, 20, etc.)"
-          />
-        </div>
-        <div class="inline-flex">
-          <button id="modal-button-donate" onclick="donateClicked()">
-            Donate
-          </button>
-          <input id="total" class="modal-input-total" type="text" />
-        </div>
+        <h1 class="title">Thank you for Donating</h1>
+        <p class="para">
+          You will see your donation show up in the donate channel on discord
+          and you were added to the <span class="purple">@Donator</span> role.
+        </p>
       </div>
     </div>
   </body>

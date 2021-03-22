@@ -19,7 +19,7 @@ function donateMoney() {
     Http.send();
 
     setTimeout(() => {
-        window.location.replace("/donation/successful");
+        window.location.replace("/thankyou");
     }, 3000);
 }
 

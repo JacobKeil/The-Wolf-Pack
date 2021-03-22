@@ -89,7 +89,7 @@ router.get("/donate", redirectLogin, (req, res) => {
       avatar: `<img id="user-logo" src="${profilePic}">`,
       guilds: req.user.guilds,
       id: req.user.discordId,
-      stripePublicKey: stripePublicKey,
+      stripePublicKey: stripePublicKey
   });
 });
 
@@ -101,7 +101,7 @@ router.post("/donate/send/:price", redirectLogin, async (req, res) => {
   let isFloat = parseFloat(req.params.price);
   let amount = "";
 
-  const api_url = `https://discord.com/api/guilds/804540410067157002/members/${req.user.discordId}/roles/813613759209144392`
+  let api_url = `https://discord.com/api/guilds/804540410067157002/members/${req.user.discordId}/roles/813613759209144392`;
 
   fetch(api_url, { 
     method: 'PUT', 
@@ -125,7 +125,7 @@ router.post("/donate/send/:price", redirectLogin, async (req, res) => {
 
   donateHook.send(donateEmbed);
 
-  res.redirect("/donate/thankyou");
+  res.redirect("/thankyou");
 });
 
 router.post("/donate/charge/:token/:amount", async (req, res) => {
@@ -136,7 +136,7 @@ router.post("/donate/charge/:token/:amount", async (req, res) => {
     }).then(() => {
       console.log("Charge Successful");
 
-      res.redirect("/donation/successful");
+      res.redirect("/thankyou");
     })
     .catch(() => {
       console.log("Charge Failed");
@@ -145,8 +145,21 @@ router.post("/donate/charge/:token/:amount", async (req, res) => {
     //console.log(req.baseUrl);
 });
 
-router.get("/donation/successful", (req, res) => {
-  res.send("Thank you for donating");
+router.get("/thankyou", (req, res) => {
+  let profilePic = "";
+  if (req.user.avatar == null) {
+    profilePic = "images/default.png";
+  } else {
+    profilePic = `https://cdn.discordapp.com/avatars/${req.user.discordId}/${req.user.avatar}`;
+  }
+  const un = req.user.discordTag.split("#");
+  res.render("thankyou.ejs", {
+      username: un[0],
+      email: req.user.email,
+      avatar: `<img id="user-logo" src="${profilePic}">`,
+      guilds: req.user.guilds,
+      id: req.user.discordId
+  });
 })
 
 module.exports = router;
