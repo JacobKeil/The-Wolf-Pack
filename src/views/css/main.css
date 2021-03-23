@@ -150,6 +150,11 @@ hr {
 
 /* End Nav Bar Styles */
 
+.centered-text {
+  text-align: center;
+  padding-top: 20px;
+}
+
 .centered-middle {
   margin: 0;
   position: absolute;
@@ -173,7 +178,7 @@ li {
 .banner-area {
   width: 100%;
   height: 100vh;
-  background: url("https://i.ibb.co/FnKkBTW/2021-03-05-22-31.png");
+  background: url("../images/9.png");
 }
 
 .section {
@@ -269,6 +274,10 @@ li {
 
 .purple {
   color: rgb(136, 92, 194);
+}
+
+.blue {
+  color: #378bda;
 }
 
 #discord-widget {

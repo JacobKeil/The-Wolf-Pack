@@ -93,13 +93,10 @@ router.get("/donate", redirectLogin, (req, res) => {
   });
 });
 
-router.post("/donate/send/:price", redirectLogin, async (req, res) => {
+router.post("/donate/:price", redirectLogin, async (req, res) => {
   const whurl = process.env.DONATION_DISCORD_WH;
   const donateHook = new Webhook(whurl);
-  const un = req.user.discordTag.split("#");
-  let isInt = parseInt(req.params.price);
-  let isFloat = parseFloat(req.params.price);
-  let amount = "";
+  //const un = req.user.discordTag.split("#");
 
   let api_url = `https://discord.com/api/guilds/804540410067157002/members/${req.user.discordId}/roles/813613759209144392`;
 
@@ -110,16 +107,9 @@ router.post("/donate/send/:price", redirectLogin, async (req, res) => {
     }
   });
 
-  if(isInt) {
-    amount = req.params.price + ".00";
-  }
-  if(isFloat) {
-    amount = req.params.price;
-  }
-
   const donateEmbed = new MessageBuilder()
     .setTitle(`Thank you for donating!`)
-    .setDescription(`<@${req.user.discordId}> sent **$${amount}** and was given the role <@&813613759209144392>`)
+    .setDescription(`<@${req.user.discordId}> sent **$${req.params.price}** and was given the role <@&813613759209144392>`)
     .setColor("#8f4aff")
     .setTimestamp();
 

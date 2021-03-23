@@ -14,7 +14,7 @@ function donateMoney() {
         return;
     }
     const Http = new XMLHttpRequest();
-    const url = `${baseUrl}/donate/send/${total.value.replace("$", "")}`;
+    const url = `${baseUrl}/donate/${total.value.replace("$", "")}`;
     Http.open("POST", url);
     Http.send();
 
