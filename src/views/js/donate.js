@@ -13,6 +13,7 @@ function donateMoney() {
     if (total == "") {
         return;
     }
+    console.log("passed stripe handler");
     const Http = new XMLHttpRequest();
     const url = `${baseUrl}/donate/${total.value.replace("$", "")}`;
     Http.open("POST", url);

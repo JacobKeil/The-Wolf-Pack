@@ -93,10 +93,12 @@ router.get("/donate", redirectLogin, (req, res) => {
   });
 });
 
-router.post("/donate/:price", redirectLogin, async (req, res) => {
+router.post("/donate/:price", redirectLogin, (req, res) => {
   const whurl = process.env.DONATION_DISCORD_WH;
   const donateHook = new Webhook(whurl);
   //const un = req.user.discordTag.split("#");
+
+  console.log("made it to backend");
 
   let api_url = `https://discord.com/api/guilds/804540410067157002/members/${req.user.discordId}/roles/813613759209144392`;
 
