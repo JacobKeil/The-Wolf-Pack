@@ -9,14 +9,14 @@ function changeValues() {
     total.value = "$" + priceAmount.value;
 }
 
-function donateMoney() {
+async function donateMoney() {
     if (total == "") {
         return;
     }
     console.log("passed stripe handler");
     const Http = new XMLHttpRequest();
     const url = `${baseUrl}/donate/${total.value.replace("$", "")}`;
-    Http.open("POST", url);
+    Http.open("POST", url, true);
     Http.send();
 
     setTimeout(() => {
@@ -42,7 +42,7 @@ var stripeHandler = StripeCheckout.configure({
             return;
         });
 
-        donateMoney();
+        await donateMoney();
     }
 });
 

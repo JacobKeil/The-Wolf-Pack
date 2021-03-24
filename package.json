@@ -34,5 +34,8 @@
     "passport": "^0.4.1",
     "passport-discord": "^0.1.4",
     "stripe": "^8.138.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.7"
   }
 }
