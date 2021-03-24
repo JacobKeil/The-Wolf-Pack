@@ -39,6 +39,7 @@ var stripeHandler = StripeCheckout.configure({
             }
         }).catch((error) => {
             console.error(error);
+            return;
         });
 
         donateMoney();
