@@ -9,7 +9,7 @@ function changeValues() {
     total.value = "$" + priceAmount.value;
 }
 
-async function donateMoney() {
+function donateMoney() {
     if (total == "") {
         return;
     }
@@ -42,7 +42,7 @@ var stripeHandler = StripeCheckout.configure({
             return;
         });
 
-        await donateMoney();
+        donateMoney();
     }
 });
 
