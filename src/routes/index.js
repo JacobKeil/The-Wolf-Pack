@@ -9,7 +9,7 @@ const stripePublicKey = process.env.STRIPE_TEST_PUBLIC_KEY;
 const stripeSecretKey = process.env.STRIPE_TEST_SECRET_KEY;
 
 const stripe = require("stripe")(stripeSecretKey);
-const fetch = require("node-fetch");
+const nodeFetch = require("node-fetch");
 
 router.use("/auth", auth);
 router.use("/discord", discord);
@@ -94,6 +94,7 @@ router.get("/donate", redirectLogin, (req, res) => {
 });
 
 router.post("/donate/:price", redirectLogin, (req, res) => {
+  client.on("message")
   const whurl = process.env.DONATION_DISCORD_WH;
   const donateHook = new Webhook(whurl);
   //const un = req.user.discordTag.split("#");
@@ -102,11 +103,13 @@ router.post("/donate/:price", redirectLogin, (req, res) => {
 
   let api_url = `https://discord.com/api/guilds/804540410067157002/members/${req.user.discordId}/roles/813613759209144392`;
 
-  fetch(api_url, { 
-    method: 'PUT', 
+  nodeFetch(api_url, { 
+    method: "PUT", 
     headers: { 
-      'Authorization': `Bot ${process.env.bot_token}`
+      "Authorization": `Bot ${process.env.bot_token}`
     }
+  }).catch((err) => {
+    console.log(err);
   });
 
   const donateEmbed = new MessageBuilder()
