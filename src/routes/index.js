@@ -94,7 +94,6 @@ router.get("/donate", redirectLogin, (req, res) => {
 });
 
 router.post("/donate/:price", redirectLogin, (req, res) => {
-  client.on("message")
   const whurl = process.env.DONATION_DISCORD_WH;
   const donateHook = new Webhook(whurl);
   //const un = req.user.discordTag.split("#");
