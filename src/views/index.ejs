@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="author" content="Jacob Keil" />
     <link rel="stylesheet" type="text/css" href="css/main.css" />
     <link
       rel="apple-touch-icon"
@@ -30,7 +31,7 @@
     ></script>
   </head>
   <body>
-    <div class="banner-area">
+    <div id="banner" class="banner-area">
       <div class="content-area">
         <div class="content">
           <div class="nav">
@@ -41,20 +42,47 @@
                   src="https://i.ibb.co/DgLFTpV/Comrades-Cove.png"
                   alt=""
               /></a>
-              <h1 id="title">Comrades Cove</h1>
+              <div class="nav-links">
+                <a href="#discord">Discord</a>
+                <a href="/donate">Donate</a>
+                <a href="#server">Server Info</a>
+              </div>
             </div>
             <div class="inline">
-              <a href="/auth/discord"
-                ><button class="button-login">Login</button></a
-              >
+              <div class="inline">
+                <a href="/auth/discord"
+                  ><button class="button-login">Login</button></a
+                >
+              </div>
             </div>
           </div>
         </div>
+        <div class="centered-middle">
+          <h1 id="title-brand">Comrades Cove</h1>
+        </div>
       </div>
-      <div class="centered-middle">
-        <a href="https://discord.gg/e3x2jXEbQB" target="_blank">
-          <button class="button">Join us on Discord</button>
-        </a>
+    </div>
+    <div class="section" id="discord">
+      <hr />
+      <h1 class="title-info">Discord Server</h1>
+      <div class="section-wrapper">
+        <iframe
+          id="discord-widget"
+          src="https://discord.com/widget?id=804540410067157002&theme=dark"
+          width="100%"
+          height="100%"
+          allowtransparency="true"
+          frameborder="0"
+          sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"
+        ></iframe>
+      </div>
+    </div>
+    <div class="section" id="server">
+      <hr />
+      <h1 class="title-info">Server Information</h1>
+      <div class="section-wrapper">
+
+      </div>
       </div>
     </div>
   </body>

@@ -9,7 +9,7 @@ const stripePublicKey = process.env.STRIPE_TEST_PUBLIC_KEY;
 const stripeSecretKey = process.env.STRIPE_TEST_SECRET_KEY;
 
 const stripe = require("stripe")(stripeSecretKey);
-const nodeFetch = require("node-fetch");
+const fetch = require("node-fetch");
 
 router.use("/auth", auth);
 router.use("/discord", discord);
@@ -102,12 +102,12 @@ router.post("/donate/:price", redirectLogin, (req, res) => {
 
   let api_url = `https://discord.com/api/guilds/804540410067157002/members/${req.user.discordId}/roles/813613759209144392`;
 
-  nodeFetch(api_url, { 
+  fetch(api_url, {
     method: "PUT", 
     headers: { 
       "Authorization": `Bot ${process.env.bot_token}`
     }
-  }).catch((err) => {
+  }).catch(err => {
     console.log(err);
   });
 

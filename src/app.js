@@ -7,6 +7,7 @@ const mongoose = require("mongoose");
 const session = require("express-session");
 const ejs = require("ejs");
 const path = require("path");
+const cors = require("cors");
 const Store = require("connect-mongo").default;
 
 const app = express();
@@ -36,6 +37,8 @@ app.use(session({
         mongoUrl: process.env.MONGO_DB_URL
      })
 }));
+
+app.use(cors());
 
 app.use(passport.initialize());
 app.use(passport.session());
