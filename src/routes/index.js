@@ -5,8 +5,8 @@ const { Webhook, MessageBuilder } = require("discord-webhook-node");
 const auth = require("./auth");
 const discord = require("./discord");
 
-const stripePublicKey = process.env.STRIPE_TEST_PUBLIC_KEY;
-const stripeSecretKey = process.env.STRIPE_TEST_SECRET_KEY;
+const stripePublicKey = process.env.STRIPE_PUBLIC_KEY;
+const stripeSecretKey = process.env.STRIPE_SECRET_KEY;
 
 const stripe = require("stripe")(stripeSecretKey);
 const fetch = require("node-fetch");
@@ -105,8 +105,7 @@ router.post("/donate/:price", redirectLogin, (req, res) => {
   fetch(api_url, {
     method: "PUT", 
     headers: { 
-      "Authorization": `Bot ${process.env.bot_token}`,
-      "Accept": "application/json"
+      "Authorization": `Bot ${process.env.bot_token}`
     }
   }).then(res => {
     res.json();
