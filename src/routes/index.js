@@ -105,10 +105,13 @@ router.post("/donate/:price", redirectLogin, (req, res) => {
   fetch(api_url, {
     method: "PUT", 
     headers: { 
-      "Authorization": `Bot ${process.env.bot_token}`
+      "Authorization": `Bot ${process.env.bot_token}`,
+      "Accept": "application/json"
     }
   }).then(res => {
-    console.log(res);
+    res.json();
+  }).then(json => {
+    console.log(json);
   }).catch(err => {
     console.log(err);
   });
