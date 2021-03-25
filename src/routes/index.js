@@ -107,6 +107,8 @@ router.post("/donate/:price", redirectLogin, (req, res) => {
     headers: { 
       "Authorization": `Bot ${process.env.bot_token}`
     }
+  }).then(res => {
+    console.log(res);
   }).catch(err => {
     console.log(err);
   });
