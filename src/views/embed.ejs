@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" type="text/css" href="css/main.css" />
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="icons/apple-touch-icon.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="icons/favicon-32x32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="icons/favicon-16x16.png"
+    />
+    <link rel="manifest" href="icons/site.webmanifest" />
+    <title>Comrades Cove</title>
+    <script
+      src="https://kit.fontawesome.com/f9371e1f01.js"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
+    <div class="nav">
+      <div class="inline">
+        <a href="/home"
+          ><img
+            id="logo"
+            src="https://i.ibb.co/DgLFTpV/Comrades-Cove.png"
+            alt=""
+        /></a>
+        <h1 id="title">Comrades Cove</h1>
+      </div>
+      <div class="inline">
+        <a href="/logout"
+          ><button class="button-login logout">Logout</button></a
+        >
+        <a href="/user"
+          ><button class="button-login logout"><%= username %></button></a
+        >
+        <a href="/user"><%- avatar %></a>
+      </div>
+    </div>
+
+    <div id="newEntry" class="modal">
+      <div class="modal-content">
+        <h1 class="title">Post Embed</h1>
+        <div class="main-inputs">
+          <input
+            id="modal-title"
+            class="modal-input"
+            type="text"
+            placeholder="Title..."
+          />
+          <textarea
+            class="modal-textarea"
+            name="description"
+            id="description"
+            placeholder="Description..."
+            cols="30"
+            rows="5"
+          ></textarea>
+          <select class="modal-select" name="Channel" id="channel">
+            <% for( var ch of channels) { %>
+            <option value="<%= ch.id %>">#<%= ch.name %></option>
+            <% } %>
+          </select>
+          <button id="modal-button-post" onclick="postEmbed()">Post</button>
+        </div>
+      </div>
+    </div>
+
+    <script src="js/post.js"></script>
+  </body>
+</html>

@@ -301,6 +301,7 @@ li {
   border: 1px solid #525252;
   color: #cecece;
   font-family: "Oswald", sans-serif;
+  font-size: 14px;
 }
 
 .modal-input-total {
@@ -314,11 +315,23 @@ li {
 
 .modal-select {
   padding: 5px 10px;
-  margin-bottom: 10px;
-  margin-right: 10px;
+  margin-top: 10px;
+  width: 100%;
   border: 1px solid #525252;
   background-color: #222222;
   color: #cecece;
+}
+
+.modal-textarea {
+  padding: 5px 10px;
+  width: 100%;
+  max-width: 100%;
+  min-width: 100%;
+  border: 1px solid #525252;
+  background-color: #222222;
+  color: #cecece;
+  font-family: "Oswald", sans-serif;
+  font-size: 14px;
 }
 
 .modal-select:focus {
@@ -362,6 +375,18 @@ li {
   cursor: pointer;
   padding: 5px 30px;
   margin-right: 10px;
+  background-color: #0061bd;
+  border: none;
+  color: #eeeeee;
+  font-weight: bold;
+  transition: all 0.25s ease-in-out;
+}
+
+#modal-button-post {
+  cursor: pointer;
+  width: 100%;
+  padding: 5px 30px;
+  margin-top: 10px;
   background-color: #0061bd;
   border: none;
   color: #eeeeee;

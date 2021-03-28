@@ -7,7 +7,6 @@ const mongoose = require("mongoose");
 const session = require("express-session");
 const ejs = require("ejs");
 const path = require("path");
-const cors = require("cors");
 const Store = require("connect-mongo").default;
 
 const app = express();
@@ -15,6 +14,11 @@ const PORT = process.env.PORT || 5001;
 const routes = require("./routes");
 
 app.use(express.static(path.join(__dirname, "views")));
+
+app.use(express.json());
+app.use(express.urlencoded({
+  extended: true
+}));
 
 app.use(function(req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
