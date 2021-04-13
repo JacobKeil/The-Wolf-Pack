@@ -19,4 +19,6 @@ function postEmbed() {
         console.error(error);
         return;
     });
+
+    alert("Message Posted");
 }
