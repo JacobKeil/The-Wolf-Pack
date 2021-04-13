@@ -399,6 +399,17 @@ li {
   color: #1d1d1d;
 }
 
+#posted {
+  background-color: #18da79;
+  font-weight: bold;
+  color: #023019;
+  margin-bottom: 10px;
+}
+
+.hidden {
+  display: none;
+}
+
 /* End Modal */
 
 /* Keyframes */

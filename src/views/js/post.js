@@ -1,6 +1,7 @@
 var Channel = document.getElementById("channel");
 var Title = document.getElementById("modal-title");
 var Description = document.getElementById("description");
+var postSuccess = document.getElementById("posted");
 
 function postEmbed() {
     fetch(`/admin/post/${Channel.value}`, {
@@ -20,5 +21,9 @@ function postEmbed() {
         return;
     });
 
-    alert("Message Posted");
+    postSuccess.classList.remove("hidden");
+
+    setTimeout(() => {
+        postSuccess.classList.add("hidden");
+    }, 10000);
 }
