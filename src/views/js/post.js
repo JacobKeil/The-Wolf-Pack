@@ -2,6 +2,8 @@ var Channel = document.getElementById("channel");
 var Title = document.getElementById("modal-title");
 var Description = document.getElementById("description");
 var postSuccess = document.getElementById("posted");
+var Color = document.getElementById("colorpicker");
+var Content = document.getElementById("everyone");
 
 function postEmbed() {
     fetch(`/admin/post/${Channel.value}`, {
@@ -10,10 +12,11 @@ function postEmbed() {
             "Content-Type": "application/json"
         },
         body: JSON.stringify({
-            content: `@everyone`,
+            content: `${(document.getElementById("everyone").checked) ? "@everyone" : ""}`,
             embed: {
                 title: `${Title.value}`,
-                description: `${Description.value}`
+                description: `${Description.value}`,
+                color: `${document.getElementById("colorpicker").value}`
             }
         })
     }).catch((error) => {

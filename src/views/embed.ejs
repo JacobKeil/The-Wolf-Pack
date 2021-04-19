@@ -68,13 +68,25 @@
             id="description"
             placeholder="Description..."
             cols="30"
-            rows="5"
+            rows="10"
           ></textarea>
           <select class="modal-select" name="Channel" id="channel">
             <% for( var ch of channels) { %>
             <option value="<%= ch.id %>">#<%= ch.name %></option>
             <% } %>
           </select>
+          <div class="inline">
+            <input type="color" id="colorpicker" value="#ffffff" />
+            <div class="inline verticalcenter">
+              <input
+                type="checkbox"
+                name="everyone"
+                id="everyone"
+                checked="checked"
+              />
+              <label for="everyone" id="everyonelabel">@everyone</label>
+            </div>
+          </div>
           <button id="modal-button-post" onclick="postEmbed()">Post</button>
         </div>
       </div>

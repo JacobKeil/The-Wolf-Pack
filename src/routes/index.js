@@ -4,6 +4,7 @@ const router = require("express").Router();
 const { Webhook, MessageBuilder } = require("discord-webhook-node");
 const auth = require("./auth");
 const discord = require("./discord");
+const convert = require("hex2dec");
 
 const stripePublicKey = process.env.STRIPE_PUBLIC_KEY;
 const stripeSecretKey = process.env.STRIPE_SECRET_KEY;
@@ -198,6 +199,11 @@ router.get("/admin", redirectLogin, async (req, res) => {
 router.post("/admin/post/:channel", (req, res) => {
   let api_url = `https://discord.com/api/channels/${req.params.channel}/messages`;
 
+  var colorHex = req.body.embed.color;
+
+  var colorDec = convert.hexToDec(colorHex.replace("#", ""));
+  console.log(colorDec);
+
   fetch(api_url, {
     method: "POST", 
     headers: {
@@ -209,6 +215,7 @@ router.post("/admin/post/:channel", (req, res) => {
         embed: {
             title: `${req.body.embed.title}`,
             description: `${req.body.embed.description}`,
+            color: colorDec,
             footer: {
               icon_url: "https://cdn.discordapp.com/avatars/805015249975640084/2db43b8b295d69f6c1c50aa0f1bfd763",
               text: "Comrade"
