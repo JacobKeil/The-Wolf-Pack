@@ -6,8 +6,8 @@ const auth = require("./auth");
 const discord = require("./discord");
 const convert = require("hex2dec");
 
-const stripePublicKey = process.env.STRIPE_PUBLIC_KEY;
-const stripeSecretKey = process.env.STRIPE_SECRET_KEY;
+const stripePublicKey = process.env.STRIPE_TEST_PUBLIC_KEY;
+const stripeSecretKey = process.env.STRIPE_TEST_SECRET_KEY;
 
 const stripe = require("stripe")(stripeSecretKey);
 const fetch = require("node-fetch");
@@ -103,7 +103,7 @@ router.post("/donate/:price", redirectLogin, (req, res) => {
 
   console.log("Donate Method Triggered");
 
-  let api_url = `https://discord.com/api/guilds/804540410067157002/members/${req.user.discordId}/roles/813613759209144392`;
+  let api_url = `https://discord.com/api/guilds/538558092070092802/members/${req.user.discordId}/roles/864390790835208203`;
 
   fetch(api_url, {
     method: "PUT", 
@@ -118,7 +118,7 @@ router.post("/donate/:price", redirectLogin, (req, res) => {
 
   const donateEmbed = new MessageBuilder()
     .setTitle(`Thank you for donating!`)
-    .setDescription(`<@${req.user.discordId}> sent **$${req.params.price}** and was given the role <@&813613759209144392>`)
+    .setDescription(`<@${req.user.discordId}> sent **$${req.params.price}** and was given the role <@&864390790835208203>`)
     .setColor("#8f4aff")
     .setTimestamp();
 
@@ -146,14 +146,14 @@ router.post("/donate/charge/:token/:amount", async (req, res) => {
 
 router.get("/admin", redirectLogin, async (req, res) => {
 
-  if (req.user.discordId == "195589455430680576" || req.user.discordId == "545044271389212672") {
+  if (req.user.discordId == "195589455430680576" || req.user.discordId == "545044271389212672" || req.user.discordId == "261717655180804097") {
     
   } else {
     res.redirect("/home");
     return;
   }
 
-  let api_url = `https://discord.com/api/guilds/804540410067157002/channels`;
+  let api_url = `https://discord.com/api/guilds/538558092070092802/channels`;
 
   let discord_ch = await fetch(api_url, {
     method: "GET", 
