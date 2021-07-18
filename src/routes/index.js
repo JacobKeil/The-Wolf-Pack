@@ -217,8 +217,8 @@ router.post("/admin/post/:channel", (req, res) => {
             description: `${req.body.embed.description}`,
             color: colorDec,
             footer: {
-              icon_url: "https://cdn.discordapp.com/avatars/805015249975640084/2db43b8b295d69f6c1c50aa0f1bfd763",
-              text: "Comrade"
+              icon_url: "https://cdn.discordapp.com/avatars/864378779367637023/3c6ccb83716d1e4fb91d3082f6b21d77",
+              text: "Wolfy"
             }
         }
     })
