@@ -1,5 +1,5 @@
-@import url("https://fonts.googleapis.com/css2?family=Nunito&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Nunito&family=Oleo+Script&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Nunito&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Nunito&family=Oleo+Script&display=swap');
 
 * {
   box-sizing: border-box;
@@ -13,7 +13,7 @@ html {
 }
 
 body {
-  font-family: "Nunito", sans-serif;
+  font-family: 'Nunito', sans-serif;
   background-color: #111111;
 }
 
@@ -71,7 +71,7 @@ hr {
 
 .button {
   cursor: pointer;
-  font-family: "Nunito", sans-serif;
+  font-family: 'Nunito', sans-serif;
   font-size: 20px;
   border-radius: 2px;
   font-weight: bold;
@@ -89,7 +89,7 @@ hr {
 
 .button-login {
   cursor: pointer;
-  font-family: "Nunito", sans-serif;
+  font-family: 'Nunito', sans-serif;
   font-size: 15px;
   border-radius: 2px;
   font-weight: bold;
@@ -111,11 +111,10 @@ hr {
 
 /* Nav Bar Styles */
 
-.nav {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+#nav {
   padding: 5px 15px;
+  position: fixed;
+  z-index: 5;
 }
 
 .inline {
@@ -125,7 +124,7 @@ hr {
 
 #title {
   padding-left: 20px;
-  font-family: "Oleo Script", cursive;
+  font-family: 'Oleo Script', cursive;
   color: #f9f9f9;
   text-align: center;
   font-size: 35px;
@@ -208,6 +207,7 @@ input::-webkit-color-swatch {
   left: 50%;
   transform: translate(-50%, -50%);
   text-align: center;
+  z-index: 5;
 }
 
 .card-title {
@@ -221,10 +221,35 @@ li {
   color: #111111;
 }
 
-.banner-area {
+.color {
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  right: 0;
+  background-color: #111111;
+  height: 100vh;
+  opacity: 0.6;
+}
+
+.banner-img {
+  z-index: -1;
+  position: fixed;
+  left: 0;
+  right: 0;
   width: 100%;
   height: 100vh;
-  background: url("../images/9.png");
+  background: url('../images/7.png');
+  background-size: cover;
+}
+
+.banner-area {
+  height: 100vh;
+}
+
+#brand-logo {
+  width: 100%;
+  margin: 0 auto;
+  animation: onLoadTitle 0.75s ease-in-out;
 }
 
 .section {
@@ -276,7 +301,7 @@ li {
   bottom: 0;
   left: 0;
   cursor: pointer;
-  font-family: "Nunito", sans-serif;
+  font-family: 'Nunito', sans-serif;
   font-size: 15px;
   border-radius: 2px;
   font-weight: bold;
@@ -292,7 +317,7 @@ li {
 }
 
 #title-brand {
-  font-family: "Oleo Script", cursive;
+  font-family: 'Oleo Script', cursive;
   font-size: 70px;
   color: #f8f8f8;
   animation: onLoadTitle 0.75s ease-in-out;
@@ -332,6 +357,11 @@ li {
   padding-top: 40px;
 }
 
+#discord {
+  position: fixed;
+  z-index: 5;
+}
+
 .section-wrapper {
   margin: 0px 40px;
   height: 82%;
@@ -346,7 +376,7 @@ li {
   background-color: #222222;
   border: 1px solid #525252;
   color: #cecece;
-  font-family: "Oswald", sans-serif;
+  font-family: 'Oswald', sans-serif;
   font-size: 14px;
 }
 
@@ -356,7 +386,7 @@ li {
   background-color: #222222;
   border: 1px solid #525252;
   color: #cecece;
-  font-family: "Oswald", sans-serif;
+  font-family: 'Oswald', sans-serif;
 }
 
 .modal-select {
@@ -376,7 +406,7 @@ li {
   border: 1px solid #525252;
   background-color: #222222;
   color: #cecece;
-  font-family: "Oswald", sans-serif;
+  font-family: 'Oswald', sans-serif;
   font-size: 14px;
 }
 
@@ -415,6 +445,7 @@ li {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  z-index: 5;
 }
 
 #modal-button-donate {
@@ -462,7 +493,7 @@ li {
 
 @keyframes onLoadTitle {
   from {
-    transform: translate(0%, -50%);
+    transform: translate(0%, -25%);
     opacity: 0;
   }
   to {

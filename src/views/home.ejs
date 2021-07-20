@@ -1,11 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<!-- Created by CodingLab |www.youtube.com/c/CodingLabYT-->
+<html lang="en" dir="ltr">
   <head>
     <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="author" content="Jacob Keil" />
-    <link rel="stylesheet" type="text/css" href="css/main.css" />
+    <!--<title> Responsive Sidebar Menu  | CodingLab </title>-->
+    <link rel="stylesheet" href="css/test.css" />
     <link
       rel="apple-touch-icon"
       sizes="180x180"
@@ -24,49 +23,210 @@
       href="icons/favicon-16x16.png"
     />
     <link rel="manifest" href="icons/site.webmanifest" />
-    <title>Comrades Cove</title>
-    <script
-      src="https://kit.fontawesome.com/f9371e1f01.js"
-      crossorigin="anonymous"
-    ></script>
+    <title>The Wolf Pack</title>
+    <!-- Boxicons CDN Link -->
+    <link
+      href="https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css"
+      rel="stylesheet"
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   </head>
   <body>
-    <div id="banner" class="banner-area">
-      <div class="content-area">
-        <div class="content">
-          <div class="nav">
-            <div class="inline">
-              <a href="/home"
-                ><img
-                  id="logo"
-                  src="https://i.ibb.co/DgLFTpV/Comrades-Cove.png"
-                  alt=""
-              /></a>
-              <div class="nav-links">
-                <a href="#discord">Discord</a>
-                <a href="#server">Server Info</a>
-                <a href="/donate">Donate</a>
-                <% if (id == "195589455430680576" || id == "545044271389212672" || id == "261717655180804097") { %>
-                  <a href="/admin">Admin</a>
-                <% } %>
-              </div>
-            </div>
-            <div class="inline">
-              <a href="/logout"
-                ><button class="button-login logout">Logout</button></a
-              >
-              <a href="/user"
-                ><button class="button-login logout"><%= username %></button></a
-              >
-              <a href="/user"><%- avatar %></a>
+    <div class="sidebar">
+      <div class="logo-details">
+        <div class="logo_name">The Wolf Pack</div>
+        <i class="bx bx-menu" id="btn"></i>
+      </div>
+      <ul class="nav-list">
+        <li>
+          <a href="#">
+            <i class="bx bx-grid-alt"></i>
+            <span class="links_name">Home</span>
+          </a>
+          <span class="tooltip">Home</span>
+        </li>
+        <li>
+          <a href="#discord">
+            <i class="bx bxl-discord"></i>
+            <span class="links_name">Discord</span>
+          </a>
+          <span class="tooltip">Discord</span>
+        </li>
+        <li>
+          <a href="#info">
+            <i class="bx bxs-info-circle"></i>
+            <span class="links_name">Server Info</span>
+          </a>
+          <span class="tooltip">Info</span>
+        </li>
+        <li>
+          <a href="#">
+            <i class="bx bx-store"></i>
+            <span class="links_name">Store</span>
+          </a>
+          <span class="tooltip">Store</span>
+        </li>
+        <li>
+          <a href="#">
+            <i class="bx bx-cog"></i>
+            <span class="links_name">Settings</span>
+          </a>
+          <span class="tooltip">Settings</span>
+        </li>
+        <% if (id == "195589455430680576" || id == "545044271389212672" || id ==
+        "261717655180804097") { %>
+        <li>
+          <a href="/admin">
+            <i class="bx bx-lock"></i>
+            <span class="links_name">Admin</span>
+          </a>
+          <span class="tooltip">Admin</span>
+        </li>
+        <% } %>
+        <li class="profile">
+          <div class="profile-details">
+            <div class="name_job">
+              <%- avatar %>
+              <div class="name">The Wolf Pack</div>
+              <div class="job">DayZ Server</div>
             </div>
           </div>
+          <i class="bx bx-log-out" id="log_out"></i>
+        </li>
+      </ul>
+    </div>
+    <section id="home" class="home-section">
+      <div class="centered-middle">
+        <img src="./images/WolfText.png" />
+      </div>
+    </section>
+    <section id="discord" class="discord-section">
+      <div>
+        <h1>Discord Community</h1>
+        <br />
+        <p>
+          <li>- Sign up for tournaments and events.</li>
+          <li>- Talk with the community.</li>
+          <li>- Make suggestions for the discord bot and dayz server.</li>
+          <li>- Post videos and pictures in the media channel.</li>
+          <li>- Find a group and run with them.</li>
+          <li>- Gain points for our custom online store.</li>
+          <li>- Keep track of stats with leaderboards.</li>
+          <li>- Open tickets and get help from our friendly adult admins.</li>
+          <li>- Have fun and be nice! We're all adults here!</li>
+        </p>
+      </div>
+      <iframe
+        id="discord-widget"
+        src="https://discord.com/widget?id=538558092070092802&theme=dark"
+        width="100%"
+        height="500"
+        allowtransparency="true"
+        frameborder="0"
+        sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"
+      ></iframe>
+    </section>
+    <section id="info" class="info-section">
+      <div class="grid2">
+        <h1>Server Mod List</h1>
+        <h1>Server Staff</h1>
+      </div>
+      <br />
+      <div class="grid2">
+        <div id="mods" class="grid3">
+          <div>
+            <li>- CF</li>
+            <li>- DayZ Expansion</li>
+            <li>- DayZ Expansion Core</li>
+            <li>- DayZ Expansion Vehicles</li>
+            <li>- DayZ Expansion Licensed</li>
+            <li>- VPP Admin Tools</li>
+            <li>- Community Online Tools</li>
+            <li>- Modular Vest System</li>
+            <li>- Banking</li>
+            <li>- GoreZ</li>
+            <li>- Clouds Military Gear</li>
+            <li>- Clouds Military Gear Expansion</li>
+            <li>- Motry's Weapons</li>
+            <li>- Mass'sManyItemOverhaul</li>
+          </div>
+          <div>
+            <li>- Bullet Stacks Plus Plus</li>
+            <li>- [Remastered] Arma Weapon Pack</li>
+            <li>- ArmA 2 ACR Weapon Pack</li>
+            <li>- Windstrides Clothing Pack</li>
+            <li>- Cannabis Plus</li>
+            <li>- Drugs Plus</li>
+            <li>- Advanced Weapon Scopes</li>
+            <li>- Base Fortifications</li>
+            <li>- Better Suppressors</li>
+            <li>- Much Stuff Pack</li>
+            <li>- Munghards Item Pack</li>
+            <li>- Rev Guns</li>
+            <li>- More Guns</li>
+            <li>- Fix Vehicle Positions</li>
+          </div>
+          <div>
+            <li>- Vehicle 3PP</li>
+            <li>- Seeds Dupe Fix</li>
+            <li>- Mikey's Custom Building and Ports</li>
+            <li>- Clothing Inventory Fix</li>
+            <li>- No Vehicle Damage</li>
+            <li>- IRP Land Rover Defender 110</li>
+            <li>- RaG Hummer Armored</li>
+            <li>- 1966 Ford Mustang</li>
+            <li>- [CrSk] BMW 525i E34</li>
+            <li>- GAZ</li>
+            <li>- GameLabs</li>
+            <li>- Trader</li>
+            <li>- Trader Fixes and Features</li>
+            <li>- Pilar Light</li>
+          </div>
         </div>
-        <div class="centered-middle">
-          <h1 id="title-brand">Comrades Cove</h1>
+        <div id="staff" class="grid3">
+          <div class="staff-card">
+            <img
+              src="https://cdn.discordapp.com/avatars/261717655180804097/748646a4a220e29c6e80bea5ecce30b1.png?size=128"
+            />
+            <h2>Lance</h2>
+            <h2>Owner</h2>
+          </div>
+          <div class="staff-card">
+            <img
+              src="https://cdn.discordapp.com/avatars/303315367852507136/85cc761c9e703f2b00fb1e19e774ec3b.png?size=128"
+            />
+            <h2>Brittney</h2>
+            <h2>Owner</h2>
+          </div>
+          <div class="staff-card">
+            <img
+              src="https://cdn.discordapp.com/avatars/195589455430680576/9b7f05b6e8fb932c2cab13807bcb2494.png?size=128"
+            />
+            <h2>Nuke</h2>
+            <h2>Developer</h2>
+          </div>
+          <div class="staff-card">
+            <img
+              src="https://cdn.discordapp.com/avatars/545044271389212672/302236ad2fed3667da26d98197cfb408.png?size=128"
+            />
+            <h2>JerZey - Admin</h2>
+            <h2>Admin</h2>
+          </div>
+          <div class="staff-card">
+            <img
+              src="https://cdn.discordapp.com/avatars/356316542423793665/ef1ac20b0d70b08aaca50eb38b729f52.png?size=128"
+            />
+            <h2>Lowkeywizard</h2>
+            <h2>Admin</h2>
+          </div>
+          <div class="staff-card">
+            <img src="./images/TheWolfPackLogo.png" />
+            <h2>Wolfy</h2>
+            <h2>Server Bot</h2>
+          </div>
         </div>
       </div>
-    </div>
-    </div>
+    </section>
+    <script src="js/home.js"></script>
   </body>
 </html>

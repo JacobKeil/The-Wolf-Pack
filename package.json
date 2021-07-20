@@ -1,7 +1,7 @@
 {
-  "name": "comrades-cove",
-  "version": "1.1.1",
-  "description": "Website for Comrades Cove",
+  "name": "the-wolf-pack",
+  "version": "1.2.1",
+  "description": "Website for The Wolf Pack",
   "main": "index.js",
   "scripts": {
     "start": "node ./src/app.js",
