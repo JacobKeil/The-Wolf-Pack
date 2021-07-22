@@ -4,7 +4,7 @@
   <head>
     <meta charset="UTF-8" />
     <!--<title> Responsive Sidebar Menu  | CodingLab </title>-->
-    <link rel="stylesheet" href="css/test.css" />
+    <link rel="stylesheet" href="css/main-site.css" />
     <link
       rel="apple-touch-icon"
       sizes="180x180"
@@ -39,35 +39,42 @@
       </div>
       <ul class="nav-list">
         <li>
-          <a href="#">
+          <a href="/home#">
             <i class="bx bx-grid-alt"></i>
             <span class="links_name">Home</span>
           </a>
           <span class="tooltip">Home</span>
         </li>
         <li>
-          <a href="#discord">
+          <a href="/home#discord">
             <i class="bx bxl-discord"></i>
             <span class="links_name">Discord</span>
           </a>
           <span class="tooltip">Discord</span>
         </li>
         <li>
-          <a href="#info">
+          <a href="/home#info">
             <i class="bx bxs-info-circle"></i>
             <span class="links_name">Server Info</span>
           </a>
           <span class="tooltip">Info</span>
         </li>
         <li>
-          <a href="#">
+          <a href="/home#donate">
+            <i class="bx bxs-dollar-circle"></i>
+            <span class="links_name">Donate</span>
+          </a>
+          <span class="tooltip">Donate</span>
+        </li>
+        <li>
+          <a href="/store">
             <i class="bx bx-store"></i>
             <span class="links_name">Store</span>
           </a>
           <span class="tooltip">Store</span>
         </li>
         <li>
-          <a href="#">
+          <a href="/user">
             <i class="bx bx-cog"></i>
             <span class="links_name">Settings</span>
           </a>
@@ -86,12 +93,13 @@
         <li class="profile">
           <div class="profile-details">
             <div class="name_job">
-              <%- avatar %>
               <div class="name">The Wolf Pack</div>
               <div class="job">DayZ Server</div>
             </div>
           </div>
-          <i class="bx bx-log-out" id="log_out"></i>
+          <a href="/logout">
+            <i class="bx bx-log-out" id="log_out"></i>
+          </a>
         </li>
       </ul>
     </div>
@@ -209,8 +217,8 @@
             <img
               src="https://cdn.discordapp.com/avatars/545044271389212672/302236ad2fed3667da26d98197cfb408.png?size=128"
             />
-            <h2>JerZey - Admin</h2>
-            <h2>Admin</h2>
+            <h2>JerZey</h2>
+            <h2>Map Developer</h2>
           </div>
           <div class="staff-card">
             <img
@@ -227,6 +235,11 @@
         </div>
       </div>
     </section>
+    <section id="donate" class="donate-section">
+      <h1>Donate</h1>
+      <div class="grid2"></div>
+    </section>
     <script src="js/home.js"></script>
+    <script src="js/donate.js"></script>
   </body>
 </html>

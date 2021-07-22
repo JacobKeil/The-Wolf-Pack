@@ -46,7 +46,8 @@ app.use(session({
     resave: false,
     saveUninitialized: false,
     store: Store.create({ 
-        mongoUrl: process.env.MONGO_DB_URL
+        mongoUrl: process.env.MONGO_DB_URL,
+        autoDelete: 'native'
      })
 }));
 

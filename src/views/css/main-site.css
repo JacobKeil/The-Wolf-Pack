@@ -224,6 +224,9 @@ li {
   border-radius: 0px;
   transition: all 0.5s ease;
 }
+.sidebar .profile #log_out:hover {
+  color: #f2f2f2;
+}
 .sidebar.open .profile #log_out {
   width: 50px;
   background: none;
@@ -247,7 +250,7 @@ li {
   left: 78px;
   width: calc(100% - 78px);
   z-index: 2;
-  height: 600px;
+  height: fit-content;
   padding: 50px;
   display: grid;
   grid-template-columns: 1fr 2fr;
@@ -259,9 +262,26 @@ li {
   left: 78px;
   width: calc(100% - 78px);
   z-index: 2;
-  height: 600px;
+  height: fit-content;
   padding: 50px;
-  margin: auto 0;
+}
+.donate-section {
+  position: relative;
+  background-color: #282d3d;
+  left: 78px;
+  width: calc(100% - 78px);
+  z-index: 2;
+  height: fit-content;
+  padding: 50px;
+}
+.base-section {
+  position: relative;
+  background-color: #282d3d;
+  left: 78px;
+  width: calc(100% - 78px);
+  z-index: 2;
+  height: 100vh;
+  padding: 50px;
 }
 .discord-section h1,
 p,
