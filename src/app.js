@@ -14,19 +14,20 @@ const app = express();
 const PORT = process.env.PORT || 5001;
 const routes = require("./routes");
 
+let origin = "";
+
+if (process.env.MODE == Development) {
+    origin = "172.16.1.254:5000";
+} else {
+    origin = "https://the-wolfpack.herokuapp.com";
+}
+
 app.use(express.static(path.join(__dirname, "views")));
 
 app.use(express.json());
 app.use(express.urlencoded({
   extended: true
 }));
-
-app.use(function(req, res, next) {
-    res.header("Access-Control-Allow-Origin", "*");
-    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, X-Authorization");
-    next();
-});
 
 app.set("views", path.join(__dirname, "views"));
 app.engine("ejs", ejs.renderFile);
@@ -52,7 +53,16 @@ app.use(session({
      })
 }));
 
-app.use(cors());
+app.use(function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, X-Authorization");
+    next();
+});
+
+app.use(cors({
+    origin: origin
+}));
 app.use(passport.initialize());
 app.use(passport.session());
 
