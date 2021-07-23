@@ -57,6 +57,9 @@ router.get("/", redirectLogin, async (req, res) => {
     let api_url_base = "https://data.cftools.cloud";
     let gamesession;
 
+    console.log(token);
+    console.log(token.api_token);
+
     fetch(`${api_url_base}/v1/server/3ba3e6d8-79fe-4118-a305-c23f50baf6bf/GSM/list`, {
       method: "GET", 
       headers: {
