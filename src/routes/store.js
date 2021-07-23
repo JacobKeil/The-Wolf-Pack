@@ -66,27 +66,27 @@ router.get("/", redirectLogin, async (req, res) => {
     }).then(res => {
       res.json()
       .then((json) => {
-        for(let i = 0; i < json.sessions.length; i++) {
-          if(json.sessions[i].gamedata.steam64 === steamID) {
-            gamesession = json.sessions[i].id;
-  
-            fetch(`${api_url_base}/v0/server/3ba3e6d8-79fe-4118-a305-c23f50baf6bf/gameLabs/spawn`, {
-              method: "POST", 
-              headers: {
-                "Authorization": `Bearer ${token.api_token}`
-              },
-              body: JSON.stringify({
-                  gamesession_id: gamesession,
-                  object: req.query.object,
-                  quantity: req.query.quantity
-              })
-            }).then(res => {
-              console.log(`SPAWNED: ${res}`)
-            }).catch(err => {
-              console.error(err);
-            });
-          }
-        }
+        json.sessions.forEach(session => {
+            if(session.gamedata.steam64 === steamID) {
+                gamesession = session.id;
+      
+                fetch(`${api_url_base}/v0/server/3ba3e6d8-79fe-4118-a305-c23f50baf6bf/gameLabs/spawn`, {
+                  method: "POST", 
+                  headers: {
+                    "Authorization": `Bearer ${token.api_token}`
+                  },
+                  body: JSON.stringify({
+                      gamesession_id: gamesession,
+                      object: req.query.object,
+                      quantity: req.query.quantity
+                  })
+                }).then(res => {
+                  console.log(`SPAWNED: ${res}`)
+                }).catch(err => {
+                  console.error(err);
+                });
+              }
+        });
       });
     }).catch(err => {
       console.log(err);
