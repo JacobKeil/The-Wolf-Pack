@@ -66,6 +66,7 @@ router.get("/", redirectLogin, async (req, res) => {
     }).then(res => {
       res.json()
       .then((json) => {
+          console.log(json);
         json.sessions.forEach(session => {
             if(session.gamedata.steam64 === steamID) {
                 gamesession = session.id;
