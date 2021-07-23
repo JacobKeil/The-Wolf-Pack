@@ -5,7 +5,8 @@ const { Webhook, MessageBuilder } = require("discord-webhook-node");
 const auth = require("./auth");
 const donate = require("./donate");
 const admin = require("./admin");
-const convert = require("hex2dec");
+const store = require("./store");
+const { MongoClient } = require("mongodb");
 
 const stripePublicKey = process.env.STRIPE_TEST_PUBLIC_KEY;
 const stripeSecretKey = process.env.STRIPE_TEST_SECRET_KEY;
@@ -16,6 +17,7 @@ const fetch = require("node-fetch");
 router.use("/auth", auth);
 router.use("/donate", donate);
 router.use("/admin", admin);
+router.use("/store", store);
 
 const admins = ["545044271389212672", "195589455430680576"];
 
@@ -66,9 +68,7 @@ router.get("/home", redirectLogin, (req, res) => {
   const un = req.user.discordTag.split("#");
   res.render("home.ejs", {
       username: un[0],
-      email: req.user.email,
       avatar: `<img id="user-logo" src="${profilePic}">`,
-      guilds: req.user.guilds,
       id: req.user.discordId
   });
 });
@@ -87,23 +87,6 @@ router.get("/user", redirectLogin, (req, res) => {
     avatar: `<img id="user-logo" src="${profilePic}">`,
     guilds: req.user.guilds,
     id: req.user.discordId
-  });
-});
-
-router.get("/store", redirectLogin, (req, res) => {
-  let profilePic = "";
-  if (req.user.avatar == null) {
-    profilePic = "images/default.png";
-  } else {
-    profilePic = `https://cdn.discordapp.com/avatars/${req.user.discordId}/${req.user.avatar}`;
-  }
-  const un = req.user.discordTag.split("#");
-  res.render("store.ejs", {
-      username: un[0],
-      email: req.user.email,
-      avatar: `<img id="user-logo" src="${profilePic}">`,
-      guilds: req.user.guilds,
-      id: req.user.discordId
   });
 });
 
