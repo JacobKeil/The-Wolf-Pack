@@ -19,8 +19,6 @@ async function runMongo() {
   await mongoClient.close();
 }
 
-runMongo();
-
 const redirectLogin = (req, res, next) => {
     if(!req.user) {
       res.redirect('/auth/discord');
@@ -30,6 +28,7 @@ const redirectLogin = (req, res, next) => {
 }
 
 router.get("/", redirectLogin, async (req, res) => {
+    await runMongo();
     await findOneSteam(req.user.discordId).then(id => {
         steamID = id.steamId;
     }).catch(err => {
