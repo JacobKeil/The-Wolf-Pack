@@ -7,6 +7,7 @@ const mongoose = require("mongoose");
 const session = require("express-session");
 const ejs = require("ejs");
 const path = require("path");
+const cors = require("cors");
 const Store = require("connect-mongo").default;
 
 const app = express();
@@ -19,6 +20,8 @@ app.use(express.json());
 app.use(express.urlencoded({
   extended: true
 }));
+
+app.use(cors());
 
 app.use(function(req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
