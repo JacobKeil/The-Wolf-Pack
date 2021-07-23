@@ -70,11 +70,11 @@ router.get("/", redirectLogin, async (req, res) => {
       res.json()
       .then((json) => {
           console.log(json);
-        json.sessions.forEach(session => {
+        json.sessions.forEach(async session => {
             if(session.gamedata.steam64 === steamID) {
                 gamesession = session.id;
       
-                fetch(`${api_url_base}/v0/server/3ba3e6d8-79fe-4118-a305-c23f50baf6bf/gameLabs/spawn`, {
+                await fetch(`${api_url_base}/v0/server/3ba3e6d8-79fe-4118-a305-c23f50baf6bf/gameLabs/spawn`, {
                   method: "POST", 
                   headers: {
                     "Authorization": `Bearer ${token.api_token}`
@@ -92,7 +92,7 @@ router.get("/", redirectLogin, async (req, res) => {
               }
         });
       });
-    }).catch(err => {
+    }).then(res => console.log(res)).catch(err => {
       console.log(err);
     });
   });
