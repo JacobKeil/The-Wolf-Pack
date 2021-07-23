@@ -61,7 +61,7 @@ router.get("/", redirectLogin, async (req, res) => {
         console.error(err);
     });
 
-    fetch(`${api_url_base}/v1/server/3ba3e6d8-79fe-4118-a305-c23f50baf6bf/GSM/list`, {
+    await fetch(`${api_url_base}/v1/server/3ba3e6d8-79fe-4118-a305-c23f50baf6bf/GSM/list`, {
       method: "GET", 
       headers: {
         "Authorization": `Bearer ${token.api_token}`
