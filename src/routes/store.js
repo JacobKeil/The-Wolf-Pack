@@ -29,11 +29,6 @@ const redirectLogin = (req, res, next) => {
 
 router.get("/", redirectLogin, async (req, res) => {
     await runMongo();
-    await findOneSteam(req.user.discordId).then(id => {
-        steamID = id.steamId;
-    }).catch(err => {
-        console.error(err);
-    });
     let profilePic = "";
     if (req.user.avatar == null) {
       profilePic = "images/default.png";
@@ -49,7 +44,7 @@ router.get("/", redirectLogin, async (req, res) => {
     });
   });
   
-  router.post("/", (req, res) => {
+  router.post("/", async (req, res) => {
     console.log(req.query.object);
     console.log(req.query.quantity);
     console.log(req.query.cost);
@@ -59,6 +54,12 @@ router.get("/", redirectLogin, async (req, res) => {
 
     console.log(token);
     console.log(token.api_token);
+
+    await findOneSteam(req.user.discordId).then(id => {
+        steamID = id.steamId;
+    }).catch(err => {
+        console.error(err);
+    });
 
     fetch(`${api_url_base}/v1/server/3ba3e6d8-79fe-4118-a305-c23f50baf6bf/GSM/list`, {
       method: "GET", 
