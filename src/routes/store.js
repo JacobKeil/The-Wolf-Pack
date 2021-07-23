@@ -32,6 +32,8 @@ const redirectLogin = (req, res, next) => {
 router.get("/", redirectLogin, async (req, res) => {
     await findOneSteam(req.user.discordId).then(id => {
         steamID = id.steamId;
+    }).catch(err => {
+        console.error(err);
     });
     let profilePic = "";
     if (req.user.avatar == null) {
@@ -48,7 +50,7 @@ router.get("/", redirectLogin, async (req, res) => {
     });
   });
   
-  router.post("/", async (req, res) => {
+  router.post("/", (req, res) => {
     console.log(req.query.object);
     console.log(req.query.quantity);
     console.log(req.query.cost);
@@ -63,12 +65,12 @@ router.get("/", redirectLogin, async (req, res) => {
       }
     }).then(res => {
       res.json()
-      .then(async (json) => {
+      .then((json) => {
         for(let i = 0; i < json.sessions.length; i++) {
           if(json.sessions[i].gamedata.steam64 === steamID) {
             gamesession = json.sessions[i].id;
   
-            await fetch(`${api_url_base}/v0/server/3ba3e6d8-79fe-4118-a305-c23f50baf6bf/gameLabs/spawn`, {
+            fetch(`${api_url_base}/v0/server/3ba3e6d8-79fe-4118-a305-c23f50baf6bf/gameLabs/spawn`, {
               method: "POST", 
               headers: {
                 "Authorization": `Bearer ${token.api_token}`
@@ -79,7 +81,7 @@ router.get("/", redirectLogin, async (req, res) => {
                   quantity: req.query.quantity
               })
             }).then(res => {
-              console.log("SPAWNED")
+              console.log(`SPAWNED: ${res}`)
             }).catch(err => {
               console.error(err);
             });
