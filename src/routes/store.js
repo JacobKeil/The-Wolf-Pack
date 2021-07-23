@@ -10,13 +10,15 @@ const { findOneSteam } = require("../util-functions/mongodb-find-one");
 
 let items = [];
 let token = "";
-let steam = "";
 
-async function runMongo(reqId) {
+async function runMongo() {
+  await mongoClient.connect();
   items = await mongoClient.db("store").collection("items").find().toArray();
   token = await mongoClient.db("environment").collection("variables").findOne({ server_id: server_id });
-  steam = await mongoClient.db("users").collection("discord").findOne({ discordId: reqId });
+  await mongoClient.close();
 }
+
+runMongo();
 
 const redirectLogin = (req, res, next) => {
     if(!req.user) {
@@ -27,8 +29,6 @@ const redirectLogin = (req, res, next) => {
 }
 
 router.get("/", redirectLogin, async (req, res) => {
-    await mongoClient.connect();
-    await runMongo(req.user.discordId);
     let profilePic = "";
     if (req.user.avatar == null) {
       profilePic = "images/default.png";
@@ -42,7 +42,6 @@ router.get("/", redirectLogin, async (req, res) => {
         id: req.user.discordId,
         items: items
     });
-    await mongoClient.close();
   });
   
   router.post("/", async (req, res) => {
@@ -53,6 +52,12 @@ router.get("/", redirectLogin, async (req, res) => {
     let api_url_base = "https://data.cftools.cloud";
     let gamesession;
 
+    let steamID = "";
+
+    await findOneSteam(req.user.discordId).then(id => {
+        steamID = id.steamId;
+    });
+
     fetch(`${api_url_base}/v1/server/3ba3e6d8-79fe-4118-a305-c23f50baf6bf/GSM/list`, {
       method: "GET", 
       headers: {
@@ -62,7 +67,7 @@ router.get("/", redirectLogin, async (req, res) => {
       res.json()
       .then(async (json) => {
         for(let i = 0; i < json.sessions.length; i++) {
-          if(json.sessions[i].gamedata.steam64 === steam.steamId) {
+          if(json.sessions[i].gamedata.steam64 === steamID) {
             gamesession = json.sessions[i].id;
   
             await fetch(`${api_url_base}/v0/server/3ba3e6d8-79fe-4118-a305-c23f50baf6bf/gameLabs/spawn`, {
@@ -71,7 +76,7 @@ router.get("/", redirectLogin, async (req, res) => {
                 "Authorization": `Bearer ${token.api_token}`
               },
               body: JSON.stringify({
-                  gamesession_id: `${gamesession}`,
+                  gamesession_id: gamesession,
                   object: req.query.object,
                   quantity: req.query.quantity
               })
