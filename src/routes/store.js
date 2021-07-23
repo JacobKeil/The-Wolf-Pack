@@ -26,7 +26,9 @@ const redirectLogin = (req, res, next) => {
     }
 }
 
-router.get("/", redirectLogin, (req, res) => {
+router.get("/", redirectLogin, async (req, res) => {
+    await mongoClient.connect();
+    await runMongo(req.user.discordId);
     let profilePic = "";
     if (req.user.avatar == null) {
       profilePic = "images/default.png";
@@ -40,6 +42,7 @@ router.get("/", redirectLogin, (req, res) => {
         id: req.user.discordId,
         items: items
     });
+    await mongoClient.close();
   });
   
   router.post("/", async (req, res) => {
@@ -49,9 +52,6 @@ router.get("/", redirectLogin, (req, res) => {
   
     let api_url_base = "https://data.cftools.cloud";
     let gamesession;
-  
-    await mongoClient.connect();
-    await runMongo(req.user.discordId);
 
     fetch(`${api_url_base}/v1/server/3ba3e6d8-79fe-4118-a305-c23f50baf6bf/GSM/list`, {
       method: "GET", 
@@ -86,7 +86,6 @@ router.get("/", redirectLogin, (req, res) => {
     }).catch(err => {
       console.log(err);
     });
-    await mongoClient.close();
   });
 
 module.exports = router;
