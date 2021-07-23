@@ -13,10 +13,26 @@ let token = "";
 let steamID = "";
 
 async function runMongo() {
-  await mongoClient.connect();
-  items = await mongoClient.db("store").collection("items").find().toArray();
-  token = await mongoClient.db("environment").collection("variables").findOne({ server_id: server_id });
-  await mongoClient.close();
+  await mongoClient.connect().then(res => {
+      console.log(res);
+  }).catch(err => {
+      console.log(err);
+  });
+  items = await mongoClient.db("store").collection("items").find().toArray().then(res => {
+    console.log("items retrieved");
+  }).catch(err => {
+    console.log(err);
+  });;
+  token = await mongoClient.db("environment").collection("variables").findOne({ server_id: server_id }).then(res => {
+    console.log("token retrieved");
+  }).catch(err => {
+    console.log(err);
+  });
+  await mongoClient.close().then(res => {
+    console.log(res);
+}).catch(err => {
+    console.log(err);
+});
 }
 
 const redirectLogin = (req, res, next) => {
