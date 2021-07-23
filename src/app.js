@@ -16,7 +16,7 @@ const routes = require("./routes");
 
 let origin = "";
 
-if (process.env.MODE == Development) {
+if (process.env.MODE == "Development") {
     origin = "172.16.1.254:5000";
 } else {
     origin = "https://the-wolfpack.herokuapp.com";
