@@ -57,6 +57,7 @@ router.get("/", redirectLogin, async (req, res) => {
 
     await findOneSteam(req.user.discordId).then(id => {
         steamID = id.steamId;
+        console.log(steamID);
     }).catch(err => {
         console.error(err);
     });
