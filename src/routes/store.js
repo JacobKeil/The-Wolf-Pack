@@ -10,6 +10,7 @@ const { findOneSteam } = require("../util-functions/mongodb-find-one");
 
 let items = [];
 let token = "";
+let steamID = "";
 
 async function runMongo() {
   await mongoClient.connect();
@@ -29,6 +30,9 @@ const redirectLogin = (req, res, next) => {
 }
 
 router.get("/", redirectLogin, async (req, res) => {
+    await findOneSteam(req.user.discordId).then(id => {
+        steamID = id.steamId;
+    });
     let profilePic = "";
     if (req.user.avatar == null) {
       profilePic = "images/default.png";
@@ -51,12 +55,6 @@ router.get("/", redirectLogin, async (req, res) => {
   
     let api_url_base = "https://data.cftools.cloud";
     let gamesession;
-
-    let steamID = "";
-
-    await findOneSteam(req.user.discordId).then(id => {
-        steamID = id.steamId;
-    });
 
     fetch(`${api_url_base}/v1/server/3ba3e6d8-79fe-4118-a305-c23f50baf6bf/GSM/list`, {
       method: "GET", 
