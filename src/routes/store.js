@@ -47,7 +47,6 @@ router.get("/", redirectLogin, async (req, res) => {
   
   router.post("/", async (req, res) => {
     await runMongo();
-    console.log(req.params.object);
   
     let api_url_base = "https://data.cftools.cloud";
     let gamesession;
