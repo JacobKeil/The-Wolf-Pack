@@ -45,7 +45,7 @@ router.get("/", redirectLogin, async (req, res) => {
     });
   });
   
-  router.post("/:object/:quantity/:price", async (req, res) => {
+  router.post("/", async (req, res) => {
     await runMongo();
     console.log(req.params.object);
   
@@ -72,7 +72,7 @@ router.get("/", redirectLogin, async (req, res) => {
               if(session.gamedata.steam64 === steamID) {
                   gamesession = session.id;
 
-                  await postSpawn(api_url_base, token.api_token, gamesession, req.params.object, req.params.quantity);
+                  await postSpawn(api_url_base, token.api_token, gamesession, req.query.object, req.query.quantity);
               }
           })
         });
