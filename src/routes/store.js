@@ -77,7 +77,9 @@ router.get("/", redirectLogin, async (req, res) => {
                     postSpawn(api_url_base, token.api_token, gamesession, req.query.object, req.query.quantity);
                 }
             })
-          });
+          }).catch(err => {
+            console.error(err);
+          })
         }).catch(err => {
           console.log(err);
         }); 
