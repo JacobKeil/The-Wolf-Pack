@@ -46,42 +46,44 @@ router.get("/", redirectLogin, async (req, res) => {
   });
   
   router.post("/", async (req, res) => {
-    await runMongo();
+    try {
+      await runMongo();
   
-    let api_url_base = "https://data.cftools.cloud";
-    let gamesession;
-
-    await findOneSteam(req.user.discordId).then(id => {
-        steamID = id.steamId;
-        console.log(steamID);
-    }).catch(err => {
-        console.error(err);
-    });
-
-    await fetch(`${api_url_base}/v1/server/3ba3e6d8-79fe-4118-a305-c23f50baf6bf/GSM/list`, {
-        method: "GET", 
-        headers: {
-          "Authorization": `Bearer ${token.api_token}`
-        }
-      }).then(res => {
-        res.json()
-        .then((json) => {
-          if(!json.sessions) {
-            console.log("No Sessions Found");
-          }
-          json.sessions.forEach(async (session) => {
-              if(session.gamedata.steam64 === steamID) {
-                  gamesession = session.id;
-
-                  await postSpawn(api_url_base, token.api_token, gamesession, req.query.object, req.query.quantity);
-              }
-          }).catch(err => {
-            console.error(err);
-          })
-        });
+      let api_url_base = "https://data.cftools.cloud";
+      let gamesession;
+  
+      await findOneSteam(req.user.discordId).then(id => {
+          steamID = id.steamId;
+          console.log(steamID);
       }).catch(err => {
-        console.log(err);
+          console.error(err);
       });
+  
+      await fetch(`${api_url_base}/v1/server/3ba3e6d8-79fe-4118-a305-c23f50baf6bf/GSM/list`, {
+          method: "GET", 
+          headers: {
+            "Authorization": `Bearer ${token.api_token}`
+          }
+        }).then(res => {
+          res.json()
+          .then((json) => {
+            if(!json.sessions) {
+              console.log("No Sessions Found");
+            }
+            json.sessions.forEach((session) => {
+                if(session.gamedata.steam64 === steamID) {
+                    gamesession = session.id;
+  
+                    postSpawn(api_url_base, token.api_token, gamesession, req.query.object, req.query.quantity);
+                }
+            })
+          });
+        }).catch(err => {
+          console.log(err);
+        }); 
+    } catch (error) {
+      console.log(error);
+    }
   });
 
 module.exports = router;

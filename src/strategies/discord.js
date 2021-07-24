@@ -12,7 +12,7 @@ passport.deserializeUser(async (discordId, done) => {
         return user ? done(null, user) : done(null, null);
     } catch (error) {
         console.log("Deserialize Error");
-        console.log(err);
+        console.log(error);
         done(err, null);
     }
 });
