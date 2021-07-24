@@ -22,7 +22,11 @@ function menuBtnChange() {
 }
 
 async function spawnItem(item, credits) {
-    var xhr = new XMLHttpRequest();
-    xhr.open("POST", `/store?object=${item}&quantity=1&price=${credits}`, true);
-    xhr.send();
+  await fetch(`/store?object=${item}&quantity=1&price=${credits}`, {
+    method: "POST"
+  }).then(res => {
+    console.log(res);
+  }).catch(err => {
+    console.log(err);
+  });
 }
