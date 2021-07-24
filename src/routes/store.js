@@ -6,6 +6,7 @@ const server_id = "9af57c49e9edd25ece64988aaf6c50ac1d5e6b10";
 const uri = process.env.MONGO_DB_URL;
 const mongoClient = new MongoClient(uri);
 const fetch = require("node-fetch");
+const { postSpawn } = require("../util-functions/api-post-request");
 const { findOneSteam } = require("../util-functions/mongodb-find-one");
 
 let items = [];
@@ -28,7 +29,6 @@ const redirectLogin = (req, res, next) => {
 }
 
 router.get("/", redirectLogin, async (req, res) => {
-    await runMongo();
     let profilePic = "";
     if (req.user.avatar == null) {
       profilePic = "images/default.png";
@@ -45,6 +45,7 @@ router.get("/", redirectLogin, async (req, res) => {
   });
   
   router.post("/", async (req, res) => {
+    await runMongo();
     console.log(req.query.object);
     console.log(req.query.quantity);
     console.log(req.query.cost);
@@ -52,7 +53,6 @@ router.get("/", redirectLogin, async (req, res) => {
     let api_url_base = "https://data.cftools.cloud";
     let gamesession;
 
-    console.log(token);
     console.log(token.api_token);
 
     await findOneSteam(req.user.discordId).then(id => {
@@ -63,39 +63,25 @@ router.get("/", redirectLogin, async (req, res) => {
     });
 
     await fetch(`${api_url_base}/v1/server/3ba3e6d8-79fe-4118-a305-c23f50baf6bf/GSM/list`, {
-      method: "GET", 
-      headers: {
-        "Authorization": `Bearer ${token.api_token}`
-      }
-    }).then(res => {
-      res.json()
-      .then((json) => {
-          console.log(json);
-        json.sessions.forEach(async session => {
-            if(session.gamedata.steam64 === steamID) {
-                gamesession = session.id;
-      
-                await fetch(`${api_url_base}/v0/server/3ba3e6d8-79fe-4118-a305-c23f50baf6bf/gameLabs/spawn`, {
-                  method: "POST", 
-                  headers: {
-                    "Authorization": `Bearer ${token.api_token}`
-                  },
-                  body: JSON.stringify({
-                      gamesession_id: gamesession,
-                      object: req.query.object,
-                      quantity: req.query.quantity
-                  })
-                }).then(res => {
-                  console.log(`SPAWNED: ${res}`)
-                }).catch(err => {
-                  console.error(err);
-                });
+        method: "GET", 
+        headers: {
+          "Authorization": `Bearer ${token.api_token}`
+        }
+      }).then(res => {
+        res.json()
+        .then((json) => {
+            console.log(json);
+          json.sessions.forEach(async (session) => {
+              if(session.gamedata.steam64 === steamID) {
+                  gamesession = session.id;
+
+                  await postSpawn(api_url_base, token.api_token, gamesession, req.query.object, req.query.quantity);
               }
+          });
         });
+      }).catch(err => {
+        console.log(err);
       });
-    }).then(res => console.log(res)).catch(err => {
-      console.log(err);
-    });
   });
 
 module.exports = router;
