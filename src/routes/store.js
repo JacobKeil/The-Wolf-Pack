@@ -45,9 +45,9 @@ router.get("/", redirectLogin, async (req, res) => {
     });
   });
   
-  router.post("/", async (req, res) => {
+  router.post("/:object/:quantity/:price", async (req, res) => {
     await runMongo();
-    console.log(req.query.object);
+    console.log(req.params.object);
   
     let api_url_base = "https://data.cftools.cloud";
     let gamesession;
@@ -72,10 +72,8 @@ router.get("/", redirectLogin, async (req, res) => {
               if(session.gamedata.steam64 === steamID) {
                   gamesession = session.id;
 
-                  await postSpawn(api_url_base, token.api_token, gamesession, req.query.object, req.query.quantity);
+                  await postSpawn(api_url_base, token.api_token, gamesession, req.params.object, req.params.quantity);
               }
-          }).catch(err => {
-              console.log(err);
           })
         });
       }).catch(err => {
