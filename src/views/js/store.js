@@ -21,11 +21,8 @@ function menuBtnChange() {
  }
 }
 
-var getUrl = window.location;
-var baseUrl = `${getUrl.protocol}//${getUrl.host}`;
-
 async function spawnItem(item, credits) {
     var xhr = new XMLHttpRequest();
-    xhr.open("POST", `${baseUrl}/store?object=${item}&quantity=1&price=${credits}`, true);
+    xhr.open("POST", `/store?object=${item}&quantity=1&price=${credits}`, true);
     xhr.send();
 }
