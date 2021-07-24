@@ -69,6 +69,7 @@ router.get("/home", redirectLogin, (req, res) => {
   res.render("home.ejs", {
       username: un[0],
       avatar: `<img id="user-logo" src="${profilePic}">`,
+      stripePublicKey: stripePublicKey,
       id: req.user.discordId
   });
 });

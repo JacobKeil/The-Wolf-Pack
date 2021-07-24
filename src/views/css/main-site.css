@@ -378,6 +378,15 @@ li {
   padding-left: 10px;
   border: none;
 }
+.donategrid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  width: 50%;
+}
+.donate-button {
+}
+.donate-input {
+}
 .grid2 {
   display: grid;
   grid-template-columns: 2fr 1fr;
