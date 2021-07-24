@@ -22,7 +22,7 @@ function menuBtnChange() {
 }
 
 var getUrl = window.location;
-var baseUrl = `${getUrl.protocol} + "//" + ${getUrl.host}`;
+var baseUrl = `${getUrl.protocol}//${getUrl.host}`;
 
 async function spawnItem(item, credits) {
     var xhr = new XMLHttpRequest();
