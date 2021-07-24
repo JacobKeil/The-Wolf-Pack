@@ -115,9 +115,12 @@
         <div class="store-item">
           <div class="display-flex">
             <h3><%= item.name %></h3>
-            <a onclick="spawnItem('<%= item.class %>', '<%= item.price %>')">
-              <button class="store-button">Buy</button>
-            </a>
+            <button
+              onclick="spawnItem('<%= item.class %>', '<%= item.price %>')"
+              class="store-button"
+            >
+              Buy
+            </button>
           </div>
           <div class="display-flex">
             <h3>Credits: <span style="color: gold"><%= item.price %></span></h3>
