@@ -3,6 +3,7 @@
   "version": "1.2.1",
   "description": "Website for The Wolf Pack",
   "main": "index.js",
+  "proxy": "https://data.cftools.cloud",
   "scripts": {
     "start": "node ./src/app.js",
     "dev": "nodemon ./src/app.js"
