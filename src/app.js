@@ -54,7 +54,7 @@ app.use(function(req, res, next) {
 });
 
 app.use(cors({
-    origin: "https://the-wolfpack.herokuapp.com"
+    origin: "*"
 }));
 app.use(passport.initialize());
 app.use(passport.session());
