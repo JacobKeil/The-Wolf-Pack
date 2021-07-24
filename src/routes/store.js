@@ -48,13 +48,9 @@ router.get("/", redirectLogin, async (req, res) => {
   router.post("/", async (req, res) => {
     await runMongo();
     console.log(req.query.object);
-    console.log(req.query.quantity);
-    console.log(req.query.cost);
   
     let api_url_base = "https://data.cftools.cloud";
     let gamesession;
-
-    console.log(token.api_token);
 
     await findOneSteam(req.user.discordId).then(id => {
         steamID = id.steamId;
@@ -78,7 +74,9 @@ router.get("/", redirectLogin, async (req, res) => {
 
                   await postSpawn(api_url_base, token.api_token, gamesession, req.query.object, req.query.quantity);
               }
-          });
+          }).catch(err => {
+              console.log(err);
+          })
         });
       }).catch(err => {
         console.log(err);
