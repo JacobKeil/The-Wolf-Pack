@@ -17,7 +17,7 @@ const routes = require("./routes");
 app.use(express.static(path.join(__dirname, "views")));
 
 app.use(cors({
-    origin: "*"
+    origin: '*'
 }));
 
 app.use(function(req, res, next) {

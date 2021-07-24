@@ -4,7 +4,8 @@ module.exports.postSpawn = async function(api_url_base, token, gamesession, obje
     await fetch(`${api_url_base}/v0/server/3ba3e6d8-79fe-4118-a305-c23f50baf6bf/gameLabs/spawn`, {
     method: "POST", 
     headers: {
-        "Authorization": `Bearer ${token}`
+        "Authorization": `Bearer ${token}`,
+        "Access-Control-Allow-Origin": "*"
     },
     body: JSON.stringify({
         gamesession_id: gamesession,
