@@ -29,6 +29,7 @@ const redirectLogin = (req, res, next) => {
 }
 
 router.get("/", redirectLogin, async (req, res) => {
+    await runMongo();
     let profilePic = "";
     if (req.user.avatar == null) {
       profilePic = "images/default.png";
