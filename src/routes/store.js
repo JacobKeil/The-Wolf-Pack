@@ -70,6 +70,7 @@ router.get("/", redirectLogin, async (req, res) => {
             if(!json.sessions) {
               console.log("No Sessions Found");
               console.log(json);
+              console.log(token.api_token);
             }
             json.sessions.forEach((session) => {
                 if(session.gamedata.steam64 === steamID) {
