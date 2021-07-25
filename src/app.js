@@ -15,7 +15,7 @@ const PORT = process.env.PORT || 5001;
 const routes = require("./routes");
 
 app.use(cors({
-    origin: true,
+    origin: "https://the-wolfpack.herokuapp.com",
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
     credentials: true
 }));
