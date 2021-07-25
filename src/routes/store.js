@@ -3,6 +3,7 @@ const router = require("express").Router();
 
 const server_id = "9af57c49e9edd25ece64988aaf6c50ac1d5e6b10";
 const fetch = require("node-fetch");
+const cors = require("cors");
 const { postSpawn } = require("../util-functions/api-post-request");
 const { findAll } = require("../util-functions/mongodb-get-all");
 const { findOneDiscordId } = require("../util-functions/mongodb-find-one-discord-id");
@@ -41,7 +42,7 @@ router.get("/", redirectLogin, async (req, res) => {
     });
   });
   
-  router.post("/", async (req, res) => {
+  router.post("/", cors(),  async (req, res) => {
     try {
       let api_url_base = "https://data.cftools.cloud";
       let gamesession;
