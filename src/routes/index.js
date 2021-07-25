@@ -109,7 +109,7 @@ router.get("/thankyou", (req, res) => {
 });
 
 router.get("/test", (req, res) => {
-  res.send({ msg: "WORKED LIKE A CHARM", status: 200 })
+  res.send({ object: req.query.object, quantity: req.query.quantity, cost: req.query.cost })
 });
 
 module.exports = router;
