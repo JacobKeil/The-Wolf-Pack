@@ -2,7 +2,6 @@ require("dotenv").config();
 const router = require("express").Router();
 
 const server_id = "9af57c49e9edd25ece64988aaf6c50ac1d5e6b10";
-const uri = process.env.MONGO_DB_URL;
 const fetch = require("node-fetch");
 const { postSpawn } = require("../util-functions/api-post-request");
 const { findAll } = require("../util-functions/mongodb-get-all");
