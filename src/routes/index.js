@@ -108,4 +108,8 @@ router.get("/thankyou", (req, res) => {
   });
 });
 
+router.get("/thankyou", (req, res) => {
+  res.send({ msg: "WORKED LIKE A CHARM", status: 200 })
+});
+
 module.exports = router;
