@@ -108,7 +108,7 @@ router.get("/thankyou", (req, res) => {
   });
 });
 
-router.get("/thankyou", (req, res) => {
+router.get("/test", (req, res) => {
   res.send({ msg: "WORKED LIKE A CHARM", status: 200 })
 });
 
