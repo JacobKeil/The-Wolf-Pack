@@ -4,10 +4,15 @@ const router = require("express").Router();
 const server_id = "9af57c49e9edd25ece64988aaf6c50ac1d5e6b10";
 const fetch = require("node-fetch");
 const cors = require("cors");
+const { CFToolsClientBuilder, SteamId64 } = require("cftools-sdk");
 const { postSpawn } = require("../util-functions/api-post-request");
 const { findAll } = require("../util-functions/mongodb-get-all");
 const { findOneDiscordId } = require("../util-functions/mongodb-find-one-discord-id");
 const { findOneServerId } = require("../util-functions/mongodb-find-one-server-id");
+
+const client = new CFToolsClientBuilder()
+    .withServerApiId('3ba3e6d8-79fe-4118-a305-c23f50baf6bf')
+    .withCredentials('60f26c966adf7a59ade2303f', 'bn2G3i8w13WDapW8dsUIG9IPzRnzMEZSfJxe12wXMWA=');
 
 let items = [];
 let token = "";
@@ -42,51 +47,27 @@ router.get("/", redirectLogin, async (req, res) => {
     });
   });
   
-  router.post("/", cors(),  async (req, res) => {
+  router.post("/", async (req, res) => {
     try {
-      let api_url_base = "https://data.cftools.cloud";
-      let gamesession;
-  
       await findOneDiscordId("users", "discord", req.user.discordId).then(id => {
           steamID = id.steamId;
-          console.log(steamID);
+          //console.log(steamID);
       }).catch(err => {
           console.error(err);
       });
-
-      await findOneServerId("environment", "variables", server_id).then(t => {
-        token = t;
-      }).catch(err => {
-        console.error(err);
-      });
   
-      await fetch(`${api_url_base}/v1/server/3ba3e6d8-79fe-4118-a305-c23f50baf6bf/GSM/list`, {
-          method: "GET", 
-          headers: {
-            "Authorization": `Bearer ${token.api_token}`,
-            "Access-Control-Allow-Origin": "https://the-wolfpack.herokuapp.com"
+      client.build().listGameSessions().then(sessions => {
+        sessions.forEach(session => {
+          if(session.steamId.id === steamID) {
+              client.build().spawnItem({
+                session: session,
+                itemClass: req.query.object
+              }).catch(err => {
+                console.error(err);
+              });
           }
-        }).then(res => {
-          res.json()
-          .then((json) => {
-            if(!json.sessions) {
-              console.log("No Sessions Found");
-              console.log(json);
-              console.log(token.api_token);
-            }
-            json.sessions.forEach((session) => {
-                if(session.gamedata.steam64 === steamID) {
-                    gamesession = session.id;
-  
-                    postSpawn(api_url_base, token.api_token, gamesession, req.query.object, req.query.quantity);
-                }
-            })
-          }).catch(err => {
-            console.error(err);
-          })
-        }).catch(err => {
-          console.log(err);
-        }); 
+        })
+      })
     } catch (error) {
       console.log(error);
     }
