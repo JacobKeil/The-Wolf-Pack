@@ -69,7 +69,6 @@ router.get("/", redirectLogin, async (req, res) => {
             stDiscord = "steam-id-found";
           }
           steamID = id.steamId;
-          //console.log(steamID);
       }).catch(err => {
           console.error(err);
       });
@@ -84,8 +83,9 @@ router.get("/", redirectLogin, async (req, res) => {
                 console.error(err);
               });
 
-              await updateCurrency("users", "discord", req.user.discordId, req.query.price);
               stServer = "user-in-server";
+
+              await updateCurrency("users", "discord", req.user.discordId, req.query.price);
           }
         })
       })
