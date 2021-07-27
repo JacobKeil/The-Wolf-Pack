@@ -464,3 +464,7 @@ li {
   cursor: pointer;
   transition: all 0.1s ease-in-out;
 }
+.buy-button:hover {
+  background-color: #e2e2e2;
+  color: #1b1b1b;
+}

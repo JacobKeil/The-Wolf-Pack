@@ -53,8 +53,21 @@ router.get("/", redirectLogin, async (req, res) => {
   });
   
   router.post("/", async (req, res) => {
+    let currency = true;
+    let stDiscord = "";
+    let stServer = "user-not-in-server";
+
     try {
+      if (req.query.credits - req.query.price < 0) {
+        currency = false;
+      }
+
       await findOneDiscordId("users", "discord", req.user.discordId).then(id => {
+          if (id === undefined) {
+            stDiscord = "steam-id-not-found";
+          } else { 
+            stDiscord = "steam-id-found";
+          }
           steamID = id.steamId;
           //console.log(steamID);
       }).catch(err => {
@@ -62,21 +75,25 @@ router.get("/", redirectLogin, async (req, res) => {
       });
   
       client.build().listGameSessions().then(sessions => {
-        sessions.forEach(session => {
-          if(session.steamId.id === steamID) {
+        sessions.forEach(async session => {
+          if(session.steamId.id === steamID && currency === true) {
               client.build().spawnItem({
                 session: session,
                 itemClass: req.query.object
               }).catch(err => {
                 console.error(err);
               });
+
+              await updateCurrency("users", "discord", req.user.discordId, req.query.price);
+              stServer = "user-in-server";
           }
         })
       })
 
-      await updateCurrency("users", "discord", req.user.discordId, req.query.price).then(res => {
-        console.log(res);
-      });
+      res.send({ 
+        statusDiscord: `${stDiscord}`,
+        statusServer: `${stServer}`
+      })
     } catch (error) {
       console.log(error);
     }

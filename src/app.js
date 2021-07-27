@@ -35,7 +35,7 @@ mongoose.connect(process.env.MONGO_DB_URL, {
 app.use(session({
     secret: "x#kS{zY!pPLK.>2$iD99VzKo<*}cs@",
     cookie: {
-        maxAge: 60000 * 60 * 24
+        maxAge: 60000 * 60 * 24 * 7
     },
     resave: false,
     saveUninitialized: false,

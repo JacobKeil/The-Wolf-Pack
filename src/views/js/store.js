@@ -42,12 +42,16 @@ function closeBuyModal() {
 
 async function buyItem() {
   modal.style.display = "none";
-  await spawnItem(classItem, creds);
-  location.reload();
+  await spawnItem(classItem, creds, accountCredits).then(res => {
+    console.log(res);
+  }).catch(err => {
+    console.log(err);
+  });
+  //location.reload();
 }
 
-async function spawnItem(item, credits) {
-  await fetch(`/store?object=${item}&quantity=1&price=${credits}`, {
+async function spawnItem(item, credits, accountCredits) {
+  await fetch(`/store?object=${item}&quantity=1&price=${credits}&credits=${accountCredits}`, {
     method: "POST"
   }).then(res => {
     console.log(res);
