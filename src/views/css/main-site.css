@@ -385,9 +385,32 @@ li {
 }
 .donate-button {
   border: none;
+  background-color: #282d3d;
+  padding: 5px 20px;
+  border-radius: 7px;
+  cursor: pointer;
+  transition: all 0.1s ease-in-out;
+}
+.donate-button:hover {
+  background-color: #e2e2e2;
+  color: #111111;
 }
 .donate-input {
   border: none;
+  background-color: #282d3d;
+  width: 100%;
+  padding: 5px 20px;
+  border-radius: 7px;
+  margin-top: 10px;
+}
+.donate-input:focus {
+  outline: 2px solid #e2e2e2;
+}
+.donate-wrapper {
+  background-color: #363e55;
+  width: 400px;
+  padding: 30px;
+  border-radius: 10px;
 }
 .grid2 {
   display: grid;
@@ -407,4 +430,37 @@ li {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+}
+.buy-modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.75);
+}
+.buy-content {
+  border-radius: 5px;
+  max-width: 600px;
+  min-width: 200px;
+  background-color: #2b2b2b;
+  padding: 20px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+.buy-button {
+  border: none;
+  margin-top: 10px;
+  width: 100%;
+  background-color: #1b1b1b;
+  padding: 5px 20px;
+  border-radius: 7px;
+  cursor: pointer;
+  transition: all 0.1s ease-in-out;
 }

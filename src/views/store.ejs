@@ -30,6 +30,17 @@
       rel="stylesheet"
     />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      @media only screen and (max-width: 500px) {
+        .sidebar {
+          display: none;
+        }
+        .store-section {
+          left: 0px;
+          width: 100%;
+        }
+      }
+    </style>
   </head>
   <body>
     <div class="sidebar">
@@ -107,7 +118,7 @@
     <section id="store" class="store-section">
       <div class="display-flex">
         <h1>Store</h1>
-        <h1>My Credits: <span style="color: gold">10150</span></h1>
+        <h1>My Credits: <span style="color: gold"><%= credits %></span></h1>
       </div>
       <br />
       <div class="grid4">
@@ -116,7 +127,7 @@
           <div class="display-flex">
             <h3><%= item.name %></h3>
             <button
-              onclick="spawnItem('<%= item.class %>', '<%= item.price %>')"
+              onclick="openBuyModal('<%= item.class %>', '<%= item.name %>', '<%= item.price %>')"
               class="store-button"
             >
               Buy
@@ -143,6 +154,17 @@
           </div>
         </div>
         <% } %>
+      </div>
+      <div id="buy-modal-full" class="buy-modal">
+        <div class="buy-content">
+          <p id="buy-title">Are you sure you want to purchase this?</p>
+          <button class="buy-button" id="buy-object" onclick="buyItem()">
+            Buy
+          </button>
+          <button class="buy-button" id="cancel-buy" onclick="closeBuyModal()">
+            Cancel
+          </button>
+        </div>
       </div>
     </section>
     <script src="js/store.js"></script>

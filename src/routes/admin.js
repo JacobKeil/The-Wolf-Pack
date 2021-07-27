@@ -4,6 +4,12 @@ const { Webhook, MessageBuilder } = require("discord-webhook-node");
 const convert = require("hex2dec");
 const fetch = require("node-fetch");
 
+const admins = ["195589455430680576", 
+                "545044271389212672",
+                "261717655180804097",
+                "303315367852507136",
+                "356316542423793665"];
+
 const redirectHome = (req, res, next) => {
     if(req.user) {
       res.redirect('/home');

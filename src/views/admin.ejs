@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<!-- Created by CodingLab |www.youtube.com/c/CodingLabYT-->
+<html lang="en" dir="ltr">
   <head>
     <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" type="text/css" href="css/main.css" />
+    <!--<title> Responsive Sidebar Menu  | CodingLab </title>-->
+    <link rel="stylesheet" href="css/main-site.css" />
     <link
       rel="apple-touch-icon"
       sizes="180x180"
@@ -23,75 +23,90 @@
       href="icons/favicon-16x16.png"
     />
     <link rel="manifest" href="icons/site.webmanifest" />
-    <title>Comrades Cove</title>
-    <script
-      src="https://kit.fontawesome.com/f9371e1f01.js"
-      crossorigin="anonymous"
-    ></script>
+    <title>The Wolf Pack</title>
+    <!-- Boxicons CDN Link -->
+    <link
+      href="https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css"
+      rel="stylesheet"
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   </head>
   <body>
-    <div class="nav">
-      <div class="inline">
-        <a href="/home"
-          ><img
-            id="logo"
-            src="https://i.ibb.co/DgLFTpV/Comrades-Cove.png"
-            alt=""
-        /></a>
-        <h1 id="title">Comrades Cove</h1>
+    <div class="sidebar">
+      <div class="logo-details">
+        <div class="logo_name">The Wolf Pack</div>
+        <i class="bx bx-menu" id="btn"></i>
       </div>
-      <div class="inline">
-        <a href="/logout"
-          ><button class="button-login logout">Logout</button></a
-        >
-        <a href="/user"
-          ><button class="button-login logout"><%= username %></button></a
-        >
-        <a href="/user"><%- avatar %></a>
-      </div>
-    </div>
-
-    <div id="newEntry" class="modal">
-      <div class="modal-content">
-        <h1 class="title">Post Embed</h1>
-        <div class="main-inputs">
-          <div id="posted" class="hidden">Message Posted</div>
-          <input
-            id="modal-title"
-            class="modal-input"
-            type="text"
-            placeholder="Title..."
-          />
-          <textarea
-            class="modal-textarea"
-            name="description"
-            id="description"
-            placeholder="Description..."
-            cols="30"
-            rows="10"
-          ></textarea>
-          <select class="modal-select" name="Channel" id="channel">
-            <% for( var ch of channels) { %>
-            <option value="<%= ch.id %>">#<%= ch.name %></option>
-            <% } %>
-          </select>
-          <div class="inline">
-            <input type="color" id="colorpicker" value="#ffffff" />
-            <div class="inline verticalcenter">
-              <input
-                type="checkbox"
-                name="everyone"
-                id="everyone"
-                checked="checked"
-              />
-              <label for="everyone" id="everyonelabel">@everyone</label>
+      <ul class="nav-list">
+        <li>
+          <a href="/home#">
+            <i class="bx bx-grid-alt"></i>
+            <span class="links_name">Home</span>
+          </a>
+          <span class="tooltip">Home</span>
+        </li>
+        <li>
+          <a href="/home#discord">
+            <i class="bx bxl-discord"></i>
+            <span class="links_name">Discord</span>
+          </a>
+          <span class="tooltip">Discord</span>
+        </li>
+        <li>
+          <a href="/home#info">
+            <i class="bx bxs-info-circle"></i>
+            <span class="links_name">Server Info</span>
+          </a>
+          <span class="tooltip">Info</span>
+        </li>
+        <li>
+          <a href="/home#donate">
+            <i class="bx bxs-dollar-circle"></i>
+            <span class="links_name">Donate</span>
+          </a>
+          <span class="tooltip">Donate</span>
+        </li>
+        <li>
+          <a href="/store">
+            <i class="bx bx-store"></i>
+            <span class="links_name">Store</span>
+          </a>
+          <span class="tooltip">Store</span>
+        </li>
+        <li>
+          <a href="/user">
+            <i class="bx bx-cog"></i>
+            <span class="links_name">Settings</span>
+          </a>
+          <span class="tooltip">Settings</span>
+        </li>
+        <% if (id == "195589455430680576" || id == "545044271389212672" || id ==
+        "261717655180804097") { %>
+        <li>
+          <a href="/admin">
+            <i class="bx bx-lock"></i>
+            <span class="links_name">Admin</span>
+          </a>
+          <span class="tooltip">Admin</span>
+        </li>
+        <% } %>
+        <li class="profile">
+          <div class="profile-details">
+            <div class="name_job">
+              <%- avatar %>
+              <div class="name">The Wolf Pack</div>
+              <div class="job">DayZ Server</div>
             </div>
           </div>
-          <button id="modal-button-post" onclick="postEmbed()">Post</button>
-        </div>
-      </div>
+          <a href="/logout">
+            <i class="bx bx-log-out" id="log_out"></i>
+          </a>
+        </li>
+      </ul>
     </div>
-
-    <script src="js/post.js"></script>
+    <section id="store" class="base-section">
+      <h1>Admin Control Panel</h1>
+    </section>
+    <script src="js/home.js"></script>
   </body>
 </html>

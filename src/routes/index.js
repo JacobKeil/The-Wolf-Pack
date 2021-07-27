@@ -19,8 +19,6 @@ router.use("/donate", donate);
 router.use("/admin", admin);
 router.use("/store", store);
 
-const admins = ["545044271389212672", "195589455430680576"];
-
 function redirect(endpoint) {
   const redirect = (req, res, next) => {
     if(req.user) {
