@@ -88,4 +88,8 @@ async function spawnItem(item, credits, accountCredits) {
   }).catch(err => {
     console.log(err);
   });
+
+  setTimeout(() => {
+    window.location.replace("/store");
+  }, 1500);
 }
