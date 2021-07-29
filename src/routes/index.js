@@ -13,6 +13,9 @@ const stripeSecretKey = process.env.STRIPE_TEST_SECRET_KEY;
 
 const stripe = require("stripe")(stripeSecretKey);
 const fetch = require("node-fetch");
+const { findOneDiscordId } = require("../util-functions/mongodb-find-one-discord-id");
+const { addDiscordUser } = require("../util-functions/mongodb-update-discord-id.js");
+const { findOneUpdateSteam } = require("../util-functions/mongodb-find-one-and-update-discord-id")
 
 router.use("/auth", auth);
 router.use("/donate", donate);
@@ -72,7 +75,19 @@ router.get("/home", redirectLogin, (req, res) => {
   });
 });
 
-router.get("/user", redirectLogin, (req, res) => {
+router.get("/user", redirectLogin, async (req, res) => {
+  let steam_id;
+
+  await findOneDiscordId("users", "discord", req.user.discordId).then(id => {
+    if (!id) {
+      steam_id = "No Steam ID set";
+    } else {
+      steam_id = id.steamId;
+    }
+  }).catch(err => {
+    console.error(err);
+  });
+
   let profilePic = "";
     if (req.user.avatar == null) {
       profilePic = "images/default.png";
@@ -85,8 +100,37 @@ router.get("/user", redirectLogin, (req, res) => {
     email: req.user.email,
     avatar: `<img id="user-logo" src="${profilePic}">`,
     guilds: req.user.guilds,
-    id: req.user.discordId
+    id: req.user.discordId,
+    steam_id: steam_id
   });
+});
+
+router.post("/user", redirectLogin, async (req, res) => {
+  let steam_id;
+
+  await findOneDiscordId("users", "discord", req.user.discordId).then(id => {
+    if (!id) {
+      steam_id = "false";
+    } else {
+      steam_id = id.steamId;
+    }
+  }).catch(err => {
+    console.error(err);
+  });
+
+  if (steam_id === "false") {
+    await addDiscordUser("users", "discord", req.user.discordId, req.query.steamId).catch(err => {
+      console.error(err);
+    });
+  } else {
+    await findOneUpdateSteam("users", "discord", req.user.discordId, req.query.steamId).then(id => {
+      steam_id = id.steamId;
+    }).catch(err => {
+      console.error(err);
+    }); 
+  }
+
+  res.send({ status: "finished" })
 });
 
 router.get("/thankyou", (req, res) => {
@@ -106,8 +150,52 @@ router.get("/thankyou", (req, res) => {
   });
 });
 
-router.get("/test", (req, res) => {
-  res.send({ object: req.query.object, quantity: req.query.quantity, cost: req.query.cost })
+router.post("/home/donate", redirectLogin, (req, res) => {
+  const whurl = process.env.DONATION_DISCORD_WH;
+  const donateHook = new Webhook(whurl);
+  //const un = req.user.discordTag.split("#");
+
+  console.log("Donate Method Triggered");
+
+  let api_url = `https://discord.com/api/guilds/538558092070092802/members/${req.user.discordId}/roles/864390790835208203`;
+
+  fetch(api_url, {
+    method: "PUT", 
+    headers: {
+      "Authorization": `Bot ${process.env.BOT_TOKEN}`
+    }
+  }).then(res => {
+    console.log(res);
+  }).catch(err => {
+    console.log(err);
+  });
+
+  const donateEmbed = new MessageBuilder()
+    .setTitle(`Thank you for donating!`)
+    .setDescription(`<@${req.user.discordId}> sent **$${req.query.price}** and was given the role <@&864390790835208203>`)
+    .setColor("#d8782f")
+    .setTimestamp();
+
+  donateHook.send(donateEmbed);
+
+  res.redirect("/thankyou");
+});
+
+router.post("/home/donate/charge", async (req, res) => {
+    stripe.charges.create({
+      amount: req.query.price,
+      source: req.query.token_id,
+      currency: "usd"
+    }).then(() => {
+      console.log("Charge Successful");
+
+      res.redirect("/thankyou");
+    })
+    .catch(() => {
+      console.log("Charge Failed");
+    });
+
+    //console.log(req.baseUrl);
 });
 
 module.exports = router;

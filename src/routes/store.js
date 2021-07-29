@@ -22,7 +22,7 @@ const redirectLogin = (req, res, next) => {
 }
 
 router.get("/", redirectLogin, async (req, res) => {
-    let credits = "";
+    let credits;
 
     await findAll("store", "items").then(r => {
       items = r;
@@ -31,7 +31,11 @@ router.get("/", redirectLogin, async (req, res) => {
     });
 
     await findOneDiscordId("users", "discord", req.user.discordId).then(id => {
-      credits = id.credits;
+      if (!id) {
+        credits = "false";
+      } else {
+        credits = id.credits;
+      }
     }).catch(err => {
       console.error(err);
     });

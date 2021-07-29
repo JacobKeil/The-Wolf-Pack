@@ -1,9 +1,7 @@
 <!DOCTYPE html>
-<!-- Created by CodingLab |www.youtube.com/c/CodingLabYT-->
 <html lang="en" dir="ltr">
   <head>
     <meta charset="UTF-8" />
-    <!--<title> Responsive Sidebar Menu  | CodingLab </title>-->
     <link rel="stylesheet" href="css/main-site.css" />
     <link
       rel="apple-touch-icon"
@@ -24,13 +22,32 @@
     />
     <link rel="manifest" href="icons/site.webmanifest" />
     <title>The Wolf Pack</title>
-    <!-- Boxicons CDN Link -->
     <link
       href="https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css"
       rel="stylesheet"
     />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   </head>
+  <style>
+    a {
+      text-decoration: underline;
+      color: #e2e2e2;
+    }
+    .donate-wrapper {
+      width: 250px;
+    }
+    .donate-button {
+      width: 100%;
+    }
+    .steam-input {
+      border: none;
+      background-color: #1b1b1b;
+      width: 100%;
+      padding: 5px 20px;
+      border-radius: 5px;
+      margin-top: 10px;
+    }
+  </style>
   <body>
     <div class="sidebar">
       <div class="logo-details">
@@ -106,7 +123,50 @@
     </div>
     <section id="store" class="base-section">
       <h1>Settings</h1>
+      <br />
+      <div class="grid3">
+        <div class="steam-id donate-wrapper">
+          <button
+            class="donate-button"
+            id="steam-button"
+            onclick="openSteamModal('<%- steam_id %>')"
+          >
+            Update Steam ID
+          </button>
+          <input
+            class="donate-input"
+            type="text"
+            placeholder="<%- steam_id %>"
+            readonly
+          />
+        </div>
+      </div>
+      <div id="buy-modal-full" class="buy-modal">
+        <div class="buy-content">
+          <p id="steam-title"></p>
+          <input
+            id="steam-input"
+            class="steam-input"
+            type="text"
+            placeholder="<%- steam_id %>"
+          />
+          <button
+            class="buy-button"
+            id="update-button"
+            onclick="updateSteamId()"
+          >
+            Update Steam ID
+          </button>
+          <button
+            class="buy-button"
+            id="cancel-button"
+            onclick="closeSteamModal()"
+          >
+            Cancel
+          </button>
+        </div>
+      </div>
     </section>
-    <script src="js/home.js"></script>
+    <script src="js/user.js"></script>
   </body>
 </html>

@@ -31,6 +31,21 @@
     />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <style>
+      @media only screen and (max-width: 1500px) {
+        .grid4 {
+          grid-template-columns: repeat(3, 1fr);
+        }
+      }
+      @media only screen and (max-width: 1000px) {
+        .grid4 {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+      @media only screen and (max-width: 800px) {
+        .grid4 {
+          grid-template-columns: repeat(1, 1fr);
+        }
+      }
       @media only screen and (max-width: 500px) {
         .sidebar {
           display: none;
@@ -39,10 +54,26 @@
           left: 0px;
           width: 100%;
         }
+        .buy-modal {
+          left: 0px;
+          width: 100%;
+        }
       }
     </style>
     <script>
       let accountCredits = `<%= credits %>`;
+
+      function checkCredits() {
+        if (accountCredits.toString() === 'false') {
+          document.getElementById(
+            'buy-title'
+          ).innerHTML = `No Steam ID was found, please add one here!`;
+          document.getElementById('buy-object').style.display = 'none';
+          document.getElementById('cancel-buy').style.display = 'none';
+          document.getElementById('add-steam').style.display = 'block';
+          document.getElementById('buy-modal-full').style.display = 'block';
+        }
+      }
     </script>
   </head>
   <body>
@@ -137,22 +168,12 @@
             </button>
           </div>
           <div class="display-flex">
-            <h3>Credits: <span style="color: gold"><%= item.price %></span></h3>
+            <h3 id="creds">
+              Credits:
+              <span style="color: gold"><%= item.price %></span>
+            </h3>
             <div>
-              <% if ( item.max > 1 ) { %>
-              <input
-                id="amount"
-                name="Amount"
-                class="store-input"
-                type="number"
-                min="1"
-                max="<%= item.max %>"
-                step="1"
-                placeholder="1-<%= item.max %>"
-              />
-              <% } else { %>
               <h3>Spawns 1</h3>
-              <% } %>
             </div>
           </div>
         </div>
@@ -166,6 +187,9 @@
           </button>
           <button class="buy-button" id="cancel-buy" onclick="closeBuyModal()">
             Cancel
+          </button>
+          <button class="buy-button" id="add-steam" onclick="goToUser()">
+            Add Steam ID
           </button>
         </div>
       </div>

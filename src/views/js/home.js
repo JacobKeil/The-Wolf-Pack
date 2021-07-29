@@ -37,7 +37,7 @@ function donateMoney() {
     }
     console.log("passed stripe handler");
     const Http = new XMLHttpRequest();
-    const url = `${baseUrl}/donate/${total.value.replace("$", "")}`;
+    const url = `${baseUrl}/home/donate?price=${total.value.replace("$", "")}`;
     Http.open("POST", url, true);
     Http.send();
 
@@ -53,7 +53,7 @@ var stripeHandler = StripeCheckout.configure({
         var price = parseInt(parseFloat(total.value.replace("$", "")) * 100);
         console.log(price);
 
-        fetch(`/donate/charge/${token.id}/${price}`, {
+        fetch(`/home/donate/charge?token_id=${token.id}&price=${price}`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
