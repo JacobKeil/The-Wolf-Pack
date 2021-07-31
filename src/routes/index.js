@@ -13,6 +13,7 @@ const stripeSecretKey = process.env.STRIPE_TEST_SECRET_KEY;
 
 const stripe = require("stripe")(stripeSecretKey);
 const fetch = require("node-fetch");
+const { findAll } = require("../util-functions/mongodb-get-all");
 const { findOneDiscordId } = require("../util-functions/mongodb-find-one-discord-id");
 const { addDiscordUser } = require("../util-functions/mongodb-update-discord-id.js");
 const { findOneUpdateSteam } = require("../util-functions/mongodb-find-one-and-update-discord-id")
@@ -58,8 +59,15 @@ router.get("/logout", (req, res) => {
   res.redirect("/");
 });
 
-router.get("/home", redirectLogin, (req, res) => {
-  //console.log(req.user.avatar);
+router.get("/home", redirectLogin, async (req, res) => {
+  let prices;
+
+  await findAll("store", "donation").then(p => {
+    prices = p;
+  }).catch(err => {
+    console.error(err);
+  });
+
   let profilePic = "";
   if (req.user.avatar == null) {
     profilePic = "images/default.png";
@@ -71,7 +79,8 @@ router.get("/home", redirectLogin, (req, res) => {
       username: un[0],
       avatar: `<img id="user-logo" src="${profilePic}">`,
       stripePublicKey: stripePublicKey,
-      id: req.user.discordId
+      id: req.user.discordId,
+      prices: prices
   });
 });
 
@@ -182,20 +191,22 @@ router.post("/home/donate", redirectLogin, (req, res) => {
 });
 
 router.post("/home/donate/charge", async (req, res) => {
-    stripe.charges.create({
-      amount: req.query.price,
-      source: req.query.token_id,
-      currency: "usd"
-    }).then(() => {
-      console.log("Charge Successful");
+  const session = await stripe.checkout.sessions.create({
+    payment_method_types: [
+      'card',
+    ],
+    line_items: [
+      {
+        price: req.query.price,
+        quantity: 1,
+      },
+    ],
+    mode: 'payment',
+    success_url: `http://172.16.1.254:3000/thankyou`,
+    cancel_url: `http://172.16.1.254:3000/home#donate`,
+  });
 
-      res.redirect("/thankyou");
-    })
-    .catch(() => {
-      console.log("Charge Failed");
-    });
-
-    //console.log(req.baseUrl);
+  res.redirect(303, session.url)
 });
 
 module.exports = router;

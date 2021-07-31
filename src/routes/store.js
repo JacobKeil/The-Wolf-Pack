@@ -23,6 +23,13 @@ const redirectLogin = (req, res, next) => {
 
 router.get("/", redirectLogin, async (req, res) => {
     let credits;
+    let phrases;
+
+    await findAll("store", "phrases").then(p => {
+      phrases = p;
+    }).catch(err => {
+      console.error(err);
+    });
 
     await findAll("store", "items").then(r => {
       items = r;
@@ -52,7 +59,8 @@ router.get("/", redirectLogin, async (req, res) => {
         avatar: `<img id="user-logo" src="${profilePic}">`,
         id: req.user.discordId,
         items: items,
-        credits: credits
+        credits: credits,
+        phrases: phrases
     });
   });
   

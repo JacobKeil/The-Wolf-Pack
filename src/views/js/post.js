@@ -1,5 +1,5 @@
 var Channel = document.getElementById("channel");
-var Title = document.getElementById("modal-title");
+var Title = document.getElementById("title");
 var Description = document.getElementById("description");
 var postSuccess = document.getElementById("posted");
 var Color = document.getElementById("colorpicker");
@@ -12,11 +12,11 @@ function postEmbed() {
             "Content-Type": "application/json"
         },
         body: JSON.stringify({
-            content: `${(document.getElementById("everyone").checked) ? "@everyone" : ""}`,
+            content: `${(Content.checked) ? "@everyone" : ""}`,
             embed: {
                 title: `${Title.value}`,
                 description: `${Description.value}`,
-                color: `${document.getElementById("colorpicker").value}`
+                color: `${Color.value}`
             }
         })
     }).catch((error) => {

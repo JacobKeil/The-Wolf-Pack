@@ -24,16 +24,14 @@
     />
     <link rel="manifest" href="icons/site.webmanifest" />
     <title>The Wolf Pack</title>
-    <!-- Boxicons CDN Link -->
     <link
       href="https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css"
       rel="stylesheet"
     />
-    <script src="https://checkout.stripe.com/checkout.js" defer></script>
-    <script>
-      var stripePublicKey = `<%= stripePublicKey %>`;
-    </script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?version=3.52.1&features=fetch"></script>
+    <script src="https://js.stripe.com/v3/"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style></style>
   </head>
   <body>
     <div class="sidebar">
@@ -249,25 +247,14 @@
             game rewards or perks!
           </p>
           <br />
+          <% for (let price of prices) { %>
           <button
             class="donate-button"
-            id="button-donate"
-            onclick="donateClicked()"
+            onclick="donateClicked('<%= price.price_id %>')"
           >
-            Donate
+            <%= price.price %>
           </button>
-          <input
-            id="amount"
-            onchange="changeValues()"
-            onkeyup="changeValues()"
-            name="Amount"
-            class="donate-input"
-            type="number"
-            min="0.00"
-            step="0.01"
-            placeholder="Amount... (ex. 5, 10, 15, 20, etc.)"
-          />
-          <input id="total" name="total" class="donate-input" readonly />
+          <% } %>
         </div>
       </div>
     </section>

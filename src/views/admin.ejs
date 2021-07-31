@@ -106,7 +106,47 @@
     </div>
     <section id="store" class="base-section">
       <h1>Admin Control Panel</h1>
+      <br />
+      <div class="admin-wrapper">
+        <p class="post" id="posted">Post Successful</p>
+        <input
+          class="admin-textbox"
+          name="title"
+          id="title"
+          type="text"
+          placeholder="Title..."
+        />
+        <textarea
+          class="admin-textarea"
+          name="description"
+          id="description"
+          cols="30"
+          rows="5"
+          placeholder="Description..."
+        ></textarea>
+        <select name="channels" id="channel" class="admin-select">
+          <% for (let channel of channels) { %>
+          <option value="<%= channel.id %>">#<%= channel.name %></option>
+          <% } %>
+        </select>
+        <div class="display-flex">
+          <input
+            type="color"
+            name="colorpicker"
+            id="colorpicker"
+            class="admin-color"
+          />
+          <label for="everyone" class="admin-label">@everyone</label>
+          <input
+            type="checkbox"
+            name="everyone"
+            id="everyone"
+            class="admin-checkbox"
+          />
+        </div>
+        <button class="admin-button" onclick="postEmbed()">Post</button>
+      </div>
     </section>
-    <script src="js/home.js"></script>
+    <script src="js/post.js"></script>
   </body>
 </html>

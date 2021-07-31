@@ -408,7 +408,8 @@ li {
 }
 .donate-wrapper {
   background-color: #363e55;
-  width: 400px;
+  min-width: 200px;
+  width: 600px;
   padding: 30px;
   border-radius: 10px;
 }
@@ -467,4 +468,86 @@ li {
 .buy-button:hover {
   background-color: #e2e2e2;
   color: #1b1b1b;
+}
+.admin-wrapper {
+  background-color: #363e55;
+  min-width: 200px;
+  width: 600px;
+  padding: 30px;
+  border-radius: 10px;
+}
+.admin-button {
+  border: none;
+  margin-top: 10px;
+  width: 100%;
+  background-color: #282d3d;
+  padding: 5px 20px;
+  border-radius: 7px;
+  cursor: pointer;
+  transition: all 0.1s ease-in-out;
+}
+.admin-button:hover {
+  background-color: #e2e2e2;
+  color: #111111;
+}
+.admin-textbox {
+  border: none;
+  margin-top: 10px;
+  width: 100%;
+  background-color: #282d3d;
+  padding: 5px 20px;
+  border-radius: 7px;
+  font-size: 13px;
+}
+.admin-textarea {
+  border: none;
+  margin-top: 10px;
+  max-width: 100%;
+  min-width: 100%;
+  background-color: #282d3d;
+  padding: 5px 20px;
+  border-radius: 7px;
+  font-size: 13px;
+}
+.admin-select {
+  border: none;
+  margin-top: 10px;
+  width: 100%;
+  background-color: #282d3d;
+  padding: 5px 20px;
+  border-radius: 7px;
+  cursor: pointer;
+  transition: all 0.1s ease-in-out;
+}
+.admin-color {
+  border: none;
+  margin-top: 10px;
+  margin-right: 20px;
+  width: 100%;
+  border-radius: 7px;
+  cursor: pointer;
+}
+.admin-label {
+  margin-top: 7px;
+  margin-right: 10px;
+}
+.admin-checkbox {
+  margin-top: 7px;
+  border: none;
+  background-color: #282d3d;
+}
+.admin-textbox:focus {
+  outline: 2px solid #e2e2e2;
+}
+.admin-textarea:focus {
+  outline: 2px solid #e2e2e2;
+}
+.hidden {
+  display: none;
+}
+.post {
+  display: none;
+  background-color: #46913f;
+  text-align: center;
+  border-radius: 5px;
 }
