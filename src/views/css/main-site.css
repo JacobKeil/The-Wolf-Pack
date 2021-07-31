@@ -472,7 +472,7 @@ li {
 .admin-wrapper {
   background-color: #363e55;
   min-width: 200px;
-  width: 600px;
+  max-width: 600px;
   padding: 30px;
   border-radius: 10px;
 }

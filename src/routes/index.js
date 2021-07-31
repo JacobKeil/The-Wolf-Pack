@@ -3,7 +3,6 @@ require("dotenv").config();
 const router = require("express").Router();
 const { Webhook, MessageBuilder } = require("discord-webhook-node");
 const auth = require("./auth");
-const donate = require("./donate");
 const admin = require("./admin");
 const store = require("./store");
 const { MongoClient } = require("mongodb");
@@ -19,7 +18,6 @@ const { addDiscordUser } = require("../util-functions/mongodb-update-discord-id.
 const { findOneUpdateSteam } = require("../util-functions/mongodb-find-one-and-update-discord-id")
 
 router.use("/auth", auth);
-router.use("/donate", donate);
 router.use("/admin", admin);
 router.use("/store", store);
 
@@ -128,11 +126,11 @@ router.post("/user", redirectLogin, async (req, res) => {
   });
 
   if (steam_id === "false") {
-    await addDiscordUser("users", "discord", req.user.discordId, req.query.steamId).catch(err => {
+    await addDiscordUser("users", "discord", req.user.discordId, req.query.steamId, req.user.discordTag).catch(err => {
       console.error(err);
     });
   } else {
-    await findOneUpdateSteam("users", "discord", req.user.discordId, req.query.steamId).then(id => {
+    await findOneUpdateSteam("users", "discord", req.user.discordId, req.query.steamId, req.user.discordTag).then(id => {
       steam_id = id.steamId;
     }).catch(err => {
       console.error(err);

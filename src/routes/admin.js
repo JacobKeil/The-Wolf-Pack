@@ -28,8 +28,12 @@ const redirectLogin = (req, res, next) => {
 
 router.get("/", redirectLogin, async (req, res) => {
 
-    if (req.user.discordId == "195589455430680576" || req.user.discordId == "545044271389212672" || req.user.discordId == "261717655180804097") {
-      
+    let isAdmin;
+
+    if (req.user.discordId == "195589455430680576" || 
+        req.user.discordId == "545044271389212672" || 
+        req.user.discordId == "261717655180804097" ||
+        req.user.discordId == "303315367852507136") {
     } else {
       res.redirect("/home");
       return;
@@ -78,9 +82,7 @@ router.get("/", redirectLogin, async (req, res) => {
     let api_url = `https://discord.com/api/channels/${req.params.channel}/messages`;
   
     var colorHex = req.body.embed.color;
-  
     var colorDec = convert.hexToDec(colorHex.replace("#", ""));
-    console.log(colorDec);
   
     fetch(api_url, {
       method: "POST", 
