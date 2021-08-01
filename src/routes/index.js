@@ -5,7 +5,7 @@ const { Webhook, MessageBuilder } = require("discord-webhook-node");
 const auth = require("./auth");
 const admin = require("./admin");
 const store = require("./store");
-const { MongoClient } = require("mongodb");
+const cors = require("cors");
 
 const stripePublicKey = process.env.STRIPE_TEST_PUBLIC_KEY;
 const stripeSecretKey = process.env.STRIPE_TEST_SECRET_KEY;
@@ -188,7 +188,7 @@ router.post("/home/donate", redirectLogin, (req, res) => {
   res.redirect("/thankyou");
 });
 
-router.post("/home/donate/charge", async (req, res) => {
+router.post("/home/donate/charge", cors(), async (req, res) => {
   const session = await stripe.checkout.sessions.create({
     payment_method_types: [
       'card',

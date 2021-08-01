@@ -107,46 +107,84 @@
     <section id="store" class="base-section">
       <h1>Admin Control Panel</h1>
       <br />
-      <div class="grid3">
-        <div class="admin-wrapper">
-          <p class="post" id="posted">Post Successful</p>
+      <div class="admin-wrapper">
+        <p class="post" id="posted">Post Successful</p>
+        <input
+          class="admin-textbox"
+          name="title"
+          id="title"
+          type="text"
+          placeholder="Title..."
+        />
+        <textarea
+          class="admin-textarea"
+          name="description"
+          id="description"
+          cols="30"
+          rows="10"
+          placeholder="Description..."
+        ></textarea>
+        <select name="channels" id="channel" class="admin-select">
+          <% for (let channel of channels) { %>
+          <option value="<%= channel.id %>">#<%= channel.name %></option>
+          <% } %>
+        </select>
+        <div class="display-flex">
           <input
-            class="admin-textbox"
-            name="title"
-            id="title"
-            type="text"
-            placeholder="Title..."
+            type="color"
+            name="colorpicker"
+            id="colorpicker"
+            class="admin-color"
           />
-          <textarea
-            class="admin-textarea"
-            name="description"
-            id="description"
-            cols="30"
-            rows="20"
-            placeholder="Description..."
-          ></textarea>
-          <select name="channels" id="channel" class="admin-select">
-            <% for (let channel of channels) { %>
-            <option value="<%= channel.id %>">#<%= channel.name %></option>
+          <label for="everyone" class="admin-label">@everyone</label>
+          <input
+            type="checkbox"
+            name="everyone"
+            id="everyone"
+            class="admin-checkbox"
+          />
+        </div>
+        <button class="admin-button" onclick="postEmbed()">Post</button>
+      </div>
+      <br />
+      <div>
+        <h1>Award Credits</h1>
+        <div class="admin-user-wrapper">
+          <select name="users" id="users" class="admin-select">
+            <% for (let discord_user of discord_users) { %>
+            <option value="<%= discord_user.discordId %>">
+              <%= discord_user.user %>
+            </option>
             <% } %>
           </select>
-          <div class="display-flex">
-            <input
-              type="color"
-              name="colorpicker"
-              id="colorpicker"
-              class="admin-color"
-            />
-            <label for="everyone" class="admin-label">@everyone</label>
-            <input
-              type="checkbox"
-              name="everyone"
-              id="everyone"
-              class="admin-checkbox"
-            />
-          </div>
-          <button class="admin-button" onclick="postEmbed()">Post</button>
+          <input
+            style="margin-left: 10px"
+            type="text"
+            id="credits-to-give"
+            class="admin-textbox"
+            placeholder="Credit Amount..."
+          />
+          <button
+            class="admin-button"
+            style="margin-left: 10px"
+            onclick="addCredits()"
+          >
+            Add Credits
+          </button>
         </div>
+      </div>
+      <br />
+      <div>
+        <h1>Store Users</h1>
+        <% for (let discord_user of discord_users) { %>
+        <div class="admin-user-wrapper">
+          <p><%= discord_user.user %></p>
+          <p>
+            Credits:
+            <span style="color: gold"><%= discord_user.credits %></span>
+          </p>
+        </div>
+        <% } %>
       </div>
     </section>
     <script src="js/post.js"></script>

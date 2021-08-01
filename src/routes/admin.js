@@ -3,6 +3,8 @@ const router = require("express").Router();
 const { Webhook, MessageBuilder } = require("discord-webhook-node");
 const convert = require("hex2dec");
 const fetch = require("node-fetch");
+const { findAll } = require("../util-functions/mongodb-get-all");
+const { addCurrency } = require("../util-functions/mongodb-add-currency");
 
 const admins = ["195589455430680576", 
                 "545044271389212672",
@@ -27,8 +29,13 @@ const redirectLogin = (req, res, next) => {
 }
 
 router.get("/", redirectLogin, async (req, res) => {
+    let discord;
 
-    let isAdmin;
+    await findAll("users", "discord").then(d => {
+      discord = d;
+    }).catch(err => {
+      console.error(err);
+    });
 
     if (req.user.discordId == "195589455430680576" || 
         req.user.discordId == "545044271389212672" || 
@@ -74,7 +81,8 @@ router.get("/", redirectLogin, async (req, res) => {
         avatar: `<img id="user-logo" src="${profilePic}">`,
         guilds: req.user.guilds,
         id: req.user.discordId,
-        channels: discord_ch
+        channels: discord_ch,
+        discord_users: discord
     });
   });
 
@@ -107,6 +115,11 @@ router.get("/", redirectLogin, async (req, res) => {
     }).catch(err => {
       console.log(err);
     });
+  });
+
+  router.post("/user/add", async (req, res) => {
+    await addCurrency("users", "discord", req.query.discordId, parseInt(req.query.credits));
+    res.send({ status: "Currency Added" });
   });
 
 module.exports = router;
