@@ -44,7 +44,10 @@ function changeValues() {
 
 function donateClicked(price_id) {
     fetch(`/home/donate/charge?price=${price_id}`, {
-        method: "POST"
+        method: "POST",
+        headers: {
+          "Access-Control-Allow-Origin": "*"
+        }
     }).then(res => {
         console.log(res);
     }).catch(err => {
