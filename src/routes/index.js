@@ -21,6 +21,8 @@ router.use("/auth", auth);
 router.use("/admin", admin);
 router.use("/store", store);
 
+const donations = require("../../json/donation.json");
+
 function redirect(endpoint) {
   const redirect = (req, res, next) => {
     if(req.user) {
@@ -58,12 +60,10 @@ router.get("/logout", (req, res) => {
 });
 
 router.get("/home", redirectLogin, async (req, res) => {
-  let prices;
+  let prices = [];
 
-  await findAll("store", "donation").then(p => {
-    prices = p;
-  }).catch(err => {
-    console.error(err);
+  donations.forEach(donation => {
+    prices.push(donation);
   });
 
   let profilePic = "";

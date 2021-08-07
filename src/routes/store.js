@@ -2,15 +2,14 @@ require("dotenv").config();
 const router = require("express").Router();
 
 const { CFToolsClientBuilder, SteamId64 } = require("cftools-sdk");
-const { findAll } = require("../util-functions/mongodb-get-all");
 const { findOneDiscordId } = require("../util-functions/mongodb-find-one-discord-id");
 const { updateCurrency } = require("../util-functions/mongodb-subtract-currency");
+const store_items = require("../../json/items.json");
 
 const client = new CFToolsClientBuilder()
     .withServerApiId('3ba3e6d8-79fe-4118-a305-c23f50baf6bf')
     .withCredentials('60f26c966adf7a59ade2303f', 'bn2G3i8w13WDapW8dsUIG9IPzRnzMEZSfJxe12wXMWA=');
 
-let items = [];
 let steamID = "";
 
 const redirectLogin = (req, res, next) => {
@@ -23,18 +22,10 @@ const redirectLogin = (req, res, next) => {
 
 router.get("/", redirectLogin, async (req, res) => {
     let credits;
-    let phrases;
+    let items = [];
 
-    await findAll("store", "phrases").then(p => {
-      phrases = p;
-    }).catch(err => {
-      console.error(err);
-    });
-
-    await findAll("store", "items").then(r => {
-      items = r;
-    }).catch(err => {
-      console.error(err);
+    store_items.forEach(store_item => {
+      items.push(store_item);
     });
 
     await findOneDiscordId("users", "discord", req.user.discordId).then(id => {
@@ -59,8 +50,7 @@ router.get("/", redirectLogin, async (req, res) => {
         avatar: `<img id="user-logo" src="${profilePic}">`,
         id: req.user.discordId,
         items: items,
-        credits: credits,
-        phrases: phrases
+        credits: credits
     });
   });
   
