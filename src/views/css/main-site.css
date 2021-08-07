@@ -283,6 +283,7 @@ button {
   left: 78px;
   width: calc(100% - 78px);
   z-index: 2;
+  min-height: 100vh;
   height: fit-content;
   padding: 50px;
 }
@@ -374,11 +375,16 @@ li {
   background-color: #85df7c;
 }
 .store-input {
-  width: 70px;
+  border: 2px solid #363e55;
   background-color: #282d3d;
-  color: #f2f2f2;
-  padding-left: 10px;
-  border: none;
+  width: 100%;
+  padding: 5px 20px;
+  border-radius: 5px;
+  margin-top: 10px;
+  margin-bottom: 15px;
+}
+.store-input:focus {
+  outline: 2px solid #c5c5c5;
 }
 .donategrid {
   display: grid;

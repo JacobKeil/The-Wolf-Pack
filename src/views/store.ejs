@@ -148,10 +148,16 @@
         <h1>Store</h1>
         <h1>Credits: <span style="color: gold"><%= credits %></span></h1>
       </div>
+      <input
+        id="store-search"
+        type="text"
+        class="store-input"
+        placeholder="Search..."
+      />
       <br />
       <div class="grid4">
         <% for(let item of items) { %>
-        <div class="store-item">
+        <div id="<%= item.name %>" class="store-item">
           <div class="display-flex">
             <h3><%= item.name %></h3>
             <button

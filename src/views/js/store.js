@@ -1,6 +1,5 @@
 let sidebar = document.querySelector(".sidebar");
 let closeBtn = document.querySelector("#btn");
-//let searchBtn = document.querySelector(".bx-search");
 let modal = document.getElementById("buy-modal-full");
 let creditText = document.getElementById("creds");
 let buy_button = document.getElementById("buy-object");
@@ -8,6 +7,7 @@ let cancel_button = document.getElementById("cancel-buy");
 let nav_modal = document.getElementById("nav-modal-full");
 let open_modal_button = document.getElementById("modal-menu-open");
 let close_modal_button = document.getElementById("modal-menu-close");
+let search = document.getElementById("store-search");
 
 open_modal_button.addEventListener("click", openNavModal);
 close_modal_button.addEventListener("click", closeNavModal);
@@ -30,11 +30,6 @@ closeBtn.addEventListener("click", ()=>{
   sidebar.classList.toggle("open");
   menuBtnChange();
 });
-
-// searchBtn.addEventListener("click", ()=>{
-//   sidebar.classList.toggle("open");
-//   menuBtnChange();
-// });
 
 function goToUser() {
   window.location.replace("/user");
@@ -106,4 +101,19 @@ async function spawnItem(item, credits, accountCredits) {
   setTimeout(() => {
     window.location.replace("/store");
   }, 1500);
+}
+
+search.onkeyup = function () {
+  getSearch();
+};
+
+function getSearch() {
+  let items = document.getElementsByClassName("store-item");
+  for (let i = 0; i < items.length; i++) {
+   if(!items[i].id.toLowerCase().includes(search.value.toLowerCase())) {
+    document.getElementById(items[i].id).classList.add("hidden");
+   } else {
+    document.getElementById(items[i].id).classList.remove("hidden");
+   }
+  }
 }
