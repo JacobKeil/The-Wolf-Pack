@@ -15,7 +15,7 @@ const fetch = require("node-fetch");
 const { findAll } = require("../util-functions/mongodb-get-all");
 const { findOneDiscordId } = require("../util-functions/mongodb-find-one-discord-id");
 const { addDiscordUser } = require("../util-functions/mongodb-update-discord-id.js");
-const { findOneUpdateSteam } = require("../util-functions/mongodb-find-one-and-update-discord-id")
+const { findOneUpdateSteam } = require("../util-functions/mongodb-find-one-and-update-discord-id");
 
 router.use("/auth", auth);
 router.use("/admin", admin);
@@ -188,7 +188,7 @@ router.post("/home/donate", redirectLogin, (req, res) => {
   res.redirect("/thankyou");
 });
 
-router.post("/home/donate/charge", cors(), async (req, res) => {
+router.post("/home/donate/charge", cors({ origin: "localhost:5000" }), async (req, res) => {
   const session = await stripe.checkout.sessions.create({
     payment_method_types: [
       'card',
@@ -204,7 +204,7 @@ router.post("/home/donate/charge", cors(), async (req, res) => {
     cancel_url: `http://172.16.1.254:3000/home#donate`,
   });
 
-  res.redirect(303, session.url)
+  res.redirect(session.url)
 });
 
 module.exports = router;
