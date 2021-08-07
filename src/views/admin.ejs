@@ -30,6 +30,22 @@
       rel="stylesheet"
     />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      #credits-to-give {
+        margin-left: 10px;
+      }
+      #add-credit-button {
+        margin-left: 10px;
+      }
+      @media only screen and (max-width: 750px) {
+        #credits-to-give {
+          margin-left: 0px;
+        }
+        #add-credit-button {
+          margin-left: 0px;
+        }
+      }
+    </style>
   </head>
   <body>
     <div class="sidebar">
@@ -105,6 +121,9 @@
       </ul>
     </div>
     <section id="store" class="base-section">
+      <div class="display-right">
+        <i class="bx bx-menu" id="modal-menu-open"></i>
+      </div>
       <h1>Admin Control Panel</h1>
       <br />
       <div class="admin-wrapper">
@@ -158,15 +177,14 @@
             <% } %>
           </select>
           <input
-            style="margin-left: 10px"
             type="text"
             id="credits-to-give"
             class="admin-textbox"
             placeholder="Credit Amount..."
           />
           <button
+            id="add-credit-button"
             class="admin-button"
-            style="margin-left: 10px"
             onclick="addCredits()"
           >
             Add Credits
@@ -185,6 +203,27 @@
           </p>
         </div>
         <% } %>
+      </div>
+      <div class="nav-modal" id="nav-modal-full">
+        <div class="display-flex">
+          <h1>The Wolf Pack</h1>
+          <i class="bx bx-x" id="modal-menu-close"></i>
+        </div>
+        <br />
+        <div class="nav-content">
+          <ul class="nav-list">
+            <li><a href="/home#">Home</a></li>
+            <li><a href="/home#discord">Discord</a></li>
+            <li><a href="/home#info">Server Info</a></li>
+            <li><a href="/home#donate">Donate</a></li>
+            <li><a href="/store">Store</a></li>
+            <li><a href="/user">Settings</a></li>
+            <% if (id == "195589455430680576" || id == "545044271389212672" ||
+            id == "261717655180804097") { %>
+            <li><a href="/admin">Admin Panel</a></li>
+            <% } %>
+          </ul>
+        </div>
       </div>
     </section>
     <script src="js/post.js"></script>

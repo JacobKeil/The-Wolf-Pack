@@ -46,19 +46,6 @@
           grid-template-columns: repeat(1, 1fr);
         }
       }
-      @media only screen and (max-width: 500px) {
-        .sidebar {
-          display: none;
-        }
-        .store-section {
-          left: 0px;
-          width: 100%;
-        }
-        .buy-modal {
-          left: 0px;
-          width: 100%;
-        }
-      }
     </style>
     <script>
       let accountCredits = `<%= credits %>`;
@@ -152,6 +139,11 @@
       </ul>
     </div>
     <section id="store" class="store-section">
+      <div class="display-flex mobile-header">
+        <h1>The Wolf Pack</h1>
+        <i class="bx bx-menu" id="modal-menu-open"></i>
+      </div>
+      <br />
       <div class="display-flex">
         <h1>Store</h1>
         <h1>Credits: <span style="color: gold"><%= credits %></span></h1>
@@ -193,6 +185,27 @@
           <button class="buy-button" id="add-steam" onclick="goToUser()">
             Add Steam ID
           </button>
+        </div>
+      </div>
+      <div class="nav-modal" id="nav-modal-full">
+        <div class="display-flex">
+          <h1>The Wolf Pack</h1>
+          <i class="bx bx-x" id="modal-menu-close"></i>
+        </div>
+        <br />
+        <div class="nav-content">
+          <ul class="nav-list">
+            <li><a href="/home#">Home</a></li>
+            <li><a href="/home#discord">Discord</a></li>
+            <li><a href="/home#info">Server Info</a></li>
+            <li><a href="/home#donate">Donate</a></li>
+            <li><a href="/store">Store</a></li>
+            <li><a href="/user">Settings</a></li>
+            <% if (id == "195589455430680576" || id == "545044271389212672" ||
+            id == "261717655180804097") { %>
+            <li><a href="/admin">Admin Panel</a></li>
+            <% } %>
+          </ul>
         </div>
       </div>
     </section>

@@ -5,6 +5,20 @@ let modal = document.getElementById("buy-modal-full");
 let creditText = document.getElementById("creds");
 let buy_button = document.getElementById("buy-object");
 let cancel_button = document.getElementById("cancel-buy");
+let nav_modal = document.getElementById("nav-modal-full");
+let open_modal_button = document.getElementById("modal-menu-open");
+let close_modal_button = document.getElementById("modal-menu-close");
+
+open_modal_button.addEventListener("click", openNavModal);
+close_modal_button.addEventListener("click", closeNavModal);
+
+function openNavModal() {
+  nav_modal.style.display = "block";
+}
+
+function closeNavModal() {
+  nav_modal.style.display = "none";
+}
 
 var getUrl = window.location;
 var baseUrl = getUrl.protocol + "//" + getUrl.host;

@@ -1,9 +1,7 @@
 <!DOCTYPE html>
-<!-- Created by CodingLab |www.youtube.com/c/CodingLabYT-->
 <html lang="en" dir="ltr">
   <head>
     <meta charset="UTF-8" />
-    <!--<title> Responsive Sidebar Menu  | CodingLab </title>-->
     <link rel="stylesheet" href="css/main-site.css" />
     <link
       rel="apple-touch-icon"
@@ -24,12 +22,45 @@
     />
     <link rel="manifest" href="icons/site.webmanifest" />
     <title>The Wolf Pack</title>
-    <!-- Boxicons CDN Link -->
     <link
       href="https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css"
       rel="stylesheet"
     />
+    <script src="https://polyfill.io/v3/polyfill.min.js?version=3.52.1&features=fetch"></script>
+    <script src="https://js.stripe.com/v3/"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      .bx-menu {
+        color: black;
+      }
+      .grid2staff {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+      }
+      @media only screen and (max-width: 750px) {
+        #wolf-logo {
+          width: 50px;
+        }
+        .grid2 {
+          grid-template-columns: 1fr;
+        }
+        .grid3 {
+          grid-template-columns: 1fr;
+        }
+        .discord-section {
+          grid-template-columns: 1fr;
+        }
+        .donate-wrapper {
+          width: 100%;
+        }
+        .donate-section {
+          grid-template-columns: 1fr;
+        }
+        .donategrid {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
   </head>
   <body>
     <div class="sidebar">
@@ -39,28 +70,28 @@
       </div>
       <ul class="nav-list">
         <li>
-          <a href="/home">
+          <a href="/home#">
             <i class="bx bx-grid-alt"></i>
             <span class="links_name">Home</span>
           </a>
           <span class="tooltip">Home</span>
         </li>
         <li>
-          <a href="#discord">
+          <a href="/home#discord">
             <i class="bx bxl-discord"></i>
             <span class="links_name">Discord</span>
           </a>
           <span class="tooltip">Discord</span>
         </li>
         <li>
-          <a href="#info">
+          <a href="/home#info">
             <i class="bx bxs-info-circle"></i>
             <span class="links_name">Server Info</span>
           </a>
           <span class="tooltip">Info</span>
         </li>
         <li>
-          <a href="#donate">
+          <a href="/home#donate">
             <i class="bx bxs-dollar-circle"></i>
             <span class="links_name">Donate</span>
           </a>
@@ -87,15 +118,18 @@
               <div class="job">DayZ Server</div>
             </div>
           </div>
-          <a href="/auth/discord/redirect">
+          <a href="/logout">
             <i class="bx bx-log-out" id="log_out"></i>
           </a>
         </li>
       </ul>
     </div>
     <section id="home" class="home-section">
+      <div class="display-right">
+        <i class="bx bx-menu" id="modal-menu-open"></i>
+      </div>
       <div class="centered-middle">
-        <img src="./images/WolfText.png" />
+        <img id="wolf-logo" src="./images/WolfText.png" />
       </div>
     </section>
     <section id="discord" class="discord-section">
@@ -125,106 +159,128 @@
       ></iframe>
     </section>
     <section id="info" class="info-section">
-      <div class="grid2">
-        <h1>Server Mod List</h1>
-        <h1>Server Staff</h1>
-      </div>
       <br />
       <div class="grid2">
-        <div id="mods" class="grid3">
-          <div>
-            <li>- CF</li>
-            <li>- DayZ Expansion</li>
-            <li>- DayZ Expansion Core</li>
-            <li>- DayZ Expansion Vehicles</li>
-            <li>- DayZ Expansion Licensed</li>
-            <li>- VPP Admin Tools</li>
-            <li>- Community Online Tools</li>
-            <li>- Modular Vest System</li>
-            <li>- Banking</li>
-            <li>- GoreZ</li>
-            <li>- Clouds Military Gear</li>
-            <li>- Clouds Military Gear Expansion</li>
-            <li>- Motry's Weapons</li>
-            <li>- Mass'sManyItemOverhaul</li>
-          </div>
-          <div>
-            <li>- Bullet Stacks Plus Plus</li>
-            <li>- [Remastered] Arma Weapon Pack</li>
-            <li>- ArmA 2 ACR Weapon Pack</li>
-            <li>- Windstrides Clothing Pack</li>
-            <li>- Cannabis Plus</li>
-            <li>- Drugs Plus</li>
-            <li>- Advanced Weapon Scopes</li>
-            <li>- Base Fortifications</li>
-            <li>- Better Suppressors</li>
-            <li>- Much Stuff Pack</li>
-            <li>- Munghards Item Pack</li>
-            <li>- Rev Guns</li>
-            <li>- More Guns</li>
-            <li>- Fix Vehicle Positions</li>
-          </div>
-          <div>
-            <li>- Vehicle 3PP</li>
-            <li>- Seeds Dupe Fix</li>
-            <li>- Mikey's Custom Building and Ports</li>
-            <li>- Clothing Inventory Fix</li>
-            <li>- No Vehicle Damage</li>
-            <li>- IRP Land Rover Defender 110</li>
-            <li>- RaG Hummer Armored</li>
-            <li>- 1966 Ford Mustang</li>
-            <li>- [CrSk] BMW 525i E34</li>
-            <li>- GAZ</li>
-            <li>- GameLabs</li>
-            <li>- Trader</li>
-            <li>- Trader Fixes and Features</li>
-            <li>- Pilar Light</li>
+        <div>
+          <h1>Server Mod List</h1>
+          <br />
+          <div id="mods" class="grid3">
+            <div>
+              <li>- CF</li>
+              <li>- DayZ Expansion</li>
+              <li>- DayZ Expansion Core</li>
+              <li>- DayZ Expansion Vehicles</li>
+              <li>- DayZ Expansion Licensed</li>
+              <li>- VPP Admin Tools</li>
+              <li>- Community Online Tools</li>
+              <li>- Modular Vest System</li>
+              <li>- Banking</li>
+              <li>- GoreZ</li>
+              <li>- Clouds Military Gear</li>
+              <li>- Clouds Military Gear Expansion</li>
+              <li>- Motry's Weapons</li>
+              <li>- Mass'sManyItemOverhaul</li>
+            </div>
+            <div>
+              <li>- Bullet Stacks Plus Plus</li>
+              <li>- [Remastered] Arma Weapon Pack</li>
+              <li>- ArmA 2 ACR Weapon Pack</li>
+              <li>- Windstrides Clothing Pack</li>
+              <li>- Cannabis Plus</li>
+              <li>- Drugs Plus</li>
+              <li>- Advanced Weapon Scopes</li>
+              <li>- Base Fortifications</li>
+              <li>- Better Suppressors</li>
+              <li>- Much Stuff Pack</li>
+              <li>- Munghards Item Pack</li>
+              <li>- Rev Guns</li>
+              <li>- More Guns</li>
+              <li>- Fix Vehicle Positions</li>
+            </div>
+            <div>
+              <li>- Vehicle 3PP</li>
+              <li>- Seeds Dupe Fix</li>
+              <li>- Mikey's Custom Building and Ports</li>
+              <li>- Clothing Inventory Fix</li>
+              <li>- No Vehicle Damage</li>
+              <li>- IRP Land Rover Defender 110</li>
+              <li>- RaG Hummer Armored</li>
+              <li>- 1966 Ford Mustang</li>
+              <li>- [CrSk] BMW 525i E34</li>
+              <li>- GAZ</li>
+              <li>- GameLabs</li>
+              <li>- Trader</li>
+              <li>- Trader Fixes and Features</li>
+              <li>- Pilar Light</li>
+            </div>
           </div>
         </div>
-        <div id="staff" class="grid3">
-          <div class="staff-card">
-            <img
-              src="https://cdn.discordapp.com/avatars/261717655180804097/748646a4a220e29c6e80bea5ecce30b1.png?size=128"
-            />
-            <h2>Lance</h2>
-            <h2>Owner</h2>
-          </div>
-          <div class="staff-card">
-            <img
-              src="https://cdn.discordapp.com/avatars/303315367852507136/85cc761c9e703f2b00fb1e19e774ec3b.png?size=128"
-            />
-            <h2>Brittney</h2>
-            <h2>Owner</h2>
-          </div>
-          <div class="staff-card">
-            <img
-              src="https://cdn.discordapp.com/avatars/195589455430680576/9b7f05b6e8fb932c2cab13807bcb2494.png?size=128"
-            />
-            <h2>Nuke</h2>
-            <h2>Developer</h2>
-          </div>
-          <div class="staff-card">
-            <img
-              src="https://cdn.discordapp.com/avatars/545044271389212672/302236ad2fed3667da26d98197cfb408.png?size=128"
-            />
-            <h2>JerZey</h2>
-            <h2>Admin</h2>
-          </div>
-          <div class="staff-card">
-            <img
-              src="https://cdn.discordapp.com/avatars/356316542423793665/ef1ac20b0d70b08aaca50eb38b729f52.png?size=128"
-            />
-            <h2>Lowkeywizard</h2>
-            <h2>Admin</h2>
-          </div>
-          <div class="staff-card">
-            <img src="./images/TheWolfPackLogo.png" />
-            <h2>Wolfy</h2>
-            <h2>Server Bot</h2>
+        <div>
+          <br />
+          <h1>Server Staff</h1>
+          <br />
+          <div id="staff" class="grid2staff">
+            <div class="staff-card">
+              <img
+                src="https://cdn.discordapp.com/avatars/261717655180804097/748646a4a220e29c6e80bea5ecce30b1.png?size=128"
+              />
+              <h2>Lance</h2>
+              <h2>Owner</h2>
+            </div>
+            <div class="staff-card">
+              <img
+                src="https://cdn.discordapp.com/avatars/303315367852507136/85cc761c9e703f2b00fb1e19e774ec3b.png?size=128"
+              />
+              <h2>Brittney</h2>
+              <h2>Owner</h2>
+            </div>
+            <div class="staff-card">
+              <img
+                src="https://cdn.discordapp.com/avatars/195589455430680576/9b7f05b6e8fb932c2cab13807bcb2494.png?size=128"
+              />
+              <h2>Nuke</h2>
+              <h2>Developer</h2>
+            </div>
+            <div class="staff-card">
+              <img
+                src="https://cdn.discordapp.com/avatars/545044271389212672/302236ad2fed3667da26d98197cfb408.png?size=128"
+              />
+              <h2>JerZey</h2>
+              <h2>Map Developer</h2>
+            </div>
+            <div class="staff-card">
+              <img
+                src="https://cdn.discordapp.com/avatars/356316542423793665/ef1ac20b0d70b08aaca50eb38b729f52.png?size=128"
+              />
+              <h2>Lowkeywizard</h2>
+              <h2>Admin</h2>
+            </div>
+            <div class="staff-card">
+              <img src="./images/TheWolfPackLogo.png" />
+              <h2>Wolfy</h2>
+              <h2>Server Bot</h2>
+            </div>
           </div>
         </div>
       </div>
     </section>
+    <div class="nav-modal" id="nav-modal-full">
+      <div class="display-flex">
+        <h1>The Wolf Pack</h1>
+        <i class="bx bx-x" id="modal-menu-close"></i>
+      </div>
+      <br />
+      <div class="nav-content">
+        <ul class="nav-list">
+          <li><a href="/home#">Home</a></li>
+          <li><a href="/home#discord">Discord</a></li>
+          <li><a href="/home#info">Server Info</a></li>
+          <li><a href="/home#donate">Donate</a></li>
+          <li><a href="/store">Store</a></li>
+          <li><a href="/user">Settings</a></li>
+        </ul>
+      </div>
+    </div>
     <script src="js/home.js"></script>
   </body>
 </html>
