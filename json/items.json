@@ -1,0 +1,261 @@
+[{
+  "class": "hardigg2_Mung",
+  "name": "Hardigg",
+  "price": 100,
+  "max": 1
+},{
+  "class": "Barrel_Green",
+  "name": "Barrel",
+  "price": 50,
+  "max": 1
+},{
+  "class": "SeaChest",
+  "name": "Sea Chest",
+  "price": 50,
+  "max": 1
+},{
+  "class": "Msp_RifleSafe_Kit",
+  "name": "Rifle Safe",
+  "price": 60,
+  "max": 1
+},{
+  "class": "Msp_MilitaryCrate_Brown",
+  "name": "Military Crate",
+  "price": 75,
+  "max": 1
+},{
+  "class": "Msp_StorageBox_Kit",
+  "name": "Storage Box",
+  "price": 75,
+  "max": 1
+},{
+  "class": "Msp_FishingRodsRack_Kit",
+  "name": "Fishing Rod Rack",
+  "price": 10,
+  "max": 1
+},{
+  "class": "Msp_MoskvaFridge_Blue_Kit",
+  "name": "Moskva Fridge",
+  "price": 25,
+  "max": 1
+},{
+  "class": "Msp_MoskvaFridge_Cream_Kit",
+  "name": "Moskva Fridge Cream",
+  "price": 25,
+  "max": 1
+},{
+  "class": "ExpansionGunRack",
+  "name": "Gun Rack",
+  "price": 30,
+  "max": 1
+},{
+  "class": "MassHeli_MRE10",
+  "name": "MRE",
+  "price": 5,
+  "max": 1
+},{
+  "class": "Canteen",
+  "name": "Canteen",
+  "price": 5,
+  "max": 1
+},{
+  "class": "NailBox",
+  "name": "Nails",
+  "price": 15,
+  "max": 25
+},{
+  "class": "ExpansionCodeLock",
+  "name": "Code Lock",
+  "price": 100,
+  "max": 1
+},{
+  "class": "ExpansionBarbedWireKit",
+  "name": "Barbed Wire",
+  "price": 15,
+  "max": 1
+},{
+  "class": "Rope",
+  "name": "Rope",
+  "price": 15,
+  "max": 1
+},{
+  "class": "Hatchet",
+  "name": "Hatchet",
+  "price": 15,
+  "max": 1
+},{
+  "class": "Hacksaw",
+  "name": "Hack saw",
+  "price": 15,
+  "max": 1
+},{
+  "class": "Whetstone",
+  "name": "Whetstone",
+  "price": 15,
+  "max": 1
+},{
+  "class": "Shovel",
+  "name": "Shovel",
+  "price": 15,
+  "max": 1
+},{
+  "class": "WoodenPlank",
+  "name": "Wooden Plank (x20)",
+  "price": 30,
+  "max": 1
+},{
+  "class": "NVGoggles",
+  "name": "NVG",
+  "price": 200,
+  "max": 1
+},{
+  "class": "NVGHeadstrap",
+  "name": "NVG Headstrap",
+  "price": 10,
+  "max": 1
+},{
+  "class": "Headtorch_Black",
+  "name": "Headtorch",
+  "price": 10,
+  "max": 1
+},{
+  "class": "Battery9V",
+  "name": "9V Battery",
+  "price": 5,
+  "max": 1
+},{
+  "class": "ToxicZoneSuits_Hood_green",
+  "name": "Hazmat Hood",
+  "price": 15,
+  "max": 1
+},{
+  "class": "ToxicZoneSuits_Jacket_green",
+  "name": "Hazmat Jacket",
+  "price": 15,
+  "max": 1
+},{
+  "class": "ToxicZoneSuits_Pants_green",
+  "name": "Hazmat Pants",
+  "price": 15,
+  "max": 1
+},{
+  "class": "ToxicZoneSuits_Boots_green",
+  "name": "Hazmat Boots",
+  "price": 15,
+  "max": 1
+},{
+  "class": "ToxicZoneSuits_Gloves_green",
+  "name": "Hazmat Gloves",
+  "price": 15,
+  "max": 1
+},{
+  "class": "ToxicZoneGP5GasMask_green",
+  "name": "Gas Mask",
+  "price": 15,
+  "max": 1
+},{
+  "class": "GP5GasMask_Filter",
+  "name": "Gas Mask Filter",
+  "price": 10,
+  "max": 1
+},{
+  "class": "Msp_Slouchie_Beige",
+  "name": "Beige Slouchie",
+  "price": 5,
+  "max": 1
+},{
+  "class": "Msp_Slouchie_Black",
+  "name": "Black Slouchie",
+  "price": 5,
+  "max": 1
+},{
+  "class": "Msp_Slouchie_Red",
+  "name": "Red Slouchie",
+  "price": 5,
+  "max": 1
+},{
+  "class": "Msp_DuffleBag_Green",
+  "name": "Green Dufflebag",
+  "price": 15,
+  "max": 1
+},{
+  "class": "Msp_DuffleBag_Black",
+  "name": "Black Dufflebag",
+  "price": 15,
+  "max": 1
+},{
+  "class": "Msp_DuffleBag_Blue",
+  "name": "Blue Dufflebag",
+  "price": 15,
+  "max": 1
+},{
+  "class": "Msp_WaistPack_Tan",
+  "name": "Tan Waist Pack",
+  "price": 10,
+  "max": 1
+},{
+  "class": "Msp_WaistPack_Black",
+  "name": "Black Waist Pack",
+  "price": 10,
+  "max": 1
+},{
+  "class": "Msp_WaistPack_Green",
+  "name": "Green Waist Pack",
+  "price": 10,
+  "max": 1
+},{
+  "class": "Msp_WaistPack_Brown",
+  "name": "Brown Waist Pack",
+  "price": 10,
+  "max": 1
+},{
+  "class": "Msp_WaistPack_Blue",
+  "name": "Blue Waist Pack",
+  "price": 10,
+  "max": 1
+},{
+  "class": "Msp_WaistPack_UrbanFlektarn",
+  "name": "Urban Flektarn Waist Pack",
+  "price": 10,
+  "max": 1
+},{
+  "class": "Msp_BaseballCap_Beige",
+  "name": "Beige Baseball Cap",
+  "price": 5,
+  "max": 1
+},{
+  "class": "Msp_BaseballCap_Black",
+  "name": "Black Baseball Cap",
+  "price": 5,
+  "max": 1
+},{
+  "class": "Msp_BaseballCap_Blue",
+  "name": "Blue Baseball Cap",
+  "price": 5,
+  "max": 1
+},{
+  "class": "Msp_BaseballCap_Camo",
+  "name": "Camo Baseball Cap",
+  "price": 5,
+  "max": 1
+},{
+  "class": "Msp_BaseballCap_Olive",
+  "name": "Olive Baseball Cap",
+  "price": 5,
+  "max": 1
+},{
+  "class": "Msp_BaseballCap_Pink",
+  "name": "Pink Baseball Cap",
+  "price": 5,
+  "max": 1
+},{
+  "class": "Msp_BaseballCap_Red",
+  "name": "Red Baseball Cap",
+  "price": 5,
+  "max": 1
+},{
+  "class": "Msp_BaseballCap_CMMG_Black",
+  "name": "CMMG Black Baseball Cap",
+  "price": 5,
+  "max": 1
+}]
