@@ -2,8 +2,8 @@ var Channel = document.getElementById("channel");
 var Title = document.getElementById("title");
 var Description = document.getElementById("description");
 var postSuccess = document.getElementById("posted");
-var Color = document.getElementById("colorpicker");
-var Content = document.getElementById("everyone");
+var Color = document.getElementById("admin-color-picker");
+var Everyone = document.getElementById("everyone");
 
 var User = document.getElementById("users");
 var Credits = document.getElementById("credits-to-give");
@@ -29,7 +29,7 @@ function postEmbed() {
             "Content-Type": "application/json"
         },
         body: JSON.stringify({
-            content: `${(Content.checked) ? "@everyone" : ""}`,
+            content: `${Everyone.value}`,
             embed: {
                 title: `${Title.value}`,
                 description: `${Description.value}`,
