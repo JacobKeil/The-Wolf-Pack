@@ -528,20 +528,30 @@ li {
   cursor: pointer;
   transition: all 0.1s ease-in-out;
 }
-.admin-color {
+#admin-color-picker {
   border: none;
+  outline: none;
+  -webkit-appearance: none;
   margin-top: 10px;
   margin-right: 20px;
   width: 100%;
   border-radius: 7px;
   cursor: pointer;
+  height: 30px;
+}
+#admin-color-picker::-webkit-color-swatch-wrapper {
+  padding: 0;
+}
+#admin-color-picker::-webkit-color-swatch {
+  border: none;
+  border-radius: 5px;
 }
 .admin-label {
   margin-top: 7px;
   margin-right: 10px;
 }
 .admin-checkbox {
-  margin-top: 7px;
+  margin-top: 14px;
   border: none;
   background-color: #282d3d;
 }
