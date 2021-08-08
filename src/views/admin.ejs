@@ -152,16 +152,13 @@
           <input
             type="color"
             name="colorpicker"
-            id="colorpicker"
+            id="admin-color-picker"
             class="admin-color"
           />
-          <label for="everyone" class="admin-label">@everyone</label>
-          <input
-            type="checkbox"
-            name="everyone"
-            id="everyone"
-            class="admin-checkbox"
-          />
+          <select name="everyone" id="everyone" class="admin-select">
+            <option value="">None</option>
+            <option value="@everyone">Everyone</option>
+          </select>
         </div>
         <button class="admin-button" onclick="postEmbed()">Post</button>
       </div>
@@ -226,6 +223,6 @@
         </div>
       </div>
     </section>
-    <script src="js/post.js"></script>
+    <script src="js/admin.js"></script>
   </body>
 </html>
