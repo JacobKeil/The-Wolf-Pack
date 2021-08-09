@@ -62,6 +62,9 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.use("/", routes);
+app.use( function(req, res, next) {
+    res.redirect("/");
+});
 
 app.listen(PORT, () => {
     console.log(`Running on port ${PORT}`);
