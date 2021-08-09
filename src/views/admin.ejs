@@ -37,6 +37,9 @@
       #add-credit-button {
         margin-left: 10px;
       }
+      .store-button {
+        padding: 8px 10px;
+      }
       @media only screen and (max-width: 750px) {
         #credits-to-give {
           margin-left: 0px;
@@ -198,6 +201,23 @@
             Credits:
             <span style="color: gold"><%= discord_user.credits %></span>
           </p>
+        </div>
+        <% } %>
+      </div>
+      <div>
+        <br />
+        <h1>Tickets</h1>
+        <% for (let ticket of tickets) { %>
+        <div class="admin-user-wrapper">
+          <p>
+            <%= ticket.ticketName %> -
+            <span style="color: rgba(255, 255, 255, 0.7)"
+              >(<%= ticket.openedName %>)</span
+            >
+          </p>
+          <a href="/ticket/<%= ticket.ticketId %>" target="_blank">
+            <button class="store-button">View Ticket</button>
+          </a>
         </div>
         <% } %>
       </div>

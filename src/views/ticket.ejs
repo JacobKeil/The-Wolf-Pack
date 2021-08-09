@@ -116,8 +116,10 @@
       <div class="display-right">
         <i class="bx bx-menu" id="modal-menu-open"></i>
       </div>
-      <h1><%= ticket.ticketName %> - Closed by <%= ticket.closedName %></h1>
-      <h4><%= ticket.timeDate %></h4>
+      <h1><%= ticket.ticketName %></h1>
+      <br />
+      <p>Closed by <%= ticket.closedName %></p>
+      <p><%= ticket.timeDate %></p>
       <br />
       <div class="ticket-transcript">
         <% for (let message of ticket.messages) { %>
