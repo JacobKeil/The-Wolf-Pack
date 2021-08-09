@@ -12,10 +12,10 @@ const stripeSecretKey = process.env.STRIPE_TEST_SECRET_KEY;
 
 const stripe = require("stripe")(stripeSecretKey);
 const fetch = require("node-fetch");
-const { findAll } = require("../util-functions/mongodb-get-all");
 const { findOneDiscordId } = require("../util-functions/mongodb-find-one-discord-id");
 const { addDiscordUser } = require("../util-functions/mongodb-update-discord-id.js");
 const { findOneUpdateSteam } = require("../util-functions/mongodb-find-one-and-update-discord-id");
+const { findOneTicket } = require("../util-functions/mongodb-find-one-ticket");
 
 router.use("/auth", auth);
 router.use("/admin", admin);
@@ -188,23 +188,35 @@ router.post("/home/donate", redirectLogin, (req, res) => {
   res.redirect("/thankyou");
 });
 
-router.post("/home/donate/charge", cors({ origin: "localhost:5000" }), async (req, res) => {
-  const session = await stripe.checkout.sessions.create({
-    payment_method_types: [
-      'card',
-    ],
-    line_items: [
-      {
-        price: req.query.price,
-        quantity: 1,
-      },
-    ],
-    mode: 'payment',
-    success_url: `http://172.16.1.254:3000/thankyou`,
-    cancel_url: `http://172.16.1.254:3000/home#donate`,
-  });
+// router.post("/home/donate/charge", cors({ origin: "localhost:5000" }), async (req, res) => {
+//   const session = await stripe.checkout.sessions.create({
+//     payment_method_types: [
+//       'card',
+//     ],
+//     line_items: [
+//       {
+//         price: req.query.price,
+//         quantity: 1,
+//       },
+//     ],
+//     mode: 'payment',
+//     success_url: `http://172.16.1.254:3000/thankyou`,
+//     cancel_url: `http://172.16.1.254:3000/home#donate`,
+//   });
 
-  res.redirect(session.url)
+//   res.redirect(session.url)
+// });
+
+router.get("/ticket/:id", (req, res) => {
+  findOneTicket("users", "tickets", req.params.id).then(ticket_res => {
+    //console.log(ticket_res);
+    res.render("ticket.ejs", {
+      ticket: ticket_res
+    });
+  }).catch(err => {
+    console.log(err);
+  });
+  //console.log(ticket);
 });
 
 module.exports = router;

@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="/css/main-site.css" />
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="icons/apple-touch-icon.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="icons/favicon-32x32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="icons/favicon-16x16.png"
+    />
+    <link rel="manifest" href="icons/site.webmanifest" />
+    <title>The Wolf Pack</title>
+    <link
+      href="https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css"
+      rel="stylesheet"
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      .base-section {
+        min-height: 100vh;
+        max-height: fit-content;
+      }
+      .ticket-transcript {
+        border-radius: 5px;
+        max-width: 800px;
+        padding: 10px 20px;
+        background-color: #363e55;
+      }
+      .message {
+        margin: 10px 0;
+        background-color: #282d3d;
+        border-radius: 5px;
+        padding: 10px;
+      }
+      .ticket-image {
+        margin-top: 10px;
+        max-width: 100% !important;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="sidebar">
+      <div class="logo-details">
+        <div class="logo_name">The Wolf Pack</div>
+        <i class="bx bx-menu" id="btn"></i>
+      </div>
+      <ul class="nav-list">
+        <li>
+          <a href="/home#">
+            <i class="bx bx-grid-alt"></i>
+            <span class="links_name">Home</span>
+          </a>
+          <span class="tooltip">Home</span>
+        </li>
+        <li>
+          <a href="/home#discord">
+            <i class="bx bxl-discord"></i>
+            <span class="links_name">Discord</span>
+          </a>
+          <span class="tooltip">Discord</span>
+        </li>
+        <li>
+          <a href="/home#info">
+            <i class="bx bxs-info-circle"></i>
+            <span class="links_name">Server Info</span>
+          </a>
+          <span class="tooltip">Info</span>
+        </li>
+        <li>
+          <a href="/home#donate">
+            <i class="bx bxs-dollar-circle"></i>
+            <span class="links_name">Donate</span>
+          </a>
+          <span class="tooltip">Donate</span>
+        </li>
+        <li>
+          <a href="/store">
+            <i class="bx bx-store"></i>
+            <span class="links_name">Store</span>
+          </a>
+          <span class="tooltip">Store</span>
+        </li>
+        <li>
+          <a href="/user">
+            <i class="bx bx-cog"></i>
+            <span class="links_name">Settings</span>
+          </a>
+          <span class="tooltip">Settings</span>
+        </li>
+        <li class="profile">
+          <div class="profile-details">
+            <div class="name_job">
+              <div class="name">The Wolf Pack</div>
+              <div class="job">DayZ Server</div>
+            </div>
+          </div>
+          <a href="/logout">
+            <i class="bx bx-log-out" id="log_out"></i>
+          </a>
+        </li>
+      </ul>
+    </div>
+    <section id="ticket" class="base-section">
+      <div class="display-right">
+        <i class="bx bx-menu" id="modal-menu-open"></i>
+      </div>
+      <h1><%= ticket.ticketName %> - Closed by <%= ticket.closedName %></h1>
+      <h4><%= ticket.timeDate %></h4>
+      <br />
+      <div class="ticket-transcript">
+        <% for (let message of ticket.messages) { %>
+        <div class="message">
+          <h4 style="color: #4da4f5"><%= message.author %></h4>
+          <% if (!message.content.includes("https://cdn.discordapp.com")) { %>
+          <p><%= message.content %></p>
+          <% } else { %>
+          <img class="ticket-image" src="<%= message.content %>" />
+          <% } %>
+        </div>
+        <% } %>
+      </div>
+      <div class="nav-modal" id="nav-modal-full">
+        <div class="display-flex">
+          <h1>The Wolf Pack</h1>
+          <i class="bx bx-x" id="modal-menu-close"></i>
+        </div>
+        <br />
+        <div class="nav-content">
+          <ul class="nav-list">
+            <li><a href="/home#">Home</a></li>
+            <li><a href="/home#discord">Discord</a></li>
+            <li><a href="/home#info">Server Info</a></li>
+            <li><a href="/home#donate">Donate</a></li>
+            <li><a href="/store">Store</a></li>
+            <li><a href="/user">Settings</a></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+    <script src="/js/ticket.js"></script>
+  </body>
+</html>
