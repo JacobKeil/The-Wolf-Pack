@@ -3,8 +3,7 @@ const router = require("express").Router();
 const { Webhook, MessageBuilder } = require("discord-webhook-node");
 const convert = require("hex2dec");
 const fetch = require("node-fetch");
-const { findAll } = require("../util-functions/mongodb-get-all");
-const { addCurrency } = require("../util-functions/mongodb-add-currency");
+const { findAll, addCurrency } = require("../util-functions/mongodb-functions");
 
 const admins = ["195589455430680576", 
                 "545044271389212672",
@@ -30,6 +29,13 @@ const redirectLogin = (req, res, next) => {
 
 router.get("/", redirectLogin, async (req, res) => {
     let discord;
+    let tickets;
+
+    await findAll("users", "tickets").then(t => {
+      tickets = t;
+    }).catch(err => {
+      console.error(err);
+    });
 
     await findAll("users", "discord").then(d => {
       discord = d;
@@ -82,7 +88,8 @@ router.get("/", redirectLogin, async (req, res) => {
         guilds: req.user.guilds,
         id: req.user.discordId,
         channels: discord_ch,
-        discord_users: discord
+        discord_users: discord,
+        tickets: tickets
     });
   });
 
