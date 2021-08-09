@@ -2,8 +2,7 @@ require("dotenv").config();
 const router = require("express").Router();
 
 const { CFToolsClientBuilder, SteamId64 } = require("cftools-sdk");
-const { findOneDiscordId } = require("../util-functions/mongodb-find-one-discord-id");
-const { updateCurrency } = require("../util-functions/mongodb-subtract-currency");
+const { findOneDiscordId, updateCurrency } = require("../util-functions/mongodb-functions");
 const store_items = require("../../json/items.json");
 
 const client = new CFToolsClientBuilder()

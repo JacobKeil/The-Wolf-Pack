@@ -5,6 +5,8 @@ const { Webhook, MessageBuilder } = require("discord-webhook-node");
 const auth = require("./auth");
 const admin = require("./admin");
 const store = require("./store");
+const user = require("./user");
+const ticket = require("./ticket");
 const cors = require("cors");
 
 const stripePublicKey = process.env.STRIPE_TEST_PUBLIC_KEY;
@@ -12,14 +14,16 @@ const stripeSecretKey = process.env.STRIPE_TEST_SECRET_KEY;
 
 const stripe = require("stripe")(stripeSecretKey);
 const fetch = require("node-fetch");
-const { findOneDiscordId } = require("../util-functions/mongodb-find-one-discord-id");
-const { addDiscordUser } = require("../util-functions/mongodb-update-discord-id.js");
-const { findOneUpdateSteam } = require("../util-functions/mongodb-find-one-and-update-discord-id");
-const { findOneTicket } = require("../util-functions/mongodb-find-one-ticket");
+
+const { findOneDiscordId, 
+        findOneUpdateSteam, 
+        addDiscordUser } = require("../util-functions/mongodb-functions");
 
 router.use("/auth", auth);
 router.use("/admin", admin);
 router.use("/store", store);
+router.use("/user", user);
+router.use("/ticket", ticket);
 
 const donations = require("../../json/donation.json");
 
@@ -80,64 +84,6 @@ router.get("/home", redirectLogin, async (req, res) => {
       id: req.user.discordId,
       prices: prices
   });
-});
-
-router.get("/user", redirectLogin, async (req, res) => {
-  let steam_id;
-
-  await findOneDiscordId("users", "discord", req.user.discordId).then(id => {
-    if (!id) {
-      steam_id = "No Steam ID set";
-    } else {
-      steam_id = id.steamId;
-    }
-  }).catch(err => {
-    console.error(err);
-  });
-
-  let profilePic = "";
-    if (req.user.avatar == null) {
-      profilePic = "images/default.png";
-    } else {
-      profilePic = `https://cdn.discordapp.com/avatars/${req.user.discordId}/${req.user.avatar}`;
-    }
-  const un = req.user.discordTag.split("#");
-  res.render("user.ejs", {
-    username: un[0],
-    email: req.user.email,
-    avatar: `<img id="user-logo" src="${profilePic}">`,
-    guilds: req.user.guilds,
-    id: req.user.discordId,
-    steam_id: steam_id
-  });
-});
-
-router.post("/user", redirectLogin, async (req, res) => {
-  let steam_id;
-
-  await findOneDiscordId("users", "discord", req.user.discordId).then(id => {
-    if (!id) {
-      steam_id = "false";
-    } else {
-      steam_id = id.steamId;
-    }
-  }).catch(err => {
-    console.error(err);
-  });
-
-  if (steam_id === "false") {
-    await addDiscordUser("users", "discord", req.user.discordId, req.query.steamId, req.user.discordTag).catch(err => {
-      console.error(err);
-    });
-  } else {
-    await findOneUpdateSteam("users", "discord", req.user.discordId, req.query.steamId, req.user.discordTag).then(id => {
-      steam_id = id.steamId;
-    }).catch(err => {
-      console.error(err);
-    }); 
-  }
-
-  res.send({ status: "finished" })
 });
 
 router.get("/thankyou", (req, res) => {
@@ -206,17 +152,5 @@ router.post("/home/donate", redirectLogin, (req, res) => {
 
 //   res.redirect(session.url)
 // });
-
-router.get("/ticket/:id", (req, res) => {
-  findOneTicket("users", "tickets", req.params.id).then(ticket_res => {
-    //console.log(ticket_res);
-    res.render("ticket.ejs", {
-      ticket: ticket_res
-    });
-  }).catch(err => {
-    console.log(err);
-  });
-  //console.log(ticket);
-});
 
 module.exports = router;
