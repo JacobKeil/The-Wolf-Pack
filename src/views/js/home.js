@@ -44,15 +44,23 @@ function changeValues() {
     total.value = "$" + priceAmount.value;
 }
 
-function donateClicked(price_id) {
-    fetch(`/home/donate/charge?price=${price_id}`, {
+function donateClicked(price_id, price) {
+    fetch(`/create-session`, {
         method: "POST",
         headers: {
-          "Access-Control-Allow-Origin": "*"
-        }
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          priceId: price_id,
+          price: price
+        })
     }).then(res => {
-        console.log(res);
-    }).catch(err => {
-        console.log(err);
+      if (res.ok) return res.json();
+      return res.json().then(json => Promise.reject(json));
+    })
+    .then(({ url }) => {
+        window.location = url;
+    }).catch(e => {
+        console.error(e.error);
     })
 }
