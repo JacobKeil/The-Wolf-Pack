@@ -120,7 +120,7 @@ router.get("/home/donate", redirectLogin, (req, res) => {
 
   const donateEmbed = new MessageBuilder()
     .setTitle(`Thank you for donating!`)
-    .setDescription(`<@${req.user.discordId}> sent **$${req.query.price}** and was given the role <@&864390790835208203>`)
+    .setDescription(`<@${req.user.discordId}> sent **$${req.query.price}** and was given the role <@&864390790835208203>\n\n`)
     .setColor("#d8782f")
     .setTimestamp();
 
@@ -147,7 +147,7 @@ router.post("/create-session", async (req, res) => {
     });
     res.json({ url: session.url });
   } catch (e) {
-    res.status(500).josn({ error: e.message });
+    res.status(500).json({ error: e.message });
   }
 });
 
