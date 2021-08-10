@@ -142,8 +142,8 @@ router.post("/create-session", async (req, res) => {
         },
       ],
       mode: 'payment',
-      success_url: `http://172.16.1.254:5000/home/donate?price=${req.body.price}`,
-      cancel_url: `http://172.16.1.254:5000/home#donate`,
+      success_url: `https://www.wolfpackdayz.com/home/donate?price=${req.body.price}`,
+      cancel_url: `https://www.wolfpackdayz.com/home#donate`,
     });
     res.json({ url: session.url });
   } catch (e) {
