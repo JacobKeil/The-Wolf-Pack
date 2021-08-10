@@ -101,7 +101,6 @@ router.get("/thankyou", (req, res) => {
 router.get("/home/donate", redirectLogin, (req, res) => {
   const whurl = process.env.DONATION_DISCORD_WH;
   const donateHook = new Webhook(whurl);
-  //const un = req.user.discordTag.split("#");
 
   console.log("Donate Method Triggered");
 
