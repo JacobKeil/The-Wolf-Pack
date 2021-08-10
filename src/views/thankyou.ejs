@@ -1,10 +1,8 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" dir="ltr">
   <head>
     <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" type="text/css" href="css/main-site.css" />
+    <link rel="stylesheet" href="css/main-site.css" />
     <link
       rel="apple-touch-icon"
       sizes="180x180"
@@ -23,46 +21,131 @@
       href="icons/favicon-16x16.png"
     />
     <link rel="manifest" href="icons/site.webmanifest" />
-    <title>Comrades Cove</title>
-    <script
-      src="https://kit.fontawesome.com/f9371e1f01.js"
-      crossorigin="anonymous"
-    ></script>
+    <title>The Wolf Pack</title>
+    <link
+      href="https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css"
+      rel="stylesheet"
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   </head>
+  <style>
+    .wrapper {
+      background-color: #363e55;
+      width: fit-content;
+      padding: 20px;
+      border-radius: 5px;
+    }
+    .base-section {
+      height: 100vh;
+    }
+  </style>
   <body>
-    <div class="nav">
-      <div class="inline">
-        <a href="/home"
-          ><img
-            id="logo"
-            src="https://i.ibb.co/DgLFTpV/Comrades-Cove.png"
-            alt=""
-        /></a>
-        <h1 id="title">Comrades Cove</h1>
+    <div class="sidebar">
+      <div class="logo-details">
+        <div class="logo_name">The Wolf Pack</div>
+        <i class="bx bx-menu" id="btn"></i>
       </div>
-      <div class="inline">
-        <a href="/logout"
-          ><button class="button-login logout">Logout</button></a
-        >
-        <a href="/user"
-          ><button class="button-login logout"><%= username %></button></a
-        >
-        <a href="/user"><%- avatar %></a>
-      </div>
+      <ul class="nav-list">
+        <li>
+          <a href="/home#">
+            <i class="bx bx-grid-alt"></i>
+            <span class="links_name">Home</span>
+          </a>
+          <span class="tooltip">Home</span>
+        </li>
+        <li>
+          <a href="/home#discord">
+            <i class="bx bxl-discord"></i>
+            <span class="links_name">Discord</span>
+          </a>
+          <span class="tooltip">Discord</span>
+        </li>
+        <li>
+          <a href="/home#info">
+            <i class="bx bxs-info-circle"></i>
+            <span class="links_name">Server Info</span>
+          </a>
+          <span class="tooltip">Info</span>
+        </li>
+        <li>
+          <a href="/home#donate">
+            <i class="bx bxs-dollar-circle"></i>
+            <span class="links_name">Donate</span>
+          </a>
+          <span class="tooltip">Donate</span>
+        </li>
+        <li>
+          <a href="/store">
+            <i class="bx bx-store"></i>
+            <span class="links_name">Store</span>
+          </a>
+          <span class="tooltip">Store</span>
+        </li>
+        <li>
+          <a href="/user">
+            <i class="bx bx-cog"></i>
+            <span class="links_name">Settings</span>
+          </a>
+          <span class="tooltip">Settings</span>
+        </li>
+        <% if (id == "195589455430680576" || id == "545044271389212672" || id ==
+        "261717655180804097") { %>
+        <li>
+          <a href="/admin">
+            <i class="bx bx-lock"></i>
+            <span class="links_name">Admin</span>
+          </a>
+          <span class="tooltip">Admin</span>
+        </li>
+        <% } %>
+        <li class="profile">
+          <div class="profile-details">
+            <div class="name_job">
+              <%- avatar %>
+              <div class="name">The Wolf Pack</div>
+              <div class="job">DayZ Server</div>
+            </div>
+          </div>
+          <a href="/logout">
+            <i class="bx bx-log-out" id="log_out"></i>
+          </a>
+        </li>
+      </ul>
     </div>
-
-    <div id="newEntry" class="modal">
-      <div class="modal-content">
-        <h1 class="title">Thank you for Donating</h1>
-        <p class="para">
-          You will see your donation show up in the donate channel on discord
-          and you were added to the <span class="purple">@Donator</span> role.
-        </p>
-        <p class="para centered-text">
-          <span><a class="blue" href="/home">Click here</a></span> to go back to
-          the home page
+    <section id="donate-thanks" class="base-section">
+      <div class="display-right">
+        <i class="bx bx-menu" id="modal-menu-open"></i>
+      </div>
+      <h1>Thank you for Donating!</h1>
+      <br />
+      <div class="wrapper">
+        <p>
+          You have been added to the
+          <span style="color: #d8782f">@Donator</span> role on discord!
         </p>
       </div>
-    </div>
+      <div class="nav-modal" id="nav-modal-full">
+        <div class="display-flex">
+          <h1>The Wolf Pack</h1>
+          <i class="bx bx-x" id="modal-menu-close"></i>
+        </div>
+        <br />
+        <div class="nav-content">
+          <ul class="nav-list">
+            <li><a href="/home#">Home</a></li>
+            <li><a href="/home#discord">Discord</a></li>
+            <li><a href="/home#info">Server Info</a></li>
+            <li><a href="/home#donate">Donate</a></li>
+            <li><a href="/store">Store</a></li>
+            <li><a href="/user">Settings</a></li>
+            <% if (id == "195589455430680576" || id == "545044271389212672" ||
+            id == "261717655180804097") { %>
+            <li><a href="/admin">Admin Panel</a></li>
+            <% } %>
+          </ul>
+        </div>
+      </div>
+    </section>
+    <script src="js/ticket.js"></script>
   </body>
 </html>
