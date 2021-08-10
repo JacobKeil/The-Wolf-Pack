@@ -8,8 +8,8 @@ const store = require("./store");
 const user = require("./user");
 const ticket = require("./ticket");
 
-const stripePublicKey = process.env.STRIPE_TEST_PUBLIC_KEY;
-const stripeSecretKey = process.env.STRIPE_TEST_SECRET_KEY;
+const stripePublicKey = process.env.STRIPE_PUBLIC_KEY;
+const stripeSecretKey = process.env.STRIPE_SECRET_KEY;
 
 const stripe = require("stripe")(stripeSecretKey);
 const fetch = require("node-fetch");
@@ -20,7 +20,7 @@ router.use("/store", store);
 router.use("/user", user);
 router.use("/ticket", ticket);
 
-const donations = require("../../json/test_donation.json");
+const donations = require("../../json/donation.json");
 
 function redirect(endpoint) {
   const redirect = (req, res, next) => {
@@ -119,7 +119,7 @@ router.get("/home/donate", redirectLogin, (req, res) => {
 
   const donateEmbed = new MessageBuilder()
     .setTitle(`Thank you for donating!`)
-    .setDescription(`<@${req.user.discordId}> sent **$${req.query.price}** and was given the role <@&864390790835208203>\n\n`)
+    .setDescription(`<@${req.user.discordId}> sent **${req.query.price}** and was given the role <@&864390790835208203>\n\n`)
     .setColor("#d8782f")
     .setTimestamp();
 
