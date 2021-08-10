@@ -20,7 +20,7 @@ router.use("/store", store);
 router.use("/user", user);
 router.use("/ticket", ticket);
 
-const donations = require("../../json/donation.json");
+const donations = require("../../json/test_donation.json");
 
 function redirect(endpoint) {
   const redirect = (req, res, next) => {
