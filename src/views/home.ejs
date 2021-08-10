@@ -322,7 +322,7 @@
         <% for (let price of prices) { %>
         <button
           class="donate-button"
-          onclick="donateClicked('<%= price.price_id %>')"
+          onclick="donateClicked('<%= price.price_id %>', '<%= price.price %>')"
         >
           <%= price.price %>
         </button>
