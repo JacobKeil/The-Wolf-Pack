@@ -7,17 +7,12 @@ const admin = require("./admin");
 const store = require("./store");
 const user = require("./user");
 const ticket = require("./ticket");
-const cors = require("cors");
 
 const stripePublicKey = process.env.STRIPE_TEST_PUBLIC_KEY;
 const stripeSecretKey = process.env.STRIPE_TEST_SECRET_KEY;
 
 const stripe = require("stripe")(stripeSecretKey);
 const fetch = require("node-fetch");
-
-const { findOneDiscordId, 
-        findOneUpdateSteam, 
-        addDiscordUser } = require("../util-functions/mongodb-functions");
 
 router.use("/auth", auth);
 router.use("/admin", admin);
@@ -103,7 +98,7 @@ router.get("/thankyou", (req, res) => {
   });
 });
 
-router.post("/home/donate", redirectLogin, (req, res) => {
+router.get("/home/donate", redirectLogin, (req, res) => {
   const whurl = process.env.DONATION_DISCORD_WH;
   const donateHook = new Webhook(whurl);
   //const un = req.user.discordTag.split("#");
@@ -134,23 +129,26 @@ router.post("/home/donate", redirectLogin, (req, res) => {
   res.redirect("/thankyou");
 });
 
-// router.post("/home/donate/charge", cors({ origin: "localhost:5000" }), async (req, res) => {
-//   const session = await stripe.checkout.sessions.create({
-//     payment_method_types: [
-//       'card',
-//     ],
-//     line_items: [
-//       {
-//         price: req.query.price,
-//         quantity: 1,
-//       },
-//     ],
-//     mode: 'payment',
-//     success_url: `http://172.16.1.254:3000/thankyou`,
-//     cancel_url: `http://172.16.1.254:3000/home#donate`,
-//   });
-
-//   res.redirect(session.url)
-// });
+router.post("/create-session", async (req, res) => {
+  try {
+    const session = await stripe.checkout.sessions.create({
+      payment_method_types: [
+        'card',
+      ],
+      line_items: [
+        {
+          price: req.body.priceId,
+          quantity: 1,
+        },
+      ],
+      mode: 'payment',
+      success_url: `http://172.16.1.254:5000/home/donate?price=${req.body.price}`,
+      cancel_url: `http://172.16.1.254:5000/home#donate`,
+    });
+    res.json({ url: session.url });
+  } catch (e) {
+    res.status(500).josn({ error: e.message });
+  }
+});
 
 module.exports = router;
