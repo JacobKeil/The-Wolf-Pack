@@ -125,10 +125,10 @@
         <% for (let message of ticket.messages) { %>
         <div class="message">
           <h4 style="color: #4da4f5"><%= message.author %></h4>
-          <% if (!message.content.includes("https://cdn.discordapp.com")) { %>
-          <p><%= message.content %></p>
-          <% } else { %>
+          <% if (message.content.includes("https://cdn.discordapp.com")) { %>
           <img class="ticket-image" src="<%= message.content %>" />
+          <% } else { %>
+          <p><%= message.content %></p>
           <% } %>
         </div>
         <% } %>
