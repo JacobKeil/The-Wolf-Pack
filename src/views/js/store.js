@@ -44,6 +44,7 @@ function checkCredits() {
     document.getElementById("buy-title").innerHTML = `No Steam ID was found, please add one here!`;
     document.getElementById("buy-object").style.display = "none";
     document.getElementById("cancel-buy").style.display = "none";
+    document.getElementById("continue").style.display = "none";
     document.getElementById('add-steam').style.display = "block";
     document.getElementById("buy-modal-full").style.display = "block";
   }
@@ -62,10 +63,14 @@ function openBuyModal(item, name, credits, accountCredits) {
     document.getElementById("buy-title").innerHTML = `You do not have enough credits to purchase 1 ${name}.`;
     document.getElementById("buy-object").style.display = "none"
     document.getElementById('add-steam').style.display = "none";
+    document.getElementById("cancel-buy").style.display = "none";
+    document.getElementById("continue").style.display = "block";
   } else {
     document.getElementById("buy-title").innerHTML = `Are you sure you want to purchase 1 ${name} for ${credits} credits?`;
     document.getElementById("buy-object").style.display = "block"
     document.getElementById('add-steam').style.display = "none";
+    document.getElementById("continue").style.display = "none";
+    document.getElementById("cancel-buy").style.display = "block";
   }
   modal.style.display = "block";
   classItem = item;
@@ -78,6 +83,15 @@ function closeBuyModal() {
 
 async function reloadPage() {
   location.reload();
+}
+
+function notInServer() {
+  document.getElementById("buy-title").innerHTML = `Please join the server to use the online store!`;
+  document.getElementById("buy-object").style.display = "none";
+  document.getElementById("cancel-buy").style.display = "none";
+  document.getElementById('add-steam').style.display = "none";
+  document.getElementById("continue").style.display = "block";
+  document.getElementById("buy-modal-full").style.display = "block";
 }
 
 async function buyItem() {
@@ -94,13 +108,19 @@ async function spawnItem(item, credits, accountCredits) {
     method: "POST"
   }).then(res => {
     console.log(res);
+    res.json().then(json => {
+      if (json.statusServer === "user-not-in-server") {
+        notInServer();
+        return;
+      } else {
+        setTimeout(() => {
+          window.location.replace("/store");
+        }, 2000);
+      }
+    })
   }).catch(err => {
     console.log(err);
   });
-
-  setTimeout(() => {
-    window.location.replace("/store");
-  }, 1500);
 }
 
 search.onkeyup = function () {

@@ -6,10 +6,11 @@ const { findOneDiscordId, updateCurrency } = require("../util-functions/mongodb-
 const store_items = require("../../json/items.json");
 
 const client = new CFToolsClientBuilder()
-    .withServerApiId('3ba3e6d8-79fe-4118-a305-c23f50baf6bf')
-    .withCredentials('60f26c966adf7a59ade2303f', 'bn2G3i8w13WDapW8dsUIG9IPzRnzMEZSfJxe12wXMWA=');
+    .withServerApiId('a727a96d-c394-4c98-b147-cd0c14d81bb0')
+    .withCredentials('6118984a902b7fc0b2a5d019', '8rWjcn9uoUG8xTb1eQkaFhySCoHZ2l2RPjaL4QHWMEQ=');
 
 let steamID = "";
+let stServer = "user-not-in-server";
 
 const redirectLogin = (req, res, next) => {
     if(!req.user) {
@@ -54,11 +55,10 @@ router.get("/", redirectLogin, async (req, res) => {
   });
   
   router.post("/", async (req, res) => {
-    let currency = true;
-    let stDiscord = "";
-    let stServer = "user-not-in-server";
-
     try {
+      let currency = true;
+      let stDiscord = "";
+      
       if (req.query.credits - req.query.price < 0) {
         currency = false;
       }
@@ -74,7 +74,7 @@ router.get("/", redirectLogin, async (req, res) => {
           console.error(err);
       });
   
-      client.build().listGameSessions().then(sessions => {
+      await client.build().listGameSessions().then(sessions => {
         sessions.forEach(async session => {
           if(session.steamId.id === steamID && currency === true) {
               client.build().spawnItem({
@@ -83,9 +83,7 @@ router.get("/", redirectLogin, async (req, res) => {
               }).catch(err => {
                 console.error(err);
               });
-
               stServer = "user-in-server";
-
               await updateCurrency("users", "discord", req.user.discordId, req.query.price);
           }
         })
