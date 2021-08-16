@@ -9,6 +9,10 @@ const client = new CFToolsClientBuilder()
     .withServerApiId('a727a96d-c394-4c98-b147-cd0c14d81bb0')
     .withCredentials('6118984a902b7fc0b2a5d019', '8rWjcn9uoUG8xTb1eQkaFhySCoHZ2l2RPjaL4QHWMEQ=');
 
+const client1 = new CFToolsClientBuilder()
+    .withServerApiId('48d57ee6-f4db-4d48-9856-f64fd1d3ee31')
+    .withCredentials('6118984a902b7fc0b2a5d019', '8rWjcn9uoUG8xTb1eQkaFhySCoHZ2l2RPjaL4QHWMEQ=');
+
 let steamID = "";
 let stServer = "user-not-in-server";
 
@@ -75,9 +79,28 @@ router.get("/", redirectLogin, async (req, res) => {
       });
   
       await client.build().listGameSessions().then(sessions => {
+        console.log("CHERNARUS");
+        console.log(sessions);
         sessions.forEach(async session => {
           if(session.steamId.id === steamID && currency === true) {
               client.build().spawnItem({
+                session: session,
+                itemClass: req.query.object
+              }).catch(err => {
+                console.error(err);
+              });
+              stServer = "user-in-server";
+              await updateCurrency("users", "discord", req.user.discordId, req.query.price);
+          }
+        })
+      })
+
+      await client1.build().listGameSessions().then(sessions => {
+        console.log("TAKISTAN");
+        console.log(sessions);
+        sessions.forEach(async session => {
+          if(session.steamId.id === steamID && currency === true) {
+              client1.build().spawnItem({
                 session: session,
                 itemClass: req.query.object
               }).catch(err => {
