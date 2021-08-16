@@ -64,7 +64,7 @@
   "price": 15,
   "max": 25
 },{
-  "class": "ExpansionCodeLock",
+  "class": "CodeLock",
   "name": "Code Lock",
   "price": 100,
   "max": 1
