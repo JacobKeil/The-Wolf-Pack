@@ -22,17 +22,6 @@ router.use("/ticket", ticket);
 
 const donations = require("../../json/donation.json");
 
-function redirect(endpoint) {
-  const redirect = (req, res, next) => {
-    if(req.user) {
-      res.redirect(endpoint);
-    } else { 
-      next();
-    }
-  }
-  return redirect;
-}
-
 const redirectHome = (req, res, next) => {
     if(req.user) {
       res.redirect('/home');
