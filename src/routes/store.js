@@ -5,11 +5,11 @@ const { CFToolsClientBuilder, SteamId64 } = require("cftools-sdk");
 const { findOneDiscordId, updateCurrency } = require("../util-functions/mongodb-functions");
 const store_items = require("../../json/items.json");
 
-const client = new CFToolsClientBuilder()
+const chernarus = new CFToolsClientBuilder()
     .withServerApiId('a727a96d-c394-4c98-b147-cd0c14d81bb0')
     .withCredentials('6118984a902b7fc0b2a5d019', '8rWjcn9uoUG8xTb1eQkaFhySCoHZ2l2RPjaL4QHWMEQ=');
 
-const client1 = new CFToolsClientBuilder()
+const takistan = new CFToolsClientBuilder()
     .withServerApiId('48d57ee6-f4db-4d48-9856-f64fd1d3ee31')
     .withCredentials('6118984a902b7fc0b2a5d019', '8rWjcn9uoUG8xTb1eQkaFhySCoHZ2l2RPjaL4QHWMEQ=');
 
@@ -78,12 +78,12 @@ router.get("/", redirectLogin, async (req, res) => {
           console.error(err);
       });
   
-      await client.build().listGameSessions().then(sessions => {
-        console.log("CHERNARUS");
-        console.log(sessions);
+      await chernarus.build().listGameSessions().then(sessions => {
+        // console.log("CHERNARUS");
+        // console.log(sessions);
         sessions.forEach(async session => {
           if(session.steamId.id === steamID && currency === true) {
-              client.build().spawnItem({
+              await chernarus.build().spawnItem({
                 session: session,
                 itemClass: req.query.object
               }).catch(err => {
@@ -95,12 +95,12 @@ router.get("/", redirectLogin, async (req, res) => {
         })
       })
 
-      await client1.build().listGameSessions().then(sessions => {
-        console.log("TAKISTAN");
-        console.log(sessions);
+      await takistan.build().listGameSessions().then(sessions => {
+        // console.log("TAKISTAN");
+        // console.log(sessions);
         sessions.forEach(async session => {
           if(session.steamId.id === steamID && currency === true) {
-              client1.build().spawnItem({
+              await takistan.build().spawnItem({
                 session: session,
                 itemClass: req.query.object
               }).catch(err => {
