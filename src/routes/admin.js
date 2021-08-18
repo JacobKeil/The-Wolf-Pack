@@ -4,6 +4,7 @@ const { Webhook, MessageBuilder } = require("discord-webhook-node");
 const convert = require("hex2dec");
 const fetch = require("node-fetch");
 const { findAll, addCurrency } = require("../util-functions/mongodb-functions");
+const connectEnsureLogin = require("connect-ensure-login");
 
 const admins = ["195589455430680576", 
                 "545044271389212672",
@@ -27,7 +28,7 @@ const redirectLogin = (req, res, next) => {
     }
 }
 
-router.get("/", redirectLogin, async (req, res) => {
+router.get("/", connectEnsureLogin.ensureLoggedIn({ redirectTo: "/" }), async (req, res) => {
     let discord;
     let tickets;
 

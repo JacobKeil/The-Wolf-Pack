@@ -4,6 +4,7 @@ const router = require("express").Router();
 const { CFToolsClientBuilder, SteamId64 } = require("cftools-sdk");
 const { findOneDiscordId, updateCurrency } = require("../util-functions/mongodb-functions");
 const store_items = require("../../json/items.json");
+const connectEnsureLogin = require("connect-ensure-login");
 
 const chernarus = new CFToolsClientBuilder()
     .withServerApiId('a727a96d-c394-4c98-b147-cd0c14d81bb0')
@@ -24,7 +25,7 @@ const redirectLogin = (req, res, next) => {
     }
 }
 
-router.get("/", redirectLogin, async (req, res) => {
+router.get("/", connectEnsureLogin.ensureLoggedIn({ redirectTo: "/" }), async (req, res) => {
     let credits;
     let items = [];
 
@@ -79,8 +80,6 @@ router.get("/", redirectLogin, async (req, res) => {
       });
   
       await chernarus.build().listGameSessions().then(sessions => {
-        // console.log("CHERNARUS");
-        // console.log(sessions);
         sessions.forEach(async session => {
           if(session.steamId.id === steamID && currency === true) {
               await chernarus.build().spawnItem({
@@ -96,8 +95,6 @@ router.get("/", redirectLogin, async (req, res) => {
       })
 
       await takistan.build().listGameSessions().then(sessions => {
-        // console.log("TAKISTAN");
-        // console.log(sessions);
         sessions.forEach(async session => {
           if(session.steamId.id === steamID && currency === true) {
               await takistan.build().spawnItem({

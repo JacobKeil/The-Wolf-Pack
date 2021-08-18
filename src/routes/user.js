@@ -5,15 +5,9 @@ const { findOneDiscordId,
     addDiscordUser,
     findTicketsById } = require("../util-functions/mongodb-functions");
 
-const redirectLogin = (req, res, next) => {
-    if(!req.user) {
-      res.redirect('/auth/discord');
-    } else { 
-      next(); 
-    }
-}
+const connectEnsureLogin = require("connect-ensure-login");
 
-router.get("/", redirectLogin, async (req, res) => {
+router.get("/", connectEnsureLogin.ensureLoggedIn({ redirectTo: "/" }), async (req, res) => {
     let steam_id;
     let tickets;
   
@@ -51,7 +45,7 @@ router.get("/", redirectLogin, async (req, res) => {
     });
   });
   
-  router.post("/", redirectLogin, async (req, res) => {
+  router.post("/", async (req, res) => {
     let steam_id;
   
     await findOneDiscordId("users", "discord", req.user.discordId).then(id => {

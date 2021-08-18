@@ -13,12 +13,13 @@ const stripeSecretKey = process.env.STRIPE_SECRET_KEY;
 
 const stripe = require("stripe")(stripeSecretKey);
 const fetch = require("node-fetch");
+const connectEnsureLogin = require("connect-ensure-login");
 
 router.use("/auth", auth);
-router.use("/admin", admin);
-router.use("/store", store);
-router.use("/user", user);
-router.use("/ticket", ticket);
+router.use("/admin", connectEnsureLogin.ensureLoggedIn({ redirectTo: "/auth/discord" }), admin);
+router.use("/store", connectEnsureLogin.ensureLoggedIn({ redirectTo: "/auth/discord" }), store);
+router.use("/user", connectEnsureLogin.ensureLoggedIn({ redirectTo: "/auth/discord" }), user);
+router.use("/ticket", connectEnsureLogin.ensureLoggedIn({ redirectTo: "/auth/discord" }), ticket);
 
 const donations = require("../../json/donation.json");
 
@@ -30,14 +31,6 @@ const redirectHome = (req, res, next) => {
     }
 }
 
-const redirectLogin = (req, res, next) => {
-  if(!req.user) {
-    res.redirect('/auth/discord');
-  } else { 
-    next(); 
-  }
-}
-
 router.get("/", redirectHome, (req, res) => {
     res.render("index.ejs");
 });
@@ -47,7 +40,7 @@ router.get("/logout", (req, res) => {
   res.redirect("/");
 });
 
-router.get("/home", redirectLogin, async (req, res) => {
+router.get("/home", connectEnsureLogin.ensureLoggedIn({ redirectTo: "/auth/discord" }), async (req, res) => {
   let prices = [];
 
   donations.forEach(donation => {
@@ -87,7 +80,7 @@ router.get("/thankyou", (req, res) => {
   });
 });
 
-router.get("/home/donate", redirectLogin, (req, res) => {
+router.get("/home/donate", connectEnsureLogin.ensureLoggedIn({ redirectTo: "/auth/discord" }), (req, res) => {
   const whurl = process.env.DONATION_DISCORD_WH;
   const donateHook = new Webhook(whurl);
 
@@ -115,6 +108,10 @@ router.get("/home/donate", redirectLogin, (req, res) => {
   donateHook.send(donateEmbed);
 
   res.redirect("/thankyou");
+});
+
+router.get("/servers", (req, res) => {
+
 });
 
 router.post("/create-session", async (req, res) => {

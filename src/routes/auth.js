@@ -11,7 +11,12 @@ const redirectLogin = (req, res, next) => {
 
 router.get("/discord", passport.authenticate("discord"));
 
-router.get("/discord/redirect", passport.authenticate("discord"),(req, res) => {
+router.get("/discord/redirect", passport.authenticate("discord", {
+    //successRedirect: "/",
+    successReturnToOrRedirect: "/",
+    failureRedirect: "/auth/discord",
+    failureFlash: true
+}),(req, res) => {
     res.redirect("/home");
 });
 
