@@ -21,6 +21,7 @@
   "dependencies": {
     "cftools-sdk": "^1.6.1",
     "common-tags": "^1.8.0",
+    "connect-ensure-login": "^0.1.1",
     "connect-mongo": "^4.3.1",
     "cookie-parser": "^1.4.5",
     "cookies": "^0.8.0",
