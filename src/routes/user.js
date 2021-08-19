@@ -46,31 +46,13 @@ router.get("/", connectEnsureLogin.ensureLoggedIn({ redirectTo: "/" }), async (r
   });
   
   router.post("/", async (req, res) => {
-    let steam_id;
+    let user = await findOneDiscordId("users", "discord", req.user.discordId);
   
-    await findOneDiscordId("users", "discord", req.user.discordId).then(id => {
-      if (!id) {
-        steam_id = "false";
-      } else {
-        steam_id = id.steamId;
-      }
-    }).catch(err => {
-      console.error(err);
-    });
-  
-    if (steam_id === "false") {
-      await addDiscordUser("users", "discord", req.user.discordId, req.query.steamId, req.user.discordTag).catch(err => {
-        console.error(err);
-      });
-    } else {
-      await findOneUpdateSteam("users", "discord", req.user.discordId, req.query.steamId, req.user.discordTag).then(id => {
-        steam_id = id.steamId;
-      }).catch(err => {
-        console.error(err);
-      }); 
+    if (user.steamId === "") {
+      await findOneUpdateSteam("users", "discord", req.user.discordId, req.query.steamId, req.user.discordTag);
     }
   
-    res.send({ status: "finished" })
+    res.send({ status: "updated-steam-id" });
   });
 
 module.exports = router;
