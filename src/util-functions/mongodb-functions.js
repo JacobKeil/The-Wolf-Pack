@@ -108,5 +108,29 @@ module.exports = {
             await mongoClient.close();
         }
         return "Added Successfully";
+    },
+    findOneQR: async function (param) {
+        let result;
+        try {
+        await mongoClient.connect();
+        result = await mongoClient.db(`users`).collection(`qr`).findOne({ id: param })
+        } catch (e) {
+            console.error(e);
+        } finally {
+            await mongoClient.close();
+        }
+        return result;
+    },
+    updateQR: async function (param) {
+        try {
+        await mongoClient.connect();
+        await mongoClient.db(`users`).collection(`qr`).findOneAndUpdate(
+            { id: param }, {$inc: { uses: -1 }});
+        } catch (e) {
+            console.error(e);
+        } finally {
+            await mongoClient.close();
+        }
+        return "Updated QR Uses";
     }
 }
