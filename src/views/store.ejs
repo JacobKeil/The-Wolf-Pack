@@ -49,20 +49,7 @@
     </style>
     <script>
       let accountCredits = `<%= credits %>`;
-      let phrases;
-      //console.log(textPhrases);
-
-      function checkCredits() {
-        if (accountCredits.toString() === 'false') {
-          document.getElementById(
-            'buy-title'
-          ).innerHTML = `No Steam ID was found, please add one here!`;
-          document.getElementById('buy-object').style.display = 'none';
-          document.getElementById('cancel-buy').style.display = 'none';
-          document.getElementById('add-steam').style.display = 'block';
-          document.getElementById('buy-modal-full').style.display = 'block';
-        }
-      }
+      let steam = `<%= steamId %>`;
     </script>
   </head>
   <body>
