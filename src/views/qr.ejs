@@ -32,21 +32,14 @@
         min-height: 100vh;
         max-height: fit-content;
       }
-      .ticket-transcript {
-        border-radius: 5px;
-        max-width: 800px;
-        padding: 10px 20px;
+      .wrapper {
         background-color: #363e55;
-      }
-      .message {
-        margin: 10px 0;
-        background-color: #282d3d;
+        padding: 20px;
         border-radius: 5px;
-        padding: 10px;
+        width: fit-content;
       }
-      .ticket-image {
-        margin-top: 10px;
-        max-width: 100% !important;
+      .store-button {
+        padding: 8px 10px;
       }
     </style>
   </head>
@@ -116,7 +109,26 @@
       <div class="display-right">
         <i class="bx bx-menu" id="modal-menu-open"></i>
       </div>
-
+      <h1>You have found an in game reward!</h1>
+      <br />
+      <div class="wrapper">
+        <h4 style="color: rgb(47, 192, 47)"><%= qrCode.location %></h4>
+        <% if(qrCode.uses > 0) { %>
+        <p>
+          You have been rewarded
+          <span style="color: gold"><%= qrCode.reward %></span> credits!
+        </p>
+        <% } else { %>
+        <p>
+          This reward has already been claimed, look out for more around the
+          map!
+        </p>
+        <% } %>
+        <br />
+        <a href="/store">
+          <button class="store-button">Go to Online Store</button>
+        </a>
+      </div>
       <div class="nav-modal" id="nav-modal-full">
         <div class="display-flex">
           <h1>The Wolf Pack</h1>
