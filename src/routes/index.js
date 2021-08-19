@@ -22,6 +22,7 @@ router.use("/user", connectEnsureLogin.ensureLoggedIn({ redirectTo: "/auth/disco
 router.use("/ticket", connectEnsureLogin.ensureLoggedIn({ redirectTo: "/auth/discord" }), ticket);
 
 const donations = require("../../json/donation.json");
+const { findOneQR, addCurrency, updateQR } = require("../util-functions/mongodb-functions");
 
 const redirectHome = (req, res, next) => {
     if(req.user) {
@@ -134,6 +135,32 @@ router.post("/create-session", async (req, res) => {
   } catch (e) {
     res.status(500).json({ error: e.message });
   }
+});
+
+router.get("/qr", connectEnsureLogin.ensureLoggedIn({ redirectTo: "/auth/discord" }), async (req, res) => {
+  const whurl = process.env.REWARD_DISCORD_WH;
+  const rewardHook = new Webhook(whurl);
+  const qrCode = await findOneQR(req.query.id);
+
+  if(qrCode.uses > 0) {
+    await addCurrency("users", "discord", req.user.discordId, qrCode.reward);
+    await updateQR(req.query.id);
+
+    const rewardEmbed = new MessageBuilder()
+    .setTitle(`Reward Claimed`)
+    .setDescription(`**Claimed by:** <@${req.user.discordId}>
+                     **Location:** ${qrCode.location}
+                     **Coordinates:** ${qrCode.coords[0]}, ${qrCode.coords[1]}, ${qrCode.coords[2]}`)
+    .setColor("#cc38f5")
+    .setTimestamp();
+
+    rewardHook.send(rewardEmbed);
+  }
+
+  res.render("qr.ejs", {
+    id: req.user.discordId,
+    qrCode: qrCode
+  });
 });
 
 module.exports = router;
