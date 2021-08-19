@@ -40,7 +40,7 @@ window.onload = function () {
 }
 
 function checkCredits() {
-  if (accountCredits === "false") {
+  if (steam === "not-found") {
     document.getElementById("buy-title").innerHTML = `No Steam ID was found, please add one here!`;
     document.getElementById("buy-object").style.display = "none";
     document.getElementById("cancel-buy").style.display = "none";
@@ -86,7 +86,7 @@ async function reloadPage() {
 }
 
 function notInServer() {
-  document.getElementById("buy-title").innerHTML = `Please join the server to use the online store!`;
+  document.getElementById("buy-title").innerHTML = `Please join a server to use the online store! <br/> Click <a href="/servers">here</a> to view our servers!`;
   document.getElementById("buy-object").style.display = "none";
   document.getElementById("cancel-buy").style.display = "none";
   document.getElementById('add-steam').style.display = "none";
