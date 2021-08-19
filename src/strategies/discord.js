@@ -2,6 +2,8 @@ const passport = require("passport");
 const DiscordStrategy = require("passport-discord");
 const User = require("../database/schemas/User");
 
+const { addDiscordUser } = require("../util-functions/mongodb-functions");
+
 passport.serializeUser((user, done) => {
     done(null, user.discordId);
 });
@@ -36,6 +38,7 @@ passport.use(new DiscordStrategy({
             console.log("User Found");
             return done(null, findUser);
         } else {
+            await addDiscordUser("users", "discord", id, "", `${username}#${discriminator}`);
             const newUser = await User.create({
                 discordId: id,
                 discordTag: `${username}#${discriminator}`,
@@ -45,6 +48,8 @@ passport.use(new DiscordStrategy({
             });
             return done(null, newUser);
         }
+
+
     } catch (err) {
         console.log("Strategy Error");
         console.log(err);
