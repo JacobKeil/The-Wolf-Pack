@@ -26,6 +26,7 @@ const redirectLogin = (req, res, next) => {
 }
 
 router.get("/", connectEnsureLogin.ensureLoggedIn({ redirectTo: "/" }), async (req, res) => {
+    let steamId;
     let credits;
     let items = [];
 
@@ -33,15 +34,13 @@ router.get("/", connectEnsureLogin.ensureLoggedIn({ redirectTo: "/" }), async (r
       items.push(store_item);
     });
 
-    await findOneDiscordId("users", "discord", req.user.discordId).then(id => {
-      if (!id) {
-        credits = "false";
-      } else {
-        credits = id.credits;
-      }
-    }).catch(err => {
-      console.error(err);
-    });
+    let user = await findOneDiscordId("users", "discord", req.user.discordId);
+
+    if (user.steamId != "") {
+      steamId = user.steamId;
+    } else {
+      steamId = "not-found";
+    }
 
     let profilePic = "";
     if (req.user.avatar == null) {
@@ -55,7 +54,8 @@ router.get("/", connectEnsureLogin.ensureLoggedIn({ redirectTo: "/" }), async (r
         avatar: `<img id="user-logo" src="${profilePic}">`,
         id: req.user.discordId,
         items: items,
-        credits: credits
+        credits: user.credits,
+        steamId: steamId
     });
   });
   
