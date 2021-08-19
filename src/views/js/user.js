@@ -23,11 +23,8 @@ closeBtn.addEventListener("click", ()=>{
 });
 
 function openSteamModal(steamId) {
-    if (steamId === "No Steam ID set") {
-        document.getElementById("steam-title").innerHTML = `Add your Steam ID, click <a href="https://store.steampowered.com/account" target="_blank">here</a> to find it!`;
-    } else {
-        document.getElementById("steam-title").innerHTML = `Update your steam ID if needed, it is currently '${steamId}'`;
-    }
+    document.getElementById("steam-title").innerHTML = `Update your steam ID, it is currently ${steamId === "" ? "not set!" : steamId}<br />
+                                                        Click <a href="https://store.steampowered.com/account" target="_blank">here</a> to find your Steam64 ID!`;
     modal.style.display = "block";
   }
   
