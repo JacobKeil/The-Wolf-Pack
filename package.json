@@ -19,7 +19,7 @@
   },
   "homepage": "https://github.com/JacobKeil/Comrades-Cove#readme",
   "dependencies": {
-    "cftools-sdk": "^1.6.1",
+    "cftools-sdk": "^1.6.4",
     "common-tags": "^1.8.0",
     "connect-ensure-login": "^0.1.1",
     "connect-mongo": "^4.3.1",

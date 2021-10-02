@@ -9,20 +9,6 @@ const {
 const store_items = require('../../json/items.json');
 const connectEnsureLogin = require('connect-ensure-login');
 
-const chernarus = new CFToolsClientBuilder()
-  .withServerApiId('a727a96d-c394-4c98-b147-cd0c14d81bb0')
-  .withCredentials(
-    '6118984a902b7fc0b2a5d019',
-    '8rWjcn9uoUG8xTb1eQkaFhySCoHZ2l2RPjaL4QHWMEQ='
-  );
-
-const takistan = new CFToolsClientBuilder()
-  .withServerApiId('48d57ee6-f4db-4d48-9856-f64fd1d3ee31')
-  .withCredentials(
-    '6118984a902b7fc0b2a5d019',
-    '8rWjcn9uoUG8xTb1eQkaFhySCoHZ2l2RPjaL4QHWMEQ='
-  );
-
 const deerisle = new CFToolsClientBuilder()
   .withServerApiId('085e7c67-deeb-4d17-8486-3b19c32eadaa')
   .withCredentials(
@@ -99,58 +85,6 @@ router.post('/', async (req, res) => {
       })
       .catch((err) => {
         console.error(err);
-      });
-
-    await chernarus
-      .build()
-      .listGameSessions()
-      .then((sessions) => {
-        sessions.forEach(async (session) => {
-          if (session.steamId.id === steamID && currency === true) {
-            await chernarus
-              .build()
-              .spawnItem({
-                session: session,
-                itemClass: req.query.object,
-              })
-              .catch((err) => {
-                console.error(err);
-              });
-            stServer = 'user-in-server';
-            await updateCurrency(
-              'users',
-              'discord',
-              req.user.discordId,
-              req.query.price
-            );
-          }
-        });
-      });
-
-    await takistan
-      .build()
-      .listGameSessions()
-      .then((sessions) => {
-        sessions.forEach(async (session) => {
-          if (session.steamId.id === steamID && currency === true) {
-            await takistan
-              .build()
-              .spawnItem({
-                session: session,
-                itemClass: req.query.object,
-              })
-              .catch((err) => {
-                console.error(err);
-              });
-            stServer = 'user-in-server';
-            await updateCurrency(
-              'users',
-              'discord',
-              req.user.discordId,
-              req.query.price
-            );
-          }
-        });
       });
 
     await deerisle
