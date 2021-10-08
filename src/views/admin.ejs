@@ -1,9 +1,7 @@
 <!DOCTYPE html>
-<!-- Created by CodingLab |www.youtube.com/c/CodingLabYT-->
 <html lang="en" dir="ltr">
   <head>
     <meta charset="UTF-8" />
-    <!--<title> Responsive Sidebar Menu  | CodingLab </title>-->
     <link rel="stylesheet" href="css/main-site.css" />
     <link
       rel="apple-touch-icon"
@@ -24,7 +22,6 @@
     />
     <link rel="manifest" href="icons/site.webmanifest" />
     <title>The Wolf Pack</title>
-    <!-- Boxicons CDN Link -->
     <link
       href="https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css"
       rel="stylesheet"
@@ -39,6 +36,19 @@
       }
       .store-button {
         padding: 8px 10px;
+      }
+      .overflow {
+        height: 600px;
+        overflow-x: hidden;
+        overflow-y: scroll;
+      }
+      .admin-user-wrapper {
+        margin-right: 10px;
+      }
+      .g2 {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-gap: 10px;
       }
       @media only screen and (max-width: 750px) {
         #credits-to-give {
@@ -129,71 +139,73 @@
       </div>
       <h1>Admin Control Panel</h1>
       <br />
-      <div class="admin-wrapper">
-        <p class="post" id="posted">Post Successful</p>
-        <input
-          class="admin-textbox"
-          name="title"
-          id="title"
-          type="text"
-          placeholder="Title..."
-        />
-        <textarea
-          class="admin-textarea"
-          name="description"
-          id="description"
-          cols="30"
-          rows="10"
-          placeholder="Description..."
-        ></textarea>
-        <select name="channels" id="channel" class="admin-select">
-          <% for (let channel of channels) { %>
-          <option value="<%= channel.id %>">#<%= channel.name %></option>
-          <% } %>
-        </select>
-        <div class="display-flex">
+      <div class="g2">
+        <div class="admin-wrapper">
+          <p class="post" id="posted">Post Successful</p>
           <input
-            type="color"
-            name="colorpicker"
-            id="admin-color-picker"
-            class="admin-color"
+            class="admin-textbox"
+            name="title"
+            id="title"
+            type="text"
+            placeholder="Title..."
           />
-          <select name="everyone" id="everyone" class="admin-select">
-            <option value="">None</option>
-            <option value="@everyone">Everyone</option>
-          </select>
-        </div>
-        <button class="admin-button" onclick="postEmbed()">Post</button>
-      </div>
-      <br />
-      <div>
-        <h1>Award Credits</h1>
-        <div class="admin-user-wrapper">
-          <select name="users" id="users" class="admin-select">
-            <% for (let discord_user of discord_users) { %>
-            <option value="<%= discord_user.discordId %>">
-              <%= discord_user.user %>
-            </option>
+          <textarea
+            class="admin-textarea"
+            name="description"
+            id="description"
+            cols="30"
+            rows="10"
+            placeholder="Description..."
+          ></textarea>
+          <select name="channels" id="channel" class="admin-select">
+            <% for (let channel of channels) { %>
+            <option value="<%= channel.id %>">#<%= channel.name %></option>
             <% } %>
           </select>
-          <input
-            type="text"
-            id="credits-to-give"
-            class="admin-textbox"
-            placeholder="Credit Amount..."
-          />
-          <button
-            id="add-credit-button"
-            class="admin-button"
-            onclick="addCredits()"
-          >
-            Add Credits
-          </button>
+          <div class="display-flex">
+            <input
+              type="color"
+              name="colorpicker"
+              id="admin-color-picker"
+              class="admin-color"
+            />
+            <select name="everyone" id="everyone" class="admin-select">
+              <option value="">None</option>
+              <option value="@everyone">Everyone</option>
+            </select>
+          </div>
+          <button class="admin-button" onclick="postEmbed()">Post</button>
+        </div>
+        <div>
+          <h1>Award Credits</h1>
+          <div class="admin-user-wrapper">
+            <select name="users" id="users" class="admin-select">
+              <option value="all">All</option>
+              <% for (let discord_user of discord_users) { %>
+              <option value="<%= discord_user.discordId %>">
+                <%= discord_user.user %>
+              </option>
+              <% } %>
+            </select>
+            <input
+              type="text"
+              id="credits-to-give"
+              class="admin-textbox"
+              placeholder="Credit Amount..."
+            />
+            <button
+              id="add-credit-button"
+              class="admin-button"
+              onclick="addCredits()"
+            >
+              Add Credits
+            </button>
+          </div>
         </div>
       </div>
       <br />
-      <div>
-        <h1>Store Users</h1>
+      <h1>Store Users</h1>
+      <div class="overflow">
         <% for (let discord_user of discord_users) { %>
         <div class="admin-user-wrapper">
           <p><%= discord_user.user %></p>
@@ -204,9 +216,9 @@
         </div>
         <% } %>
       </div>
-      <div>
-        <br />
-        <h1>Tickets</h1>
+      <br />
+      <h1>Tickets</h1>
+      <div class="overflow">
         <% for (let ticket of tickets) { %>
         <div class="admin-user-wrapper">
           <p>
