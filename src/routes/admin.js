@@ -68,7 +68,7 @@ router.get(
       return;
     }
 
-    let api_url = `https://discord.com/api/guilds/538558092070092802/channels`;
+    let api_url = `https://discord.com/api/guilds/845509436373205052/channels`;
 
     let discord_ch = await fetch(api_url, {
       method: 'GET',
@@ -77,9 +77,11 @@ router.get(
       },
     })
       .then((res) => {
+        console.log(res);
         return res.json();
       })
       .then((json) => {
+        console.log(json);
         let channels = [];
         for (var ch of json) {
           if (ch.parent_id !== null && ch.type == 0) {
