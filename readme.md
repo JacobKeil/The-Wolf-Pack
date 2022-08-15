@@ -12,26 +12,6 @@ The Wolf Pack has a unique online website that allows you to buy items and they 
 This system uses credits that can be earned by entering tournaments and answering random questions in
 game and on discord! Check it out [here](https://www.wolfpackdayz.com/store)!
 
-## ![alt text](https://i.ibb.co/Wk4NJM7/Capture.png 'Online Store')
-
-## ![alt text](https://i.ibb.co/nsJNrkF/2021-03-05-22-28-01.png 'Custom Cave')
-
-## ![alt text](https://i.ibb.co/FnKkBTW/2021-03-05-22-31.png 'Top of Custom Cave')
-
-## ![alt text](https://i.ibb.co/VjZjRf9/2021-03-05-22-32.png 'Custom Cave Ambient')
-
-## ![alt text](https://i.ibb.co/3v0Cqr4/2021-03-02-23-10-06.png 'Admin Compound')
-
-## ![alt text](https://i.ibb.co/njWqHb2/2021-03-02-23-00.png 'Balota Airstrip 1')
-
-## ![alt text](https://i.ibb.co/WyvmVSW/2021-03-02-22-39.png 'Balota Airstrip 2')
-
-## ![alt text](https://i.ibb.co/m648H30/2021-03-03-20-35.png 'Easter Egg')
-
-## ![alt text](https://i.ibb.co/q9FCjmj/2021-03-03-21-16.png 'NEAF')
-
-## ![alt text](https://i.ibb.co/xYTZzwJ/2021-03-03-20-46.png 'Hunting Stag')
-
 | Mod List                  |
 | ------------------------- |
 | CF                        |
